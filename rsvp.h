@@ -10,3 +10,37 @@ Project_Team 18:
                 Jovanny Vera
                 Mark Wagner
 */
+
+class Person{ //the person class
+    
+    private:
+        std::string name;
+        int age;
+        bool primary; //Primary guest is true. Plus one is false.
+        
+    public:
+        void setName(std::string name);
+        
+        void setAge(int age);
+        
+        void setPrimary(bool primary);
+        
+        std::string getName();
+        
+        int getAge();
+        
+        bool getPrimary();
+        
+}
+
+class Event{
+    
+    private:
+        int day, month, year, hour, minute;
+        std::string eventName;
+        
+    public:
+        void setEventName(std::string eventName);
+        
+        std::string getEventName();
+}
