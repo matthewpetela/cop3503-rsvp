@@ -15,13 +15,20 @@ Project_Team 18:
 class Event{ //Matt
     
     private:
-        int day, month, year, hour, minute;
+        time_t eventTimeDate;
         std::string eventName;
         
     public:
+        Event(void);
+        
+        Event(std::string eventName, time_t eventTimeDate);
+        
         void setEventName(std::string eventName);
         
+        void setEventTime(time_t eventTimeDate);
+        
         std::string getEventName();
+        
         
         class Person{ //the person class /Matt
     
@@ -43,6 +50,7 @@ class Event{ //Matt
         
                 bool getPrimary();
         
-}
+        };
 
-}
+
+};
