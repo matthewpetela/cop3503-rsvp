@@ -17,23 +17,35 @@ class Event{ //Matt
     private:
         time_t eventTimeDate;
         string eventName;
+        string eventLocation;//Jovanny/Mark
+        string eventType;  //Jovanny/Mark
         
     public:
         Event(void);
         
         Event(std::string eventName, time_t eventTimeDate);
         
-        void setEventName(std::string eventName);
+        void setEventName(string eventName);
         
         void setEventTime(time_t eventTimeDate);
+
+        void setEventLocation(string location); //Jovanny/Mark
+
+        void setEventType(string occassion);  //Jovanny/Mark
+
+        string getEventType();  //Jovanny/Mark
+
+        string getEventlocation(); //Jovanny/Mark
+
+        string getEventType();   //Jovanny/Mark
         
-        std::string getEventName();
+        string getEventName();
         
         
-        class Person{ //the person class /Matt
+       /* class Person{ //the person class /Matt
     
             private:
-                std::string name;
+                string name;
                 int age;
                 bool primary; //Primary guest is true. Plus one is false.
         
@@ -44,13 +56,13 @@ class Event{ //Matt
         
                 void setPrimary(bool primary);
         
-                std::string getName();
+                string getName();
         
                 int getAge();
         
                 bool getPrimary();
         
-        };
+        }; */
 
 
 };
