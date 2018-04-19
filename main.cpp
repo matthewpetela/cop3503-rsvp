@@ -19,7 +19,78 @@ Project_Team 18:
 #include"person.h"
 
 using namespace std;
+void createEvent(){
+	cout<<"What is the name of your event?(Ex. Tom's party) "<<endl;
+	std::string eventName;						//accepts multiple words for the event name
+	std::getline(std::cin, eventName);
+	/*
+	 * add event to list here
+	 */
+	cout<<" "<<endl;
 
+	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
+	std::string eventType;						//accepts multiple words for the event type
+	std::getline(std::cin, eventType);
+	/*
+	 * add type to list, if the event is a wedding ask if they want to add a registry
+	 */
+	cout<<" "<<endl;
+
+	cout<<"Would you like to create a seating chart? "<<endl;
+	cout<<"1. Yes "<<endl;
+	cout<<"2. No "<<endl;
+	int ynInput;
+	cin>>ynInput;
+	cin.ignore();
+	if(ynInput>2|| ynInput<1) {
+		cout<<"Error, enter the number of the option you'd like."<<endl;
+	}
+	else{
+		switch(ynInput){
+		case 1:
+			//create seating chart
+			break;
+		case 2:
+			break;
+		}
+	}
+	cout<<" "<<endl;
+
+	cout<<"Is there an age requirement? "<<endl;
+	cout<<"1. Yes "<<endl;
+	cout<<"2. No "<<endl;
+	int ynInput2;
+	string minAge;
+	string maxAge;
+	cin>>ynInput2;
+	cin.ignore();
+	if(ynInput2>2|| ynInput2<1) {
+		cout<<"Error, enter the number of the option you'd like."<<endl;
+	}
+	else{
+		switch(ynInput2){
+		case 1:
+			cout<<"What is the minimum age requirement? If none type NA "<<endl;
+			cin>>minAge;
+			//seperate code to deal with age
+			cout<<"What is the maximum age requirement? If none type NA. "<<endl;
+			cin>>maxAge;
+			//seperate code for age
+			break;
+		case 2:
+			break;
+		}
+	}
+	cout<<" "<<endl;
+
+	cout<<"Any notes you'd like your guests to know? "<<endl;
+	std::string message;
+	std::getline(std::cin, message);
+	//include the message in details?
+
+
+
+}
 void userMenu(){
 	cout<<"Please select an option below."<<endl;
 
@@ -41,6 +112,7 @@ void userMenu(){
 		switch(userInput){
 		case 1:
 			cout<<"Wonderful! To create your event please answer the following questions."<<endl;
+			createEvent();
 			/*
 			* Create the code needed for a new event, then access it here
 			* Make sure the questions are simple for the user to answer
