@@ -16,6 +16,7 @@ Project_Team 18:
 #include<ctime>
 #include<vector>
 #include"rsvp.h"
+#include"person.h"
 
 using namespace std;
 int main(int argc, char *argv[]){
