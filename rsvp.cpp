@@ -16,18 +16,12 @@ Project_Team 18:
 
 #include "rsvp.h" //includes header file //matt
 
+void Event::Event();
+
 void Event::setEventName(std::string event){
     eventName=event;
 }
 
 void Event::setEventTime(time_t now){
     eventTimeDate = now;
-}
-
-int main(int argc, char *argv[]){
-    
-    std::string event = "Party"; //used for testing
-    time_t now = time(0); //used for testing
-    
-        
 }

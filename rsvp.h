@@ -11,12 +11,12 @@ Project_Team 18:
                 Mark Wagner
 */
 
-
+using namespace std;
 class Event{ //Matt
     
     private:
         time_t eventTimeDate;
-        std::string eventName;
+        string eventName;
         
     public:
         Event(void);
