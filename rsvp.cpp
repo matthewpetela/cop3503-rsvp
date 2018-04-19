@@ -13,8 +13,10 @@ Project_Team 18:
 
 #include <iostream>
 #include "rsvp.h"
+#include "person.h"
 #include <vector>
-#include <string>
+
+using namespace std;
 
 // Basic Constructor for an event with all elements filled out // Mark and Jovanny
 Event::Event(string eventName, string eventType, string eventTime, string eventLocation) {

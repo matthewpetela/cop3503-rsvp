@@ -6,8 +6,7 @@
 #define GROUP_PROGRAM_PERSON_H
 
 #include <iostream>
-#include "rsvp.h"
-#include "string"
+#include <string>
 
 using namespace std;
 
@@ -23,6 +22,9 @@ private:
 public:
 
     person(string name, int age, string response, bool primary);  // Basic Constructor for a person with no plus one
+
+    void setResponse(string response);
+    void plusOne(string name, int age);
 
     string getName();       // Returns the name of the person
     int getAge();           // Returns the age of the person
