@@ -19,17 +19,7 @@ Project_Team 18:
 #include"person.h"
 
 using namespace std;
-int main(int argc, char *argv[]){
-    vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
-   // std::string event = "Party"; //used for testing
-    time_t now = time(0); //used for testing
-
-
-    cout << "Welcome to the Gator RSVP system!" << endl;
-	userMenu();
-
-}
 void userMenu(){
 	cout<<"Please select an option below."<<endl;
 
@@ -94,3 +84,15 @@ void userMenu(){
 		}
 	}
 }
+int main(int argc, char *argv[]){
+    vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
+
+   // std::string event = "Party"; //used for testing
+    time_t now = time(0); //used for testing
+
+
+    cout << "Welcome to the Gator RSVP system!" << endl;
+	userMenu();
+
+}
+
