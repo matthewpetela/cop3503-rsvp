@@ -34,7 +34,7 @@ Event::Event(string eventPlanner, string eventName, string eventType, string eve
 }
 
 // Overloaded Constructor for an event with all elements filled out except for the dresscode and age limit // Mark and Jovanny
-Event::Event(string eventPlanner, string eventName, string eventType, string eventDate, string eventTime, string eventLocation, string dresscode, int ageMin, string message) {
+Event::Event(string eventPlanner, string eventName, string eventType, string eventDate, string eventTime, string eventLocation, string dresscode, string message) {
     this->eventPlanner = eventPlanner;
     this->eventName = eventName;
     this->eventType = eventType;
@@ -42,7 +42,7 @@ Event::Event(string eventPlanner, string eventName, string eventType, string eve
     this->eventTime = eventTime;
     this->location = eventLocation;
     this->dresscode = dresscode;
-    this->ageMinimum = ageMin;
+  //  this->ageMinimum = ageMin;
     this->message = message;
 }
 

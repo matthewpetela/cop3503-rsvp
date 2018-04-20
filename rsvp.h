@@ -45,7 +45,7 @@ public:
     Event();
 
     // Constructor for an event with all elements filled out except for the age minimum and dresscode // Mark and Jovanny
-    Event(string eventPlanner, string eventName, string eventType, string eventDate, string eventTime, string eventLocation, string dresscode, int ageMin, string message);
+    Event(string eventPlanner, string eventName, string eventType, string eventDate, string eventTime, string eventLocation, string dresscode, string message);
 
     // Overloaded constructor for an event with all elements filled out // Mark and Jovanny
     Event(string eventPlanner, string eventName, string eventType, string eventDate, string eventTime, string eventLocation, string message);

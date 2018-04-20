@@ -1,5 +1,3 @@
-#include <ctime>
-
 /*
 main.cpp
 COP3503
@@ -28,9 +26,11 @@ void createEvent(int i){                    //int i is used to tell which event 
     string eventTime;                       //used for event date       //jovanny and mark
     string eventLocation;                   //used for event location
     string message;
+    string dressCode;
     string eventDate;
     string guestName;                       // used to guest creation
     string age;                                // used for guest creation
+    int dressOption;                        //int used for dresscode options
 
 
     vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
@@ -65,13 +65,62 @@ void createEvent(int i){                    //int i is used to tell which event 
     getline(cin, eventLocation);
     cout<<endl;
 
+
+    //jovanny  // loop to make sure a dress code is picked
+    bool dressBool = true;
+    while(dressBool){
+        cout<<"Please select the dresscode for this event?" <<endl;
+        cout<<"1. Casual "<<endl;
+        cout<<"2. Business casual "<<endl;
+        cout<<"3. Business formal "<<endl;
+        cout<<"4. Semi-formal "<<endl;
+        cout<<"5. Formal "<<endl;
+        cout<<"6. Other (please specify)"<<endl;
+        cin>>dressOption;
+        switch(dressOption){
+            case 1:
+                dressCode = "Casual";
+                dressBool = false;
+                break;
+            case 2:
+                dressCode = "Business casual";
+                dressBool = false;
+                break;
+            case 3:
+                dressCode = "Business formal";
+                dressBool = false;
+                break;
+            case 4:
+                dressCode = "Semi-formal";
+                dressBool = false;
+                break;
+            case 5:
+                dressCode = "Formal";
+                dressBool = false;
+                break;
+            case 6:
+                cout<<"Please specify your dress Code" <<endl;
+                cin.ignore();
+                getline(cin, dressCode);
+                dressBool = false;
+                break;
+            default:
+                cout<<"Error, enter the number of the option you'd like."<<endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+
+        }
+
+    }
+
+
     cout<<"Any notes you'd like your guests to know? "<<endl;
     getline(cin, message);
     cout<<endl;
-    //include the message in details?
 
     //creates the event based on whatever inputs the user givse
-    eventCreator.emplace_back(eventPlanner, eventName, eventType,eventDate, eventTime, eventLocation, message);     //jovanny and mark emplace back is equivalent to push back
+    eventCreator.emplace_back(eventPlanner, eventName, eventType,eventDate, eventTime, eventLocation, dressCode , message);     //jovanny and mark emplace back is equivalent to push back
     cout<<eventName << " " << eventType << " " << eventLocation << " " << eventTime << " "<< eventDate << " "<< eventPlanner<< " " << message<< "\n"<< endl;  //statement for erro checking
 
 
@@ -112,14 +161,13 @@ void createEvent(int i){                    //int i is used to tell which event 
             continue;   // and the user is not prompted about adding another person
         }
 
-
           //while loop to check if user wants to add another guest
 
         while(menu2){
             cout<<"Would you like to add another guest? (hit Y for yes or N for no)"<<endl;
             cin>>addGuest;
             switch(toupper(addGuest)){
-                case 'Y':
+                case 'Y':   //
                     menu = true;
                     menu2 = false;
                     break;
@@ -135,11 +183,7 @@ void createEvent(int i){                    //int i is used to tell which event 
             }
         }
 
-
     }
-
-
-
 
 
 
@@ -163,38 +207,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 		}
 	}
 	cout<<" "<<endl;
-
-
-
-//DRESS CODE SECTION
-
-    cout<<"Is there a dress code? "<<endl;
-    cout<<"1. Yes "<<endl;
-    cout<<"2. No "<<endl;
-    int ynInput3;
-    cin>>ynInput3;
-    std::string eventDress;
-    cin.ignore();
-    if(ynInput3>2|| ynInput3<1) {
-        cout<<"Error, enter the number of the option you'd like."<<endl;
-    }
-    else{
-        switch(ynInput3){
-            case 1:
-                cout<<"Enter the dresscode. (Ex. casual, professional, etc.) "<<endl;
-                std::getline(std::cin, eventDress);
-                /*
-                 * add dresscode to list
-                 */
-                break;
-            case 2:
-                break;
-        }
-    }
-    cout<<" "<<endl;
-
-
-
 
 
     //AGE REQUIREMENT SECTION
@@ -227,12 +239,11 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<" "<<endl;
 
 
-
-
 }
 
 
 //jovanny and mark
+//used for selection 2 on the menu
 void rsvpSystem(){
 
 
