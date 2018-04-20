@@ -17,50 +17,124 @@ Project_Team 18:
 #include<vector>
 #include"rsvp.h"
 #include"person.h"
+#include<limits>
 
 using namespace std;
-void createEvent(){
-	cout<<"What is the name of your event?(Ex. Tom's party) "<<endl;
-	std::string eventName;						//accepts multiple words for the event name
-	std::getline(std::cin, eventName);
-	/*
-	 * add event to list here
-	 */
+void createEvent(int i){                    //int i is used to tell which event we are currently creating.
+                                            // this is used for adding people to the current event
+    string eventName;
+    string eventType;						//accepts multiple words for the event type
+    string eventTime;                       //used for event date       //jovanny and mark
+    string eventLocation;                   //used for event location
+    string guestName;                       // used to guest creation
+    string age;                                // used for guest creation
+
+
+    vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
+
+    cout<<"What is the name of your event?(Ex. Tom's party) "<<endl;     //accepts multiple words for the event name
+    cin.ignore();
+    getline(cin, eventName);
 	cout<<" "<<endl;
 
 	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
-	std::string eventType;						//accepts multiple words for the event type
-	std::getline(std::cin, eventType);
-	/*
-	 * add type to list, if the event is a wedding ask if they want to add a registry
-	 */
+    getline(cin, eventType);
 	cout<<" "<<endl;
 
-	cout<<"Please enter the date of the event in the form mm/dd/yyyy. "<<endl;
-	std::string eventDate;						//accepts multiple words for the event type
-	std::getline(std::cin, eventDate);
-	/*
-	 * add date to list
-	 */
-	cout<<" "<<endl;
+    cout<<"What is the time of the event?" << endl;        //jovanny and mark
+    getline(cin, eventTime);
+    cout<<endl;
 
-	cout<<"Please enter the time of the event.(Ex. 6:00PM) "<<endl;
-	std::string eventTime;						//accepts multiple words for the event type
-	std::getline(std::cin, eventTime);
-	/*
-	 * add time to list
-	 */
-	cout<<" "<<endl;
+    cout<<"What is the date of the event? (enter in the form mm/dd/yyyy)" <<endl;
+    /*
+     * error checking needs to be done in this section to make sure it is in correct format
+     * possibly use substrings to analyze that everything is in proper format
+     */
 
-	cout<<"Please enter the location of the event.(Ex. P. Sherman 42 Wallaby Way, Sydney) "<<endl;
-	std::string eventLocation;						//accepts multiple words for the event type
-	std::getline(std::cin, eventLocation);
-	/*
-	 * add location to list
-	 */
-	cout<<" "<<endl;
+    cout<<endl;
 
-	cout<<"Would you like to create a seating chart? "<<endl;
+    cout<<"Where will this event be held?" << endl;         //jovanny and mark
+    getline(cin, eventLocation);
+    cout<<endl;
+
+    //creates the event based on whatever inputs the user givse
+    eventCreator.emplace_back(eventName, eventType, eventTime, eventLocation);     //jovanny and mark emplace back is equivalent to push back
+    cout<<eventName << " " << eventType << " " << eventLocation << " " << eventTime <<endl;  //statement for erro checking
+
+
+    //while loop used to create guests
+    bool menu = true;
+    bool breakOut;          // bool to check if you broke out of the for loop due to a bad age string
+    bool menu2 = true;
+    char addGuest = 'z';
+
+    while(menu){
+        breakOut = false;
+        cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
+        getline(cin, guestName);
+        cout<<endl;
+
+        cout<<"Please enter the guest's age (numbers only)"<<endl;
+        getline(cin, age);
+        cout<<endl;
+
+        for(unsigned int a = 0; a < age.size(); a++){   //for loop to check if the age string contains numbers only
+            if(isdigit(age.at(a)) == 0){                //isdigit returns 0 when it is false
+            breakOut = true;
+            cout<<"Please enter numbers only"<<endl;
+                cout<< "\n";
+            break;                                      //if a character isnt a number, we break out of the for loop
+            }
+            else{
+                if(a == (age.size()  - 1)){             // if you reach the end of the age string and everything is a number you create a person
+                    cout<< guestName << " was added successfully to your guest list!"<<endl;
+                    eventCreator[i].sendInvite(guestName, stoi(age));
+                }
+            }
+        }
+        cout<<guestName << " " << age << "\n";      //used for testing purposes
+
+
+        if(breakOut){   // if we brokeout of the for loop due to bad age, the while loop is continued
+            continue;   // and the user is not prompted about adding another person
+        }
+
+
+          //while loop to check if user wants to add another guest
+
+        while(menu2){
+            cout<<"Would you like to add another guest? (hit Y for yes or N for no)"<<endl;
+            cin>>addGuest;
+           // toupper(addGuest);
+            switch(toupper(addGuest)){
+                case 'Y':
+                    menu = true;
+                    menu2 = false;
+                    break;
+                case 'N':
+                    menu = false;
+                    menu2 = false;
+                    break;
+                default:
+                    menu2 = true;
+                    cout<<"Please enter either Y or N"<<endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+//SEATING CHART SECTION
+    cout<<"Would you like to create a seating chart? "<<endl;
 	cout<<"1. Yes "<<endl;
 	cout<<"2. No "<<endl;
 	int ynInput;
@@ -80,30 +154,40 @@ void createEvent(){
 	}
 	cout<<" "<<endl;
 
-	cout<<"Is there a dress code? "<<endl;
-	cout<<"1. Yes "<<endl;
-	cout<<"2. No "<<endl;
-	int ynInput3;
-	cin>>ynInput3;
-	std::string eventDress;
-	cin.ignore();
-	if(ynInput3>2|| ynInput3<1) {
-		cout<<"Error, enter the number of the option you'd like."<<endl;
-	}
-	else{
-		switch(ynInput3){
-		case 1:
-			cout<<"Enter the dresscode. (Ex. casual, professional, etc.) "<<endl;
-			std::getline(std::cin, eventDress);
-			/*
-			 * add dresscode to list
-			 */
-			break;
-		case 2:
-			break;
-		}
-	}
-	cout<<" "<<endl;
+
+
+//DRESS CODE SECTION
+
+    cout<<"Is there a dress code? "<<endl;
+    cout<<"1. Yes "<<endl;
+    cout<<"2. No "<<endl;
+    int ynInput3;
+    cin>>ynInput3;
+    std::string eventDress;
+    cin.ignore();
+    if(ynInput3>2|| ynInput3<1) {
+        cout<<"Error, enter the number of the option you'd like."<<endl;
+    }
+    else{
+        switch(ynInput3){
+            case 1:
+                cout<<"Enter the dresscode. (Ex. casual, professional, etc.) "<<endl;
+                std::getline(std::cin, eventDress);
+                /*
+                 * add dresscode to list
+                 */
+                break;
+            case 2:
+                break;
+        }
+    }
+    cout<<" "<<endl;
+
+
+
+
+
+    //AGE REQUIREMENT SECTION
 
 	cout<<"Is there an age requirement? "<<endl;
 	cout<<"1. Yes "<<endl;
@@ -132,6 +216,12 @@ void createEvent(){
 	}
 	cout<<" "<<endl;
 
+
+
+
+    //EXTRA NOTES SECTION
+
+
 	cout<<"Any notes you'd like your guests to know? "<<endl;
 	std::string message;
 	std::getline(std::cin, message);
@@ -140,28 +230,36 @@ void createEvent(){
 
 
 }
+
+
+//jovanny and mark
+void rsvpSystem(){
+
+
+
+
+}
+
+
+
 void userMenu(){
-	cout<<"Please select an option below."<<endl;
+    int userInput;
+    int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
 
-	cout<<" "<<endl;
-	cout<<"1. Creating an event "<<endl;
-	cout<<"2. RSVP to an event "<<endl;
-	cout<<"3. Details of an event "<<endl;
-	cout<<"4. Change response to event "<<endl;
-	cout<<"5. Exit system "<<endl;
-	cout<<" "<<endl;
+    //jovanny and mark
+    while(true){        //while statement will continue to display the menu until a correct option is chosen
+        cout<<"1. Creating an event "<<endl;
+        cout<<"2. RSVP to an event "<<endl;
+        cout<<"3. Details of an event "<<endl;
+        cout<<"4. Change response to event "<<endl;
+        cout<<"5. Exit system "<<endl;
+        cin>>userInput;
 
-	int userInput;
-	cin>>userInput;
-	cin.ignore();
-	if(userInput>5|| userInput<1) {
-		cout<<"Error, enter the number of the option you'd like."<<endl;
-	}
-	else{
 		switch(userInput){
 		case 1:
 			cout<<"Wonderful! To create your event please answer the following questions."<<endl;
-			createEvent();
+			createEvent(i);
+            i++;    //after creating the event, i is incremented to be ready for the use in the next event
 			/*
 			* Create the code needed for a new event, then access it here
 			* Make sure the questions are simple for the user to answer
@@ -201,15 +299,19 @@ void userMenu(){
 		case 5:
 			cout<<"See you later, alligator! "<<endl;
 			exit(0);
-			break;
+
+        default:                // clears all input a user puts in and continues the loop //jovanny and mark
+            cout<<"Error, enter the number of the option you'd like."<<endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
 		}
 	}
 }
 int main(int argc, char *argv[]){
     vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
-   // std::string event = "Party"; //used for testing
-    time_t now = time(0); //used for testing
+   time_t now = time(0); //used for testing
 
 
     cout << "Welcome to the Gator RSVP system!" << endl;
