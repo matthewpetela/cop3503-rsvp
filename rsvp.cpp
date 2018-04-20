@@ -18,14 +18,48 @@ Project_Team 18:
 
 using namespace std;
 
-// Basic Constructor for an event with all elements filled out // Mark and Jovanny
-Event::Event(string eventName, string eventType, string eventTime, string eventLocation) {
+// CONSTRUCTORS //
+
+// Basic Constructor for an event with all elements filled out except for the dresscode and age limit // Mark and Jovanny
+Event::Event(string eventPlanner, string eventName, string eventType, string eventDate, string eventTime, string eventLocation, string message) {
+    this->eventPlanner = eventPlanner;
     this->eventName = eventName;
     this->eventType = eventType;
-    this->time = eventTime;
+    this->eventDate = eventDate;
+    this->eventTime = eventTime;
     this->location = eventLocation;
+    this->dresscode = "";
+    this->ageMinimum = 0;
+    this->message = message;
 }
 
+// Overloaded Constructor for an event with all elements filled out except for the dresscode and age limit // Mark and Jovanny
+Event::Event(string eventPlanner, string eventName, string eventType, string eventDate, string eventTime, string eventLocation, string dresscode, int ageMin, string message) {
+    this->eventPlanner = eventPlanner;
+    this->eventName = eventName;
+    this->eventType = eventType;
+    this->eventDate = eventDate;
+    this->eventTime = eventTime;
+    this->location = eventLocation;
+    this->dresscode = dresscode;
+    this->ageMinimum = ageMin;
+    this->message = message;
+}
+
+// Overloaded Constructor with no elements filled in // Mark and Jovanny
+Event::Event(string eventPlanner) {
+    this->eventPlanner = eventPlanner;
+    this->eventName = "";
+    this->eventType = "";
+    this->eventDate = "";
+    this->eventTime = "";
+    this->location = "";
+    this->dresscode = "";
+    this->ageMinimum = 0;
+    this->message = "";
+}
+
+// MUTATOR METHODS //
 // Creates an event object with no elements filled out // Mark and Jovanny
 Event::Event() = default;
 
@@ -40,15 +74,47 @@ void Event::setEventType(string eventType){
     this->eventType = eventType;
 }
 
+// Sets the date of the event // Mark and Jovanny
+void Event::setEventDate(string eventDate){
+    this->eventDate = eventDate;
+}
+
 // Sets the time the event will take place // Mark and Jovanny
-void Event::setEventTime(string time){
-    this->time = time;
+void Event::setEventTime(string eventTime){
+    this->eventTime = eventTime;
 }
 
 // Sets the location where the event will take place // Mark and Jovanny
 void Event::setEventLocation(string eventLocation){
     this->location = eventLocation;
 }
+
+// Sets the dresscode for the event // Mark and Jovanny
+void Event::setDressCode(string dresscode){
+    this->dresscode = dresscode;
+}
+
+// Sets the minimum age for the event // Mark and Jovanny
+void Event::setAgeMin(int ageMinimum){
+    this->ageMinimum = ageMinimum;
+}
+
+// Sets the message the event planner wants to send to the invitee
+void Event::setMessage(string message){
+    this->message = message;
+}
+
+// Creates a person with a name and an age, sets their decision to Undecided
+// and says that they are the primary invitee, rather than a plus one
+// This person is that added to a vector of all the people invited to the event //Mark and Jovanny
+void Event::sendInvite(string name, int age) {
+    invitees.emplace_back(person(name, age, "Undecided", true));
+}
+
+// ACCESSOR METHODS //
+
+// Returns the name of the event planner // Mark and Jovanny
+string Event::getEventPlanner() { return eventPlanner; }
 
 // Returns the name of the event // Mark and Jovanny
 string Event::getEventName() { return eventName;}
@@ -59,15 +125,26 @@ string Event::getEventType() { return eventType;}
 // Returns the location of the event // Mark and Jovanny
 string Event::getEventLocation() { return location;}
 
-// Returns the time of the event // Mark and Jovanny
-string Event::getEventTime() { return time;}
+// Returns the date of the event // Mark and Jovanny
+string Event::getEventDate() { return eventDate;}
 
-// Creates a person with a name and an age, sets their decision to Undecided
-// and says that they are the primary invitee, rather than a plus one
-// This person is that added to a vector of all the people invited to the event //Mark and Jovanny
-void Event::sendInvite(string name, int age) {
-    invitees.push_back(person(name, age, "Undecided", true));
-}
+// Returns the time of the event // Mark and Jovanny
+string Event::getEventTime() { return eventTime;}
+
+// Returns the event's dresscode // Mark and Jovanny
+string Event::getDressCode(){ return dresscode; }
+
+// Returns the age minimum // Mark and Jovanny
+int Event::getAgeMin(){ return ageMinimum; }
+
+// Returns the message the event planner wants to send to the invite // Mark and Jovanny
+string Event::getMessage() { return message; }
+
+// Returns the list of people invited to the event // Mark and Jovanny
+vector<person> Event::getInvitees() { return invitees; }
+
+
+// PRINT METHODS //
 
 // Prints out a list of people that have said they will go to the event // Mark and Jovanny
 void Event::rsvpYes() {
@@ -112,4 +189,20 @@ void Event::rsvpNo() {
         cout << rsvpNo.at(i).getName() << " (" << rsvpNo.at(i).getAge() << "), " << endl;
     }
     cout << rsvpNo.at(rsvpNo.size()).getName() << " (" << rsvpNo.at(rsvpNo.size()).getAge() << ") \n" << endl;
+}
+
+// Prints out the information for the invitation
+void Event::printInvite() {
+    cout << "You were invited to " << eventPlanner << "'s " << eventType << "!" << endl;
+    cout << eventName << ": " << endl;
+    cout << "When: " << eventDate << " at " << eventTime << endl;
+    cout << "Where: " << location << endl;
+
+    if (dresscode != "NA")
+        cout << "Dresscode: " << dresscode << endl;
+
+    if (ageMinimum != 0)
+        cout << "Age Limit: " << ageMinimum << " or older" << endl;
+
+    cout << "\n" << message << endl;
 }

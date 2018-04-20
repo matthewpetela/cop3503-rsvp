@@ -22,10 +22,13 @@ Project_Team 18:
 using namespace std;
 void createEvent(int i){                    //int i is used to tell which event we are currently creating.
                                             // this is used for adding people to the current event
+    string eventPlanner;
     string eventName;
     string eventType;						//accepts multiple words for the event type
     string eventTime;                       //used for event date       //jovanny and mark
     string eventLocation;                   //used for event location
+    string message;
+    string eventDate;
     string guestName;                       // used to guest creation
     string age;                                // used for guest creation
 
@@ -37,6 +40,10 @@ void createEvent(int i){                    //int i is used to tell which event 
     getline(cin, eventName);
 	cout<<" "<<endl;
 
+    cout<<"what is your name?"<<endl; // used for eventplanner name
+    getline(cin, eventPlanner);
+    cout<<endl;
+
 	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
     getline(cin, eventType);
 	cout<<" "<<endl;
@@ -46,6 +53,7 @@ void createEvent(int i){                    //int i is used to tell which event 
     cout<<endl;
 
     cout<<"What is the date of the event? (enter in the form mm/dd/yyyy)" <<endl;
+    getline(cin, eventDate);
     /*
      * error checking needs to be done in this section to make sure it is in correct format
      * possibly use substrings to analyze that everything is in proper format
@@ -57,9 +65,14 @@ void createEvent(int i){                    //int i is used to tell which event 
     getline(cin, eventLocation);
     cout<<endl;
 
+    cout<<"Any notes you'd like your guests to know? "<<endl;
+    getline(cin, message);
+    cout<<endl;
+    //include the message in details?
+
     //creates the event based on whatever inputs the user givse
-    eventCreator.emplace_back(eventName, eventType, eventTime, eventLocation);     //jovanny and mark emplace back is equivalent to push back
-    cout<<eventName << " " << eventType << " " << eventLocation << " " << eventTime <<endl;  //statement for erro checking
+    eventCreator.emplace_back(eventPlanner, eventName, eventType,eventDate, eventTime, eventLocation, message);     //jovanny and mark emplace back is equivalent to push back
+    cout<<eventName << " " << eventType << " " << eventLocation << " " << eventTime << " "<< eventDate << " "<< eventPlanner<< " " << message<< "\n"<< endl;  //statement for erro checking
 
 
     //while loop used to create guests
@@ -105,7 +118,6 @@ void createEvent(int i){                    //int i is used to tell which event 
         while(menu2){
             cout<<"Would you like to add another guest? (hit Y for yes or N for no)"<<endl;
             cin>>addGuest;
-           // toupper(addGuest);
             switch(toupper(addGuest)){
                 case 'Y':
                     menu = true;
@@ -125,8 +137,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 
     }
-
-
 
 
 
@@ -219,16 +229,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 
 
-    //EXTRA NOTES SECTION
-
-
-	cout<<"Any notes you'd like your guests to know? "<<endl;
-	std::string message;
-	std::getline(std::cin, message);
-	//include the message in details?
-
-
-
 }
 
 
@@ -239,7 +239,6 @@ void rsvpSystem(){
 
 
 }
-
 
 
 void userMenu(){
