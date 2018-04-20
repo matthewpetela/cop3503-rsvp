@@ -35,14 +35,15 @@ void createEvent(int i){                    //int i is used to tell which event 
 
     vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
-    cout<<"What is the name of your event?(Ex. Tom's party) "<<endl;     //accepts multiple words for the event name
+    cout<<"what is your name?"<<endl; // used for eventplanner name
     cin.ignore();
+    getline(cin, eventPlanner);
+    cout<<endl;
+
+    cout<<"What is the name of your event?(Ex. Tom's party) "<<endl;     //accepts multiple words for the event name
     getline(cin, eventName);
 	cout<<" "<<endl;
 
-    cout<<"what is your name?"<<endl; // used for eventplanner name
-    getline(cin, eventPlanner);
-    cout<<endl;
 
 	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
     getline(cin, eventType);
@@ -122,6 +123,7 @@ void createEvent(int i){                    //int i is used to tell which event 
     //creates the event based on whatever inputs the user givse
     eventCreator.emplace_back(eventPlanner, eventName, eventType,eventDate, eventTime, eventLocation, dressCode , message);     //jovanny and mark emplace back is equivalent to push back
     cout<<eventName << " " << eventType << " " << eventLocation << " " << eventTime << " "<< eventDate << " "<< eventPlanner<< " " << message<< "\n"<< endl;  //statement for erro checking
+    cout<<dressCode;    //used for error checking in dress code
 
 
     //while loop used to create guests
