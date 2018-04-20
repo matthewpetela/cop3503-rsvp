@@ -36,6 +36,30 @@ void createEvent(){
 	 */
 	cout<<" "<<endl;
 
+	cout<<"Please enter the date of the event in the form mm/dd/yyyy. "<<endl;
+	std::string eventDate;						//accepts multiple words for the event type
+	std::getline(std::cin, eventDate);
+	/*
+	 * add date to list
+	 */
+	cout<<" "<<endl;
+
+	cout<<"Please enter the time of the event.(Ex. 6:00PM) "<<endl;
+	std::string eventTime;						//accepts multiple words for the event type
+	std::getline(std::cin, eventTime);
+	/*
+	 * add time to list
+	 */
+	cout<<" "<<endl;
+
+	cout<<"Please enter the location of the event.(Ex. P. Sherman 42 Wallaby Way, Sydney) "<<endl;
+	std::string eventLocation;						//accepts multiple words for the event type
+	std::getline(std::cin, eventLocation);
+	/*
+	 * add location to list
+	 */
+	cout<<" "<<endl;
+
 	cout<<"Would you like to create a seating chart? "<<endl;
 	cout<<"1. Yes "<<endl;
 	cout<<"2. No "<<endl;
@@ -49,6 +73,31 @@ void createEvent(){
 		switch(ynInput){
 		case 1:
 			//create seating chart
+			break;
+		case 2:
+			break;
+		}
+	}
+	cout<<" "<<endl;
+
+	cout<<"Is there a dress code? "<<endl;
+	cout<<"1. Yes "<<endl;
+	cout<<"2. No "<<endl;
+	int ynInput3;
+	cin>>ynInput3;
+	std::string eventDress;
+	cin.ignore();
+	if(ynInput3>2|| ynInput3<1) {
+		cout<<"Error, enter the number of the option you'd like."<<endl;
+	}
+	else{
+		switch(ynInput3){
+		case 1:
+			cout<<"Enter the dresscode. (Ex. casual, professional, etc.) "<<endl;
+			std::getline(std::cin, eventDress);
+			/*
+			 * add dresscode to list
+			 */
 			break;
 		case 2:
 			break;
