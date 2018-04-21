@@ -159,14 +159,15 @@ void createEvent(int i){                    //int i is used to tell which event 
     for(int x = 0; x < numGuests; x++){
            // breakOut = false;
             cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
-            getline(cin, guestName);
+            std::cin.get();
+            getline(std::cin, guestName);
             guestArray[x] = guestName;
             cout<<endl;
 
             /*I thought it made more sense to ask the guest their age rather than the event creator so I just commented out the code to copy later
              * I made a more simple loop for the names, since the age doesn't matter yet
              * It also fixed an issue of not letting the someone enter the second guest's name before asking if they wanted to add another guest
-             * I ws hoping to make it more user friendly
+             * I was hoping to make it more user friendly
              */
 
          /*   cout<<"Please enter the guest's age (numbers only)"<<endl;
@@ -378,7 +379,7 @@ int main(int argc, char *argv[]){
    time_t now = time(0); //used for testing
 
 
-    cout << "Welcome to the Gator RSVP system!" << endl;
+    cout << "Welcome to the Gator RSVP system!!!!!" << endl;
 	userMenu();
 
 }
