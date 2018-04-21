@@ -269,9 +269,22 @@ void userMenu(){
 
 		switch(userInput){
 		case 1:
-			cout<<"Wonderful! To create your event please answer the following questions."<<endl;
+		 // Kareem
+		 char cont;
+		    do{
+            cout<<"Wonderful! To create your event please answer the following questions."<<endl;
 			createEvent(i);
-            i++;    //after creating the event, i is incremented to be ready for the use in the next event
+                             i++;
+          do
+        {
+            cout << "Do you want to create another event (Y/N)" << endl;
+            cin >> cont; //asdfg
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        } while(cont != 'y' && cont != 'Y' && cont != 'N' && cont != 'n');
+
+ } while(cont == 'y' || cont == 'Y');
+		  //after creating the event, i is incremented to be ready for the use in the next event
 			/*
 			* Create the code needed for a new event, then access it here
 			* Make sure the questions are simple for the user to answer
