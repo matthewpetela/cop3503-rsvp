@@ -1,4 +1,3 @@
-
 #include <ctime>
 
 /*
@@ -20,8 +19,13 @@ Project_Team 18:
 #include"person.h"
 #include<limits>
 
+
 using namespace std;
 
+//kimmy and kailee
+void registry(){
+	cout<<""<<endl;
+}
 //kimmy
 void createEvent(int i){                    //int i is used to tell which event we are currently creating.Kimmy
                                             // this is used for adding people to the current event
@@ -37,6 +41,7 @@ void createEvent(int i){                    //int i is used to tell which event 
     string age;                                // used for guest creation
     int numGuests;
     int dressOption;
+    int eventTypeOp;
 
     vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
@@ -46,20 +51,72 @@ void createEvent(int i){                    //int i is used to tell which event 
     cout<<" "<<endl;
 
     cout<<"What is the name of your event?(Ex. Tom's party) "<<endl;
-   // cin.ignore();
-    getline(cin, eventName);
+    std::cin.get();
+    getline(std::cin, eventName);
     cout<<" "<<endl;
 
-	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
-    getline(cin, eventType);
+    cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
+    cout<<" "<<endl;
+    cout<<"1. Party "<<endl;
+    cout<<"2. Wedding "<<endl;
+    cout<<"3. Shower (bridal, baby, etc. "<<endl;
+    cout<<"4. Other (Please specify) "<<endl; // AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+    cin>>eventTypeOp;
+
+    switch(eventTypeOp){
+    case 1:
+    	eventType= "Party";
+    	break;
+    case 2:
+    	eventType = "Wedding";
+    	cout<<"Would you like to create a registry? "<<endl;
+    	cout<<"1. Yes"<<endl;
+    	cout<<"2. No"<<endl;
+    	int ans2;
+    	cin>>ans2;
+    	switch(ans2){
+    	case 1:
+    		registry();
+    		break;
+    	case 2:
+    		break;
+    	default:
+    		break;
+    	}
+    	break;
+    	case 3:
+    		eventType = "Shower";
+    		cout<<"Would you like to create a registry? "<<endl;
+    		cout<<"1. Yes"<<endl;
+    		cout<<"2. No"<<endl;
+    		int ans3;
+    		switch(ans3){
+    		case 1:
+    			registry();
+    			break;
+    		case 2:
+    			break;
+    		default:
+    			break;
+    		}
+    		break;
+    		case 4:
+    			getline(cin, eventName);
+    			cout<<" "<<endl;
+    			break;
+    		default:
+    			break;
+
+    }
     cout<<" "<<endl;
 
     cout<<"What is the time of the event?" << endl;
-    getline(cin, eventTime);
+    std::cin.get();
+    getline(std::cin, eventTime);
     cout<<" "<<endl;
 
     cout<<"What is the date of the event? (Enter in the form mm/dd/yyyy)" <<endl;
-    getline(cin, eventDate);
+    getline(std::cin, eventDate);
     /*
      * error checking needs to be done in this section to make sure it is in correct format
      * possibly use substrings to analyze that everything is in proper format
@@ -173,7 +230,6 @@ void createEvent(int i){                    //int i is used to tell which event 
          /*   cout<<"Please enter the guest's age (numbers only)"<<endl;
             getline(cin, age);
             cout<<endl;
-
             for(unsigned int a = 0; a < age.size(); a++){   //for loop to check if the age string contains numbers only
                 if(isdigit(age.at(a)) == 0){                //isdigit returns 0 when it is false
                 breakOut = true;
@@ -189,8 +245,6 @@ void createEvent(int i){                    //int i is used to tell which event 
                 }
             }
             cout<<guestName << " " << age << "\n";      //used for testing purposes
-
-
             if(breakOut){   // if we brokeout of the for loop due to bad age, the while loop is continued
                 continue;   // and the user is not prompted about adding another person
             }*/
@@ -310,7 +364,6 @@ void userMenu(){
 		switch(userInput){
 		case 1:
 			// Kareem
-			int i =1;
 			char cont;
 			do{
 				cout<<"Wonderful! To create your event please answer the following questions."<<endl;
