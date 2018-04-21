@@ -1,3 +1,4 @@
+
 #include <ctime>
 
 /*
@@ -34,6 +35,7 @@ void createEvent(int i){                    //int i is used to tell which event 
     string eventDate;
     string guestName;                       // used to guest creation
     string age;                                // used for guest creation
+    int numGuests;
     int dressOption;
 
     vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
@@ -145,67 +147,75 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 
     //while loop used to create guests
-    bool menu = true;
-    bool breakOut;          // bool to check if you broke out of the for loop due to a bad age string
-    bool menu2 = true;
-    char addGuest = 'z';
-    //jovanny and mark
-    while(menu){
-        breakOut = false;
-        cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
-        getline(cin, guestName);
-        cout<<endl;
+   // bool menu = true;
+   // bool breakOut;          // bool to check if you broke out of the for loop due to a bad age string
+    //bool menu2 = true;
+   // char addGuest = 'z';
 
-        cout<<"Please enter the guest's age (numbers only)"<<endl;
-        getline(cin, age);
-        cout<<endl;
+    //kailee
+    cout<<"How many guests would you like to invite?"<<endl;
+    cin>>numGuests;
+    string guestArray[numGuests];
+    for(int x = 0; x < numGuests; x++){
+           // breakOut = false;
+            cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
+            getline(cin, guestName);
+            guestArray[x] = guestName;
+            cout<<endl;
 
-        for(unsigned int a = 0; a < age.size(); a++){   //for loop to check if the age string contains numbers only
-            if(isdigit(age.at(a)) == 0){                //isdigit returns 0 when it is false
-            breakOut = true;
-            cout<<"Please enter numbers only"<<endl;
-                cout<< "\n";
-            break;                                      //if a character isnt a number, we break out of the for loop
-            }
-            else{
-                if(a == (age.size()  - 1)){             // if you reach the end of the age string and everything is a number you create a person
-                    cout<< guestName << " was added successfully to your guest list!"<<endl;
-                    eventCreator[i].sendInvite(guestName, stoi(age));
+            /*I thought it made more sense to ask the guest their age rather than the event creator so I just commented out the code to copy later
+             * I made a more simple loop for the names, since the age doesn't matter yet
+             * It also fixed an issue of not letting the someone enter the second guest's name before asking if they wanted to add another guest
+             * I ws hoping to make it more user friendly
+             */
+
+         /*   cout<<"Please enter the guest's age (numbers only)"<<endl;
+            getline(cin, age);
+            cout<<endl;
+
+            for(unsigned int a = 0; a < age.size(); a++){   //for loop to check if the age string contains numbers only
+                if(isdigit(age.at(a)) == 0){                //isdigit returns 0 when it is false
+                breakOut = true;
+                cout<<"Please enter numbers only"<<endl;
+                    cout<< "\n";
+                break;                                      //if a character isn't a number, we break out of the for loop
+                }
+                else{
+                    if(a == (age.size()  - 1)){             // if you reach the end of the age string and everything is a number you create a person
+                        cout<< guestName << " was added successfully to your guest list!"<<endl;
+                        eventCreator[i].sendInvite(guestName, stoi(age));
+                    }
                 }
             }
+            cout<<guestName << " " << age << "\n";      //used for testing purposes
+
+
+            if(breakOut){   // if we brokeout of the for loop due to bad age, the while loop is continued
+                continue;   // and the user is not prompted about adding another person
+            }*/
+
+              //while loop to check if user wants to add another guest
+
+            /*while(menu2){
+                cout<<"Would you like to add another guest? (hit Y for yes or N for no)"<<endl;
+                cin>>addGuest;
+                switch(toupper(addGuest)){
+                    case 'Y':   //
+                        menu = true;
+                        menu2 = false;
+                        break;
+                    case 'N':
+                        menu = false;
+                        menu2 = false;
+                        break;
+                    default:
+                        menu2 = true;
+                        cout<<"Please enter either Y or N"<<endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            }*/
         }
-        cout<<guestName << " " << age << "\n";      //used for testing purposes
-
-
-        if(breakOut){   // if we brokeout of the for loop due to bad age, the while loop is continued
-            continue;   // and the user is not prompted about adding another person
-        }
-
-
-          //while loop to check if user wants to add another guest
-        //jovanny and mark
-        while(menu2){
-            cout<<"Would you like to add another guest? (hit Y for yes or N for no)"<<endl;
-            cin>>addGuest;
-            switch(toupper(addGuest)){
-                case 'Y':
-                    menu = true;
-                    menu2 = false;
-                    break;
-                case 'N':
-                    menu = false;
-                    menu2 = false;
-                    break;
-                default:
-                    menu2 = true;
-                    cout<<"Please enter either Y or N"<<endl;
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-        }
-
-
-    }
 
 
 
