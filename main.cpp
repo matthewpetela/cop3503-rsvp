@@ -117,6 +117,39 @@ void createEvent(int i){                    //int i is used to tell which event 
 
     cout<<"What is the date of the event? (Enter in the form mm/dd/yyyy)" <<endl;
     getline(std::cin, eventDate);
+	//Kareem
+	// just plz check if it is working 
+	/*
+	for(int i=0, i<eventDate.size()-1,i++){
+        if(eventDate.length()!=9){
+        cout<<"Wrong input"<<endl;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout<<"Please try again"<<endl;
+        cin>>eventDate
+            
+        }
+    else{
+        
+    
+        if(eventDate.substr(0,2)!=isdigit(eventDate.substr(0,2))||eventDate.substr(3,2)!=isdigit(eventDate.substr(3,2))||eventDate.substr(6,4)!=isdigit(eventDate.susbstr(6,4))){
+        cout<<"wrong input"<<endl;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout<<"Please try again"<<endl;
+        cin>>eventDate 
+        }
+        
+        if(eventDate.at(2)!=47||eventDate.at(5)!=47){
+        cout<<"Wrong input"<<endl; 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout<<"Please try again"<<endl;
+        cin>>eventDate
+            
+        }
+    }
+            
+    }
+    */
+	
     /*
      * error checking needs to be done in this section to make sure it is in correct format
      * possibly use substrings to analyze that everything is in proper format
