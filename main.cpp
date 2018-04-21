@@ -310,6 +310,7 @@ void userMenu(){
 		switch(userInput){
 		case 1:
 			// Kareem
+			int i =1;
 			char cont;
 			do{
 				cout<<"Wonderful! To create your event please answer the following questions."<<endl;
