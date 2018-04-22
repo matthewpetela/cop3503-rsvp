@@ -499,12 +499,11 @@ void rsvpSystem(){
 	transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
 	cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
 
-	cout<<eventCreator.size();
+	
 	for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
 		tempPeople = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
 		for(unsigned int a = 0; a < tempPeople.size(); a++){        //for loop to iterate through all the people in the event
 			tempEventName = tempPeople[a].getName();
-            cout<<tempEventName<<endl;
 			tempEventName.erase(remove(tempEventName.begin(), tempEventName.end(), ' '), tempEventName.end()); //removes whitespace for comparison
 			transform(tempEventName.begin(),tempEventName.end(), tempEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
 			if(tempEventName == tempRsvpName){
