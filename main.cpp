@@ -240,7 +240,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<" "<<endl;
 
 	cout<<"Where will this event be held?" << endl;
-	cin.get();
+	//cin.get();
 	getline(cin, eventLocation);
 	cout<<" "<<endl;
 
@@ -499,7 +499,7 @@ void rsvpSystem(){
 	transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
 	cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
 
-	
+
 	for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
 		tempPeople = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
 		for(unsigned int a = 0; a < tempPeople.size(); a++){        //for loop to iterate through all the people in the event
