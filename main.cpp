@@ -140,14 +140,15 @@ void createEvent(int i){                    //int i is used to tell which event 
 	getline(cin, eventTime);
 	cout<<" "<<endl;
 
-/*	//kareem and jovanny
+	//kareem and jovanny
 	bool menuBool = true;
 	int x = 0;
 	char tempChar;
 	while(menuBool){
 		cout<<"What is the date of the event? (Enter in the form mm/dd/yyyy. Year must be between 2000 and 2199)" <<endl;
-		std::cin.get();
-		getline(std::cin, eventDate);
+		//std::cin.get();
+		//getline(std::cin, eventDate);
+		cin>>eventDate;
 
 		if(eventDate.length() != 10){
 			cout<<"Wrong input"<<endl;
@@ -236,10 +237,10 @@ void createEvent(int i){                    //int i is used to tell which event 
 		}
 
 	}
-	cout<<" "<<endl;*/
+	cout<<" "<<endl;
 
 	cout<<"Where will this event be held?" << endl;
-	//cin.get();
+	cin.get();
 	getline(cin, eventLocation);
 	cout<<" "<<endl;
 
@@ -341,23 +342,39 @@ void createEvent(int i){                    //int i is used to tell which event 
             guestArray[x] = guestName;
             cout<<endl;*/
 
+	/*cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
+			cin.get();
+			getline(cin, guestName);
+			cout<<endl;*/
+	// guestArray[x] = guestName;
+
+			/*I thought it made more sense to ask the guest their age rather than the event creator so I just commented out the code to copy later
+			 * I made a more simple loop for the names, since the age doesn't matter yet
+			 * It also fixed an issue of not letting the someone enter the second guest's name before asking if they wanted to add another guest
+			 * I was hoping to make it more user friendly
+			 */
+
 	while(menu){
 		breakOut = false;
-		cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
-		//cin.get();
+		//kimmy I had to turn it into two parts so it saves all letters correctly but the string is still saved under the same name
+		//I also put the old code for the section above the while loop so its all together
+		string firstInvite;
+		string lastInvite;
 
-		getline(cin, guestName);
-		// guestArray[x] = guestName;
+		cout<<"Please Enter the first name of your guest."<<endl;
+		cin>>firstInvite;
 		cout<<endl;
-		/*I thought it made more sense to ask the guest their age rather than the event creator so I just commented out the code to copy later
-		 * I made a more simple loop for the names, since the age doesn't matter yet
-		 * It also fixed an issue of not letting the someone enter the second guest's name before asking if they wanted to add another guest
-		 * I was hoping to make it more user friendly
-		 */
+
+		cout<<"Please enter the last name of your guest."<<endl;
+		cin>>lastInvite;
+		cout<<endl;
+
+		guestName = firstInvite +" "+ lastInvite;
+
+		cout<< guestName <<endl;
 
 		cout<<"Please enter the guest's age (numbers only)"<<endl;
-		//cin.get();
-		getline(cin, age);
+		cin>>age;
 		cout<<endl;
 		for(unsigned int a = 0; a < age.size(); a++){   //for loop to check if the age string contains numbers only
 			if(isdigit(age.at(a)) == 0){                //isdigit returns 0 when it is false
