@@ -17,6 +17,7 @@ Project_Team 18:
 #include"person.h"
 #include<limits>
 #include<algorithm>
+#include <fstream> //used for file IO - Matt
 
 vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 //global variable is needed for access across all methods
@@ -496,9 +497,10 @@ void rsvpSystem(){
 void userMenu(){
     int userInput;
     int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
+    bool okay = true; //used to quit method
 
     //jovanny and mark
-    while(true){        //while statement will continue to display the menu until a correct option is chosen
+    while(okay){        //while statement will continue to display the menu until a correct option is chosen
 
     	//kimmy
     	cout<<"Please select an option. "<<endl;
@@ -564,7 +566,8 @@ void userMenu(){
 
 		case 5:
 			cout<<"See you later, alligator! "<<endl;
-			exit(0);
+			okay = false;
+			break;
 
         default:                // clears all input a user puts in and continues the loop //jovanny and mark
             cout<<"Error, enter the number of the option you'd like."<<endl;
@@ -573,6 +576,40 @@ void userMenu(){
 		}
 	}
 }
+
+void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+    std::string DATA_FILE_NAME = "data.txt";
+    std::string PERSON_FILE_NAME = "person.txt";
+    vector<std::string> dataFileVector;
+    ofstream dataFile;
+    dataFile.open (DATA_FILE_NAME);
+    
+   // for( std::string line; getline( input, line ); ){
+        
+        
+   // }
+    
+    
+    dataFile.close();
+    
+}
+
+void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+    int size = eventCreator.size(); //Gets the number of events
+    std::string DATA_FILE_NAME = "data.txt";
+    std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
+    ofstream dataFile(DATA_FILE_NAME);
+    
+    
+    for (int i= 0 ; i < size; i++){ //writes to file with new line seperation
+    dataFile << eventCreator.at(i).getEventPlanner() << "\n" << eventCreator.at(i).getEventName() << "\n" << eventCreator.at(i).getEventType() << "\n" << eventCreator.at(i).getEventLocation() << "\n" << 
+    eventCreator.at(i).getEventDate() << eventCreator.at(i).getEventTime() <<"\n" << eventCreator.at(i).getDressCode() << "\n" << eventCreator.at(i).getAgeMin()<< "\n";
+    
+    }
+    
+    dataFile.close();
+    
+}
 int main(int argc, char *argv[]){
     vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
@@ -580,6 +617,7 @@ int main(int argc, char *argv[]){
 
 
     cout << "Welcome to the Gator RSVP system!!!!!" << endl;
-	userMenu();
+    userMenu();
+	saveFile();
 
 }
