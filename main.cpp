@@ -66,7 +66,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 	int dressOption;
 	int eventTypeOp;
 
-	vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
 	cout<<"What is your name?"<<endl; // used for eventplanner name
 	cin.get();
@@ -147,8 +146,9 @@ void createEvent(int i){                    //int i is used to tell which event 
 	while(menuBool){
 		cout<<"What is the date of the event? (Enter in the form mm/dd/yyyy. Year must be between 2000 and 2199)" <<endl;
 		//std::cin.get();
-		//getline(std::cin, eventDate);
-		cin>>eventDate;
+		getline(std::cin, eventDate);	//HAS TO STAY AS GETLINE. IF NOT YOU HAVE TO CLEAR INPUT EVERYTIME ITS BAD INPUT OR YOU GET AN
+		//cin>>eventDate;				//INFINITE LOOP - JOVANNY
+
 
 		if(eventDate.length() != 10){
 			cout<<"Wrong input"<<endl;
@@ -499,11 +499,12 @@ void rsvpSystem(){
 	transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
 	cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
 
-
+	cout<<eventCreator.size();
 	for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
 		tempPeople = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
 		for(unsigned int a = 0; a < tempPeople.size(); a++){        //for loop to iterate through all the people in the event
 			tempEventName = tempPeople[a].getName();
+            cout<<tempEventName<<endl;
 			tempEventName.erase(remove(tempEventName.begin(), tempEventName.end(), ' '), tempEventName.end()); //removes whitespace for comparison
 			transform(tempEventName.begin(),tempEventName.end(), tempEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
 			if(tempEventName == tempRsvpName){
