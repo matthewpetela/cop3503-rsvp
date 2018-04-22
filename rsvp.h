@@ -95,6 +95,7 @@ public:
     int getAgeMin();             // Returns the age minimum // Mark and Jovanny
     string getMessage();         // Returns the message the event planner wants to send to the invite // Mark and Jovanny
     vector<person> getInvitees(); // Returns the list of people invited to the event // Mark and Jovanny
+    int getInviteesSize();       // used to see
 
     // PRINT METHODS //
 
@@ -102,4 +103,5 @@ public:
     void rsvpUndecided();        // Shows the event planner who has indicated that they have not decided if they will attend the event
     void rsvpNo();               // Shows the event planner who has indicated that they will not attend the event
     void printInvite();          // Prints out the information for the invitation
+    void setResponse(unsigned int a, string Response);     //method used for setting response of user in case 2
 };

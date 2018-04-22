@@ -142,6 +142,10 @@ string Event::getMessage() { return message; }
 
 // Returns the list of people invited to the event // Mark and Jovanny
 vector<person> Event::getInvitees() { return invitees; }
+//method used to set response in case 2 Jovanny
+void Event::setResponse(unsigned int a, string Response) {
+    invitees.at(a).setResponse(Response);
+}
 
 
 // PRINT METHODS //
@@ -197,12 +201,10 @@ void Event::printInvite() {
     cout << eventName << ": " << endl;
     cout << "When: " << eventDate << " at " << eventTime << endl;
     cout << "Where: " << location << endl;
+    cout << "Dresscode: " << dresscode << endl;
+    cout << "Notes: " << message << endl;
+   // if (ageMinimum != 0)
+    //    cout << "Age Limit: " << ageMinimum << " or older" << endl;
 
-    if (dresscode != "NA")
-        cout << "Dresscode: " << dresscode << endl;
 
-    if (ageMinimum != 0)
-        cout << "Age Limit: " << ageMinimum << " or older" << endl;
-
-    cout << "\n" << message << endl;
 }
