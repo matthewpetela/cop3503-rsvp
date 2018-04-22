@@ -108,7 +108,7 @@ void Event::setMessage(string message){
 // and says that they are the primary invitee, rather than a plus one
 // This person is that added to a vector of all the people invited to the event //Mark and Jovanny
 void Event::sendInvite(string name, int age) {
-    invitees.emplace_back(person(name, age, "Undecided", true));
+    invitees.emplace_back(person(name, age, "Undecided", true, "None"));
 }
 
 // ACCESSOR METHODS //
@@ -145,6 +145,9 @@ vector<person> Event::getInvitees() { return invitees; }
 //method used to set response in case 2 Jovanny
 void Event::setResponse(unsigned int a, string Response) {
     invitees.at(a).setResponse(Response);
+}
+void Event::setSeating(unsigned int i, string Table){
+	invitees.at(i).setSeating(Table);
 }
 
 
@@ -206,5 +209,9 @@ void Event::printInvite() {
    // if (ageMinimum != 0)
     //    cout << "Age Limit: " << ageMinimum << " or older" << endl;
 
+
+}
+void Event::printSeating1(){
+    vector<person> Table1;
 
 }
