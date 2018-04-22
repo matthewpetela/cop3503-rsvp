@@ -1,3 +1,4 @@
+
 #include <ctime>
 
 /*
@@ -611,6 +612,8 @@ void eventDetails(){
     string tempEventTime;
     string tempEventLocation;
     string tempDressCode;
+    vector<person> guestList;
+    string guestName;
 
     bool isEvent = false;
     cout<<"What is the name of the event that you would like the details for? "<<endl;
@@ -632,6 +635,7 @@ void eventDetails(){
         tempEventTime = eventCreator[i].getEventTime();
         tempEventLocation = eventCreator[i].getEventLocation();
         tempDressCode = eventCreator[i].getDressCode();
+        guestList = eventCreator[i].getInvitees();
 
         if (tempName == tempEvent) {
             isEvent = true;
@@ -641,7 +645,12 @@ void eventDetails(){
             cout<<"The time of the event is "<<tempEventTime<<endl;
             cout<<"The location of the event is "<<tempEventLocation<<endl;
             cout<<"The dress code of the event is "<<tempDressCode<<endl;
+            cout<<"The list of guests is " << endl;
+            for(unsigned int a = 0; a < guestList.size(); a++){        //for loop to iterate through all the people in the event
+                        guestName = guestList[a].getName();
+                        cout<< << guestName << endl;
 
+            }
         }
     }
     if(!isEvent) {
@@ -839,7 +848,7 @@ int main(int argc, char *argv[]){
    time_t now = time(0); //used for testing
 
 
-    cout << "Welcome to the Gator RSVP system!!!!!" << endl;
+    cout << "Welcome to the Gator RSVP system!!!!" << endl;
 	userMenu();
 
 }
