@@ -95,7 +95,7 @@ public:
     int getAgeMin();             // Returns the age minimum // Mark and Jovanny
     string getMessage();         // Returns the message the event planner wants to send to the invite // Mark and Jovanny
     vector<person> getInvitees(); // Returns the list of people invited to the event // Mark and Jovanny
-    int getInviteesSize();       // used to see
+
 
     // PRINT METHODS //
 
