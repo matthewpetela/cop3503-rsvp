@@ -40,7 +40,7 @@ void person::setSeating(string table){
 // This person is "Going" by default, and they cannot invite another plus one
 // Mark
 void person::plusOne(string name, int age) {
-    person(name, age, "Going", false, "Table 1");
+    person(name, age, "Going", false, "None");
 }
 
 // Returns the name of the person // Mark

@@ -505,7 +505,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 			//create seating chart
 			break;
 		case 2:
-			eventCreator[i].setSeating(i,"None");
 			break;
 		}
 	}
@@ -650,6 +649,89 @@ void eventDetails(){
 
     }
 }
+void changeResponse(){
+    string tempEventName;
+    string tempRsvpName;
+    bool inEvent = false;
+    bool menu1 = true;
+    bool menu2 = false;
+    char menuOption1 = 'z';
+    char menuOption2 = 'z';
+    vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
+
+    cout<<"Please enter your name"<< endl;
+    cin.get();
+    getline(cin, tempRsvpName);
+    tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
+    transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
+    cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
+
+
+    for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
+        tempPeople = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
+        for(unsigned int a = 0; a < tempPeople.size(); a++){        //for loop to iterate through all the people in the event
+            tempEventName = tempPeople[a].getName();
+            tempEventName.erase(remove(tempEventName.begin(), tempEventName.end(), ' '), tempEventName.end()); //removes whitespace for comparison
+            transform(tempEventName.begin(),tempEventName.end(), tempEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
+            if(tempEventName == tempRsvpName){
+                inEvent = true;                                     //bool to let user know whether they re in an event or not
+                eventCreator[i].printInvite();                      //prints the invitation to the event
+                menu1 = true;
+                while(menu1){										//while loop to ask if the user would like to change their response to an invitation
+                	cout<<"Would you like to change your response for this event? (hit Y for yes or N for no)"<<endl;
+                    cin>>menuOption1;
+                    clearInput();
+                    switch(toupper(menuOption1)){
+                            case 'Y':
+                                cout<<"Thank you for your response!"<<endl;
+                                cout<<"To change your response, answer the question below"<<endl;
+                                menu1 = false;
+                                menu2 = true;
+                                break;
+                            case 'N':
+                                cout<<"Thank you for your response!"<< "\n"<<endl;
+                                menu1 = false;
+                                menu2 = false;
+                                break;
+                            default:
+                                cout<<"Please enter either Y or N"<<endl;
+                                clearInput();
+                                continue;
+
+                    }
+                }
+
+                while(menu2){                                        //while loop to change if user is attending the event
+                    cout<<"What would you like to change your response to? (hit Y for yes or N for no)"<<endl;
+                    cin>>menuOption2;
+                    clearInput();
+                    switch(toupper(menuOption2)){
+                            case 'Y':
+                                eventCreator[i].setResponse(a,"Yes");
+                                cout<<"Thank you for response!"<<endl;
+                                menu2 = false;
+                                break;
+                            case 'N':
+                                eventCreator[i].setResponse(a,"No");
+                                cout<<"Thank you for response!"<< "\n"<<endl;
+                                menu2 = false;
+                                break;
+                            default:
+                                cout<<"Please enter either Y or N"<<endl;
+                                clearInput();
+                                continue;
+
+                    }
+                }
+            }
+        }
+    }
+    if(!inEvent){
+        cout<<"Unfortunately you have not been invited to any events."<<endl;
+    }
+
+}
+
 
 
 
@@ -702,12 +784,7 @@ void userMenu(){
 			break;
 		case 4:
 			cout<<"No problem! To change your response follow the steps below. "<<endl;
-			/*
-			 * Create the code needed to change the response of a guest
-			 * Try to be as detailed as possible
-			 * The code can be written in different classes so long as the correct information is displayed
-			 * Return to menu
-			 */
+			changeResponse();
 			break;
 
 		case 5:
