@@ -603,6 +603,8 @@ void rsvpSystem(){
 	}
 }
 
+
+//Nicholas
 void eventDetails(){
     string Name;					//Initializes all of the event deatils
     string tempName;
@@ -614,6 +616,7 @@ void eventDetails(){
     string tempDressCode;
     vector<person> guestList;
     string guestName;
+    string tableNum;
 
     bool isEvent = false;
     cout<<"What is the name of the event that you would like the details for? "<<endl;
@@ -645,12 +648,22 @@ void eventDetails(){
             cout<<"The time of the event is "<<tempEventTime<<endl;
             cout<<"The location of the event is "<<tempEventLocation<<endl;
             cout<<"The dress code of the event is "<<tempDressCode<<endl;
+
+            //kailee
+            //prints list of guest and table assignment
             cout<<"The list of guests is " << endl;
             for(unsigned int a = 0; a < guestList.size(); a++){        //for loop to iterate through all the people in the event
                         guestName = guestList[a].getName();
-                        cout<< << guestName << endl;
+                        tableNum = guestList[a].getSeating();
+                        if(tableNum != "None"){
+                        cout<< guestName <<" at " << tableNum << endl;
+                        }
+                        else{
+                        	cout<<guestName<<endl;
+                        }
 
             }
+            cout<<""<<endl;
         }
     }
     if(!isEvent) {
