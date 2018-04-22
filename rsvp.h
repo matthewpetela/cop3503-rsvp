@@ -104,4 +104,9 @@ public:
     void rsvpNo();               // Shows the event planner who has indicated that they will not attend the event
     void printInvite();          // Prints out the information for the invitation
     void setResponse(unsigned int a, string Response);     //method used for setting response of user in case 2
+    void setSeating(unsigned int i, string Table);
+    void printSeating1();
+    void printSeating2();
+    void printSeating3();
+    void printSeating4();
 };
