@@ -49,6 +49,7 @@ void registry(){
 		cout<<endl;
 	}
 }
+
 //kimmy
 void createEvent(int i){                    //int i is used to tell which event we are currently creating.Kimmy
 	// this is used for adding people to the current event
@@ -187,7 +188,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 				continue;
 			}
 
-			if(isdigit(eventDate.at(3)) == 0 && (((int)eventDate.at(4)) - 48) > 1){
+			if(x == 3 && (((int)eventDate.at(4)) - 48) > 1){
 				cout<<"wrong input"<<endl;
 				cout<<"Please input the date in the correct format"<<endl;
 				continue;
@@ -330,34 +331,9 @@ void createEvent(int i){                    //int i is used to tell which event 
 	bool menu2 = true;
 	char addGuest = 'z';
 
-	/* //kailee
-    cout<<"How many guests would you like to invite?"<<endl;
-    cin>>numGuests;
-    string guestArray[numGuests];
-    for(int x = 0; x < numGuests; x++){
-           // breakOut = false;
-            cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
-            std::cin.get();
-            getline(std::cin, guestName);
-            guestArray[x] = guestName;
-            cout<<endl;*/
-
-	/*cout<<"Please enter the name of the guest you would like to add to your invite list" << endl;
-			cin.get();
-			getline(cin, guestName);
-			cout<<endl;*/
-	// guestArray[x] = guestName;
-
-			/*I thought it made more sense to ask the guest their age rather than the event creator so I just commented out the code to copy later
-			 * I made a more simple loop for the names, since the age doesn't matter yet
-			 * It also fixed an issue of not letting the someone enter the second guest's name before asking if they wanted to add another guest
-			 * I was hoping to make it more user friendly
-			 */
-
 	while(menu){
 		breakOut = false;
 		//kimmy I had to turn it into two parts so it saves all letters correctly but the string is still saved under the same name
-		//I also put the old code for the section above the while loop so its all together
 		string firstInvite;
 		string lastInvite;
 
@@ -430,13 +406,14 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<"2. No "<<endl;
 	int ynInput;
 	cin>>ynInput;
-	cin.ignore();
+	//cin.ignore()
 	if(ynInput>2|| ynInput<1) {
 		cout<<"Error, enter the number of the option you'd like."<<endl;
 	}
 	else{
 		switch(ynInput){
 		case 1:
+			//seatingSystem();
 			//create seating chart
 			break;
 		case 2:
@@ -476,10 +453,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 		}
 	}
 	cout<<" "<<endl;
-
-
-
-
 }
 
 
@@ -541,6 +514,56 @@ void rsvpSystem(){
 	}
 }
 
+void eventDetails(){
+    string Name;					//Initializes all of the event deatils
+    string tempName;
+    string tempEvent;
+    string tempEventType;
+    string tempEventDate;
+    string tempEventTime;
+    string tempEventLocation;
+    string tempDressCode;
+
+    bool isEvent = false;
+    cout<<"What is the name of the event that you would like the details for? "<<endl;
+    cin.get();
+    getline(cin, Name);
+
+    tempName = Name;
+    tempName.erase(remove(tempName.begin(), tempName.end(), ' '), tempName.end()); //removes whitespace for comparison
+    transform(tempName.begin(),tempName.end(), tempName.begin(), ::tolower);    //sets characters to lower case for comparison
+    cout<< tempName <<endl;
+
+    for(unsigned int i = 0; i < eventCreator.size(); i++) {          //for loop to iterate through all created events
+        tempEvent = eventCreator[i].getEventName();
+        tempEvent.erase(remove(tempEvent.begin(), tempEvent.end(), ' '), tempEvent.end()); //removes whitespace for comparison
+        transform(tempEvent.begin(), tempEvent.end(), tempEvent.begin(), ::tolower);    //sets characters to lower case for comparison
+
+        tempEventType = eventCreator[i].getEventType();   				//
+        tempEventDate = eventCreator[i].getEventDate();
+        tempEventTime = eventCreator[i].getEventTime();
+        tempEventLocation = eventCreator[i].getEventLocation();
+        tempDressCode = eventCreator[i].getDressCode();
+
+        if (tempName == tempEvent) {
+            isEvent = true;
+            cout << "\nThe event " << Name << " has the following details to it:" << endl;
+            cout<<"The type of the event is "<<tempEventType<<endl;
+            cout<<"The date of the event is "<<tempEventDate<<endl;
+            cout<<"The time of the event is "<<tempEventTime<<endl;
+            cout<<"The location of the event is "<<tempEventLocation<<endl;
+            cout<<"The dress code of the event is "<<tempDressCode<<endl;
+
+        }
+    }
+    if(!isEvent) {
+        cout<<"Error, that is not an event name."<<endl;
+
+    }
+}
+
+
+
 
 void userMenu(){
     int userInput;
@@ -586,12 +609,7 @@ void userMenu(){
 			break;
 		case 3:
 			cout<<"Details are important! Please answer the questions below. "<<endl;
-			/*
-			 * Display details of an event here including seating, who's going, etc.
-			 * Most of the code should exist from other classes so it should just be able to print here
-			 * Make sure it's easy to understand for the user
-			 * Return to menu
-			 */
+						eventDetails();
 			break;
 		case 4:
 			cout<<"No problem! To change your response follow the steps below. "<<endl;
