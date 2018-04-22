@@ -33,6 +33,94 @@ void clearInput(){
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
+//Kailee and kimmy
+void seatingSystem(){
+	string tEventName;
+	string tRsvpName;
+	bool inEvent = false;
+	bool menu = true;
+	bool addSeat = true;
+	char menuOption1 = 'z';
+	vector<person> tempTable;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
+	//cout<<"To exit type x."<<endl;
+
+	while(addSeat != false){
+	cout<<"Would you like to assign a new guest to a table? "<<endl;
+	cout<<"1. Yes"<<endl;
+	cout<<"2. No"<<endl;
+	int ans4;
+	cin>>ans4;
+	if(ans4 == 1){
+	cout<<"Please enter the guest you'd like to seat."<< endl;
+	cin.get();
+	getline(cin, tRsvpName);
+	tRsvpName.erase(remove(tRsvpName.begin(), tRsvpName.end(), ' '), tRsvpName.end()); //removes whitespace for comparison
+	transform(tRsvpName.begin(),tRsvpName.end(), tRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
+	cout<< tRsvpName <<endl;         // test to make sure input user name has no spaces
+
+
+	for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
+		tempTable = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
+		for(unsigned int a = 0; a < tempTable.size(); a++){        //for loop to iterate through all the people in the event
+			tEventName = tempTable[a].getName();
+			tEventName.erase(remove(tEventName.begin(), tEventName.end(), ' '), tEventName.end()); //removes whitespace for comparison
+			transform(tEventName.begin(),tEventName.end(), tEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
+			if(tEventName == tRsvpName){
+				inEvent = true;                                     //bool to let user know whether they re in an event or not
+				//eventCreator[i].printSeating();                      //prints the invitation to the event
+
+				menu = true;
+				while(menu){                                        //while loop to check if user is attending the event
+					cout<<"Where would you like them to sit?"<<endl;
+					cout<<"Table 1,2,3, or 4?"<<endl;
+					cin>>menuOption1;
+					clearInput();
+					switch(toupper(menuOption1)){
+					case '1':
+						eventCreator[i].setSeating(i,"Table 1");
+						cout<<"It's been recorded"<<endl;
+						menu = false;
+						break;
+					case '2':
+						eventCreator[i].setSeating(i,"Table 2");
+						cout<<"It's been recorded"<< "\n"<<endl;
+						menu = false;
+						break;
+					case '3':
+						eventCreator[i].setSeating(i,"Table 3");
+						cout<<"It's been recorded"<<endl;
+						menu = false;
+						break;
+					case '4':
+						eventCreator[i].setSeating(i,"Table 4");
+						cout<<"It's been recorded"<< "\n"<<endl;
+						menu = false;
+						break;
+					default:
+						cout<<"Please enter an option 1-4."<<endl;
+						clearInput();
+						continue;
+
+					}
+				}
+			}
+		}
+	}
+	if(!inEvent){
+		cout<<"Error they were not on the list of invites"<<endl;
+	}
+	}
+	else if (ans4 == 2){
+		addSeat=false;
+	}
+	else{
+		cout<<"invalid input."<<endl;
+		clearInput();
+		continue;
+	}
+	}
+}
+
 //kimmy and kailee
 void registry(){
 	int numGifts;
@@ -413,10 +501,11 @@ void createEvent(int i){                    //int i is used to tell which event 
 	else{
 		switch(ynInput){
 		case 1:
-			//seatingSystem();
+			seatingSystem();
 			//create seating chart
 			break;
 		case 2:
+			eventCreator[i].setSeating(i,"None");
 			break;
 		}
 	}
