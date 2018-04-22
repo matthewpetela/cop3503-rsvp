@@ -20,23 +20,27 @@ using namespace std;
 // Basic constructor for the person object, each person has a name, an age, a reponse that is
 // "Undecided" by default, and if the person is the primary person being invited, they can bring a plus one
 // Mark
-person::person(string name, int age, string response, bool primary) {
+person::person(string name, int age, string response, bool primary, string table) {
     this->name = name;
     this->age = age;
     this->inviteResponse = response;
     this->primary = primary;
+    this->seating = table;
 }
 
 // Sets the response of the person // Mark
 void person::setResponse(string response) {
     this->inviteResponse = response;
 }
+void person::setSeating(string table){
+	this->seating = table;
+}
 
 // Creates a new person if the primary invitee wants to bring a plus one
 // This person is "Going" by default, and they cannot invite another plus one
 // Mark
 void person::plusOne(string name, int age) {
-    person(name, age, "Going", false);
+    person(name, age, "Going", false, "Table 1");
 }
 
 // Returns the name of the person // Mark
@@ -47,3 +51,5 @@ int person::getAge() { return age;}
 
 // Returns the response of the person // Mark
 string person::getResponse() { return inviteResponse;}
+
+string person::getSeating() {return seating;}
