@@ -34,11 +34,7 @@ void clearInput(){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
-//kareem method to check valid time
-bool checktime(std::string const& Input){
-    regex validtime("([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])"); // check for good sequence
-    return regex_match(Input, validtime);// return false if input does not match validtime
-}
+
 //Kailee and kimmy
 void seatingSystem(){
     string tEventName;
@@ -54,7 +50,7 @@ void seatingSystem(){
         cout<<"Would you like to assign a new guest to a table? (Y/N)"<<endl;
         char ans4;
         cin>>ans4;
-        if(ans4 == 'y' || ans4 == 'Y"'){
+        if(ans4 == 'y' || ans4 == 'Y'){
             cout<<"Please enter the guest you'd like to seat."<< endl;
             cin.get();
             getline(cin, tRsvpName);
@@ -336,84 +332,168 @@ void createEvent(int i){                    //int i is used to tell which event 
     cout<<" "<<endl;
 
     //type
-    cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
-    cout<<" "<<endl;
-    cout<<"1. Party "<<endl;
-    cout<<"2. Wedding "<<endl;
-    cout<<"3. Shower (bridal, baby, etc. "<<endl;
-    cout<<"4. Other (Please specify) "<<endl;
-    cin>>eventTypeOp;
-    bool registryTrue;
+    bool typeError;
+    bool registryTrue = false;
+    do {
+        typeError = false;
+        cout << "What type of event is this?(Ex. party, wedding, etc.) " << endl;
+        cout << " " << endl;
+        cout << "1. Party " << endl;
+        cout << "2. Wedding " << endl;
+        cout << "3. Shower (bridal, baby, etc. " << endl;
+        cout << "4. Other (Please specify) " << endl;
+        cin >> eventTypeOp;
 
-    switch(eventTypeOp){
-        case 1:
-            eventType= "Party";
-            break;
-        case 2:
-            eventType = "Wedding";
-            cout<<"Would you like to create a registry?(Y/N) "<<endl;
-            char ans2;
-            cin>>ans2;
-            switch(ans2){
-                case 'Y':
-                    registryTrue = true;
-                    break;
-                case 'y' :
-                    registryTrue = true;
-                    break;
-                case 'N':
-                    registryTrue = false;
-                    break;
-                case 'n' :
-                    registryTrue = false;
-                    break;
-                default:
-                    break;
+        switch (eventTypeOp) {
+            case 1:
+                eventType = "Party";
+                break;
+            case 2:
+                bool weddingError;
+                do {
+                    weddingError = false;
+                    eventType = "Wedding";
+                    cout << "Would you like to create a registry?(Y/N) " << endl;
+                    char ans2;
+                    cin >> ans2;
+                    switch (ans2) {
+                        case 'Y':
+                            registryTrue = true;
+                            break;
+                        case 'y' :
+                            registryTrue = true;
+                            break;
+                        case 'N':
+                            registryTrue = false;
+                            break;
+                        case 'n' :
+                            registryTrue = false;
+                            break;
+                        default:
+                            cout << "Please enter either Y or N" << endl;
+                            weddingError = true;
+                            clearInput();
+                            break;
+                    }
+                } while (weddingError);
+                break;
+            case 3:
+                bool showerError;
+                do {
+                    showerError = false;
+                    eventType = "Shower";
+                    cout << "Would you like to create a registry? (Y/N)" << endl;
+                    char ans3;
+                    cin >> ans3;
+                    switch (ans3) {
+                        case 'Y':
+                            registryTrue = true;
+                            break;
+                        case 'y' :
+                            registryTrue = true;
+                            break;
+                        case 'N':
+                            registryTrue = false;
+                            break;
+                        case 'n' :
+                            registryTrue = false;
+                            break;
+                        default:
+                            cout << "Please enter either Y or N" << endl;
+                            showerError = true;
+                            clearInput();
+                            break;
+                    }
+                } while (showerError);
+                break;
+            case 4:
+                cin.get();
+                getline(cin, eventName);
+                cout << " " << endl;
+                break;
+            default:
+                cout << "Please enter a number 1 to 4" << endl;
+                clearInput();
+                typeError = true;
+                break;
+
+        }
+        cout << " " << endl;
+    } while (typeError);
+
+    bool menBool = true;
+    char temChar;
+    int y = 0;
+    while(menBool) {
+        cout << "What is the time of the event? (Enter in the format 01:23)" << endl;
+        getline(cin, eventTime);
+        if(eventTime.length() != 5){
+            cout<<"Wrong input"<<endl;
+            cout<<"Please input the time in the correct format"<<endl;
+            continue;
+        }
+        else{
+            temChar = eventTime.at(0);
+            y = (int)temChar - 48;
+            if(isdigit(eventTime.at(0)) == 0 || (y == 1 && ((int)eventTime.at(1) - 48) > 2)){ // checks if hour is proper
+                cout<<"Wrong input"<<endl;
+                cout<<"Please input the time in the correct format"<<endl;
+                continue;
             }
-            break;
-        case 3:
-            eventType = "Shower";
-            cout<<"Would you like to create a registry? (Y/N)"<<endl;
-            char ans3;
-            cin>>ans3;
-            switch(ans3){
-                case 'Y':
-                    registryTrue = true;
-                    break;
-                case'y' :
-                    registryTrue = true;
-                    break;
-                case 'N':
-                    registryTrue = false;
-                    break;
-                case 'n' :
-                    registryTrue = false;
-                    break;
-                default:
-                    break;
+
+            if(isdigit(eventTime.at(1)) == 0||(y == 0 && (int)eventTime.at(1) - 48 > 9)){
+                cout<<"Wrong input"<<endl;
+                cout<<"Please input the time in the correct format"<<endl;
+                continue;
             }
-            break;
-        case 4:
-            cin.get();
-            getline(cin, eventName);
-            cout<<" "<<endl;
-            break;
-        default:
-            break;
 
+            temChar = eventTime.at(2);
+            if(temChar != ':'){
+                cout<<"Wrong input"<<endl;
+                cout<<"Please input the time in the correct format"<<endl;
+                continue;
+            }
+
+            temChar = eventTime.at(3);
+            y = (int)temChar - 48;
+
+            if(isdigit(eventTime.at(3)) == 0 || isdigit(eventTime.at(4)) == 0){ // checks if minute is proper
+                cout<<"Wrong input"<<endl;
+                cout<<"Please input the time in the correct format"<<endl;
+                continue;
+            }
+
+            if(y > 5 || (int)eventTime.at(4) - 48 > 9){
+                cout<<"Wrong input"<<endl;
+                cout<<"Please input the time in the correct format"<<endl;
+                continue;
+            }
+
+
+        }
+        menBool = false;
     }
-    cout<<" "<<endl;
 
-    cout<<"What is the time of the event? (Enter in the format --:--)" << endl;
-    cin.get();
-    getline(cin, eventTime);
-    while(checktime(eventTime)==false){
-        cout<<"wrong input please try again: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin>>eventTime;
+    bool menuuu = true;
+    int time = 0;
+    while(menuuu){
+        cout<<"is this time AM(select 1) or PM(select 2)"<<endl;
+        cin>>time;
+        clearInput();
+        switch(time){
+            case 1:
+                eventTime +="AM";
+                menuuu = false;
+                break;
+            case 2:
+                eventTime += "PM";
+                menuuu = false;
+                break;
+            default:
+                cout<<"Error please select 1 for AM or 2 for PM"<<endl;
+                continue;
+        }
     }
-
 
     cout<<" "<<endl;
 
@@ -571,32 +651,37 @@ void createEvent(int i){                    //int i is used to tell which event 
 
     }
 
-    cout<<"Any notes you'd like your guests to know?(Y/N)"<<endl;
-    char choice = 0;
-    cin>>choice;
-    switch(choice){
-        case 'Y':
-            cout<<"Type your message."<<endl;
-            cin.get();
-            getline(cin, message);
-            cout<<endl;
-            break;
-        case 'y' :
-            cout<<"Type your message."<<endl;
-            cin.get();
-            getline(cin,message);
-            cout<<endl;
-            break;
-        case 'N':
-            message = "N/A";
-            break;
-        case 'n' :
-            message = "N/A";
-            break;
-        default:
-            cout<<"Please enter either 1 or 2"<<endl;
-            clearInput();
-    }
+    bool notesError;
+    do {
+        notesError = false;
+        cout << "Any notes you'd like your guests to know?(Y/N)" << endl;
+        char choice = 0;
+        cin >> choice;
+        switch (choice) {
+            case 'Y':
+                cout << "Type your message." << endl;
+                cin.get();
+                getline(cin, message);
+                cout << endl;
+                break;
+            case 'y' :
+                cout << "Type your message." << endl;
+                cin.get();
+                getline(cin, message);
+                cout << endl;
+                break;
+            case 'N':
+                message = "N/A";
+                break;
+            case 'n' :
+                message = "N/A";
+                break;
+            default:
+                cout << "Please enter either Y or N" << endl;
+                notesError = true;
+                clearInput();
+        }
+    } while (notesError);
 
 
     //include the message in details?
@@ -1207,7 +1292,7 @@ void userMenu(){
         cout<<"4. Change response to event "<<endl;
         cout<<"5. Exit system "<<endl;
         cin>>userInput;
-
+        clearInput();
         //kimmy
         switch(userInput){
             case 1:
@@ -1248,8 +1333,7 @@ void userMenu(){
 
             default:                // clears all input a user puts in and continues the loop //jovanny and mark
                 cout<<"Error, enter the number of the option you'd like."<<endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 continue;
         }
     }

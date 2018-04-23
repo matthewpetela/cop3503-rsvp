@@ -111,14 +111,14 @@ void Event::setMessage(string message){
 // and says that they are the primary invitee, rather than a plus one
 // This person is that added to a vector of all the people invited to the event //Mark and Jovanny
 void Event::sendInvite(string name, int age) {
-    invitees.emplace_back(person(name, age, "Undecided","nothing ",  true, "None", "NA", "No"));
+    invitees.emplace_back(person(name, age, "Undecided","nothing ", true, "None", "NA", "No"));
 }
 
 // Creates a new person if the primary invitee wants to bring a plus one
 // This person is "Going" by default, and they cannot invite another plus one
 // Mark
 void Event::plusOne(string name, int age) {
-    invitees.emplace_back(person(name, age, "Yes", false, "None", "NA"));
+    invitees.emplace_back(person(name, age, "Yes", "nothing", false, "None", "NA", "No"));
 }
 
 //FOOD ITEMS TO BRING SECTION

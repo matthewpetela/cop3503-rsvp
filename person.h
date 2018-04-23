@@ -43,7 +43,7 @@ public:
     string getBring();
     string getRide();
 
-    bool person::isPrimary();
+    bool isPrimary();
 };
 
 #endif //GROUP_PROGRAM_PERSON_H
