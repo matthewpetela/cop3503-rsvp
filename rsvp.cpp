@@ -14,7 +14,6 @@ Project_Team 18:
 #include <iostream>
 #include "rsvp.h"
 #include "person.h"
-#include "objects.h"
 #include <vector>
 
 using namespace std;
@@ -109,12 +108,9 @@ void Event::setMessage(string message){
 // and says that they are the primary invitee, rather than a plus one
 // This person is that added to a vector of all the people invited to the event //Mark and Jovanny
 void Event::sendInvite(string name, int age) {
-    invitees.emplace_back(person(name, age, "Undecided", true, "None"));
+    invitees.emplace_back(person(name, age, "Undecided", true, "None", "NA"));
 }
 
-void Event::addGift(string gift, int qnty){
-	gifts.emplace_back(objects(gift, qnty));
-}
 
 // ACCESSOR METHODS //
 
@@ -148,7 +144,6 @@ string Event::getMessage() { return message; }
 // Returns the list of people invited to the event // Mark and Jovanny
 vector<person> Event::getInvitees() { return invitees; }
 
-vector<objects> Event::getGifts() { return gifts; }
 //method used to set response in case 2 Jovanny
 void Event::setResponse(unsigned int a, string Response) {
     invitees.at(a).setResponse(Response);
@@ -157,8 +152,9 @@ void Event::setSeating(unsigned int i, string Table){
 	invitees.at(i).setSeating(Table);
 }
 void Event::setRegistry(unsigned int i, string gift){
-	gifts.at(i).setRegistry(gift);
+	invitees.at(i).setRegistry(gift);
 }
+
 
 
 // PRINT METHODS //

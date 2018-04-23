@@ -19,20 +19,23 @@ private:
     string inviteResponse;     // Going, Not Going, or undecided
     bool primary;              // Yes for if the person is the primary person invited, false for if the person is the plus one
     string seating;
+    string registry;
 
 public:
 
-    person(string name, int age, string response, bool primary, string table);  // Basic Constructor for a person with no plus one
+    person(string name, int age, string response, bool primary, string table, string gift);  // Basic Constructor for a person with no plus one
 
     void setResponse(string response);
     void plusOne(string name, int age);
     void setSeating(string table);
+    void setRegistry(string gift);
     void printSeating();
 
     string getName();       // Returns the name of the person
     int getAge();           // Returns the age of the person
     string getResponse();   // Returns the response of the person
     string getSeating();
+    string getRegistry();
 
 };
 

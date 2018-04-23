@@ -14,19 +14,20 @@ Project_Team 18:
 #include <iostream>
 #include <vector>
 #include "person.h"
-#include "objects.h"
+
 
 using namespace std;
 
 // Basic constructor for the person object, each person has a name, an age, a reponse that is
 // "Undecided" by default, and if the person is the primary person being invited, they can bring a plus one
 // Mark
-person::person(string name, int age, string response, bool primary, string table) {
+person::person(string name, int age, string response, bool primary, string table, string gift) {
     this->name = name;
     this->age = age;
     this->inviteResponse = response;
     this->primary = primary;
     this->seating = table;
+    this->registry = gift;
 }
 
 // Sets the response of the person // Mark
@@ -36,12 +37,15 @@ void person::setResponse(string response) {
 void person::setSeating(string table){
 	this->seating = table;
 }
+void person::setRegistry(string gift){
+	this->registry = gift;
+}
 
 // Creates a new person if the primary invitee wants to bring a plus one
 // This person is "Going" by default, and they cannot invite another plus one
 // Mark
 void person::plusOne(string name, int age) {
-    person(name, age, "Going", false, "None");
+    person(name, age, "Going", false, "None", "NA");
 }
 
 // Returns the name of the person // Mark
@@ -54,4 +58,5 @@ int person::getAge() { return age;}
 string person::getResponse() { return inviteResponse;}
 
 string person::getSeating() {return seating;}
+string person::getRegistry(){return registry;}
 
