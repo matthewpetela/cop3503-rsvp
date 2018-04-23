@@ -1,3 +1,4 @@
+
 #include <ctime>
 
 /*
@@ -17,7 +18,7 @@ Project_Team 18:
 #include<vector>
 #include"rsvp.h"
 #include"person.h"
-#include"objects.h"
+//#include"objects.h"
 #include<limits>
 #include<algorithm>
 #include<fstream>
@@ -123,7 +124,7 @@ void seatingSystem(){
 }
 
 //kimmy and kailee
-void registry(int i){
+/*void registry(int i){
 	string itemName;
 	string qnty;
 
@@ -195,7 +196,7 @@ void registry(int i){
 		}
 	}
 
-}
+}*/
 
 //kimmy
 void createEvent(int i){                    //int i is used to tell which event we are currently creating.Kimmy
@@ -246,7 +247,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 		cin>>ans2;
 		switch(ans2){
 		case 1:
-			registry(i);
+			//registry(i);
 			break;
 		case 2:
 			break;
@@ -263,7 +264,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 			cin>>ans3;
 			switch(ans3){
 			case 1:
-				registry(i);
+				//registry(i);
 				break;
 			case 2:
 				break;
