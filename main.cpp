@@ -733,9 +733,10 @@ void changeResponse(){
 void userMenu(){
 	int userInput;
 	int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
+	bool menuLoop = true; //used to quite menu. 
 
 	//jovanny and mark
-	while(true){        //while statement will continue to display the menu until a correct option is chosen
+	while(menuLoop){        //while statement will continue to display the menu until a correct option is chosen
 
 		//kimmy
 		cout<<"Please select an option. "<<endl;
@@ -783,7 +784,8 @@ void userMenu(){
 
 		case 5:
 			cout<<"See you later, alligator! "<<endl;
-			exit(0);
+			menuLoop = false;
+			break;
 
 		default:                // clears all input a user puts in and continues the loop //jovanny and mark
 			cout<<"Error, enter the number of the option you'd like."<<endl;
@@ -835,5 +837,6 @@ int main(int argc, char *argv[]){
 
 	cout << "Welcome to the Gator RSVP system!!!!" << endl;
 	userMenu();
+	saveFile();
 
 }
