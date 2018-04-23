@@ -633,12 +633,40 @@ void eventDetails()
 
 			//prints list of guests and table assignments
 			cout<<"The list of guests who are coming and their table assignments " << endl;
-			for(unsigned int a = 0; a < guestList.size(); a++){        //for loop to iterate through all the people in the event
+			for(unsigned int a = 0; a < guestList.size(); a++)
+			{        //for loop to iterate through all the people in the event
 				guestName = guestList[a].getName();
 				tableNum = guestList[a].getSeating();
 				response = guestList[a].getResponse();
 				if(tableNum != "None" && response == "Yes"){
 					cout<< guestName <<" at " << tableNum << endl;
+				}
+				else if (response == "Yes")
+				{
+					cout<< guestName << endl;
+				}
+
+			}
+			cout<<""<<endl;
+			cout<< "List of guests not coming " << endl;
+			for(unsigned int b = 0; b < guestList.size(); b++)
+			{
+				guestName = guestList[b].getName();
+				response = guestList[b].getResponse();
+				if(response == "No")
+				{
+					cout<<guestName<<endl;
+				}
+			}
+			cout<<""<<endl;
+			cout<<"List of guest who are Undecided"<<endl;
+			for(unsigned int c = 0; c < guestList.size(); c++)
+			{
+				guestName = guestList[c].getName();
+				response = guestList[c].getResponse();
+				if(response == "Undecided")
+				{
+					cout<<guestName<<endl;
 				}
 			}
 
@@ -744,10 +772,9 @@ void userMenu()
 {
 	int userInput;
 	int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
-	bool menuLoop = true; //used to quite menu. 
 
 	//jovanny and mark
-	while(menuLoop){        //while statement will continue to display the menu until a correct option is chosen
+	while(true){        //while statement will continue to display the menu until a correct option is chosen
 
 		//kimmy
 		cout<<"Please select an option. "<<endl;
@@ -795,8 +822,7 @@ void userMenu()
 
 		case 5:
 			cout<<"See you later, alligator! "<<endl;
-			menuLoop = false;
-			break;
+			exit(0);
 
 		default:                // clears all input a user puts in and continues the loop //jovanny and mark
 			cout<<"Error, enter the number of the option you'd like."<<endl;
@@ -849,8 +875,7 @@ int main(int argc, char *argv[])
 	time_t now = time(0); //used for testing
 
 
-	cout << "Welcome to the Gator RSVP system!!!!" << endl;
+	cout << "Welcome to the Gator RSVP system!" << endl;
 	userMenu();
-	saveFile();
 
 }
