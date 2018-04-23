@@ -34,6 +34,11 @@ void clearInput(){
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
+//kareem method to check valid time
+bool checktime(std::string const& Input){
+std::regex validtime("([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])"); // check for good sequence
+return std::regex_match(Input, validtime);// return false if input does not match validtime
+}
 
 //Kailee and kimmy
 void seatingSystem(){
@@ -283,10 +288,17 @@ void createEvent(int i){                    //int i is used to tell which event 
 	}
 	cout<<" "<<endl;
 
-
-	cout<<"What is the time of the event?" << endl;
+	//Kareem
+	cout<<"What is the time of the event? (please use this format --:--)" << endl;
 	cin.get();
 	getline(cin, eventTime);
+	while(checktime(eventTime)==false){
+     cout<<"wrong input please try again: ";
+     cin.clear();
+     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin>>eventTime;
+	}
+
 
 
 	cout<<" "<<endl;
