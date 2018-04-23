@@ -276,7 +276,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<" "<<endl;*/
 
 
-	cout<<"What is the time of the event?" << endl;
+	cout<<"What is the time of the event? (Enter in the format --:--)" << endl;
 	cin.get();
 	getline(cin, eventTime);
 	while(checktime(eventTime)==false){
