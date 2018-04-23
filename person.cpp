@@ -53,3 +53,4 @@ int person::getAge() { return age;}
 string person::getResponse() { return inviteResponse;}
 
 string person::getSeating() {return seating;}
+

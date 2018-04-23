@@ -1,4 +1,3 @@
-
 #include <ctime>
 
 /*
@@ -46,79 +45,79 @@ void seatingSystem(){
 	//cout<<"To exit type x."<<endl;
 
 	while(addSeat != false){
-	cout<<"Would you like to assign a new guest to a table? "<<endl;
-	cout<<"1. Yes"<<endl;
-	cout<<"2. No"<<endl;
-	int ans4;
-	cin>>ans4;
-	if(ans4 == 1){
-	cout<<"Please enter the guest you'd like to seat."<< endl;
-	cin.get();
-	getline(cin, tRsvpName);
-	tRsvpName.erase(remove(tRsvpName.begin(), tRsvpName.end(), ' '), tRsvpName.end()); //removes whitespace for comparison
-	transform(tRsvpName.begin(),tRsvpName.end(), tRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
-	cout<< tRsvpName <<endl;         // test to make sure input user name has no spaces
+		cout<<"Would you like to assign a new guest to a table? "<<endl;
+		cout<<"1. Yes"<<endl;
+		cout<<"2. No"<<endl;
+		int ans4;
+		cin>>ans4;
+		if(ans4 == 1){
+			cout<<"Please enter the guest you'd like to seat."<< endl;
+			cin.get();
+			getline(cin, tRsvpName);
+			tRsvpName.erase(remove(tRsvpName.begin(), tRsvpName.end(), ' '), tRsvpName.end()); //removes whitespace for comparison
+			transform(tRsvpName.begin(),tRsvpName.end(), tRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
+			cout<< tRsvpName <<endl;         // test to make sure input user name has no spaces
 
 
-	for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
-		tempTable = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
-		for(unsigned int a = 0; a < tempTable.size(); a++){        //for loop to iterate through all the people in the event
-			tEventName = tempTable[a].getName();
-			tEventName.erase(remove(tEventName.begin(), tEventName.end(), ' '), tEventName.end()); //removes whitespace for comparison
-			transform(tEventName.begin(),tEventName.end(), tEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
-			if(tEventName == tRsvpName){
-				inEvent = true;                                     //bool to let user know whether they re in an event or not
-				//eventCreator[i].printSeating();                      //prints the invitation to the event
+			for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
+				tempTable = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
+				for(unsigned int a = 0; a < tempTable.size(); a++){        //for loop to iterate through all the people in the event
+					tEventName = tempTable[a].getName();
+					tEventName.erase(remove(tEventName.begin(), tEventName.end(), ' '), tEventName.end()); //removes whitespace for comparison
+					transform(tEventName.begin(),tEventName.end(), tEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
+					if(tEventName == tRsvpName){
+						inEvent = true;                                     //bool to let user know whether they re in an event or not
+						//eventCreator[i].printSeating();                      //prints the invitation to the event
 
-				menu = true;
-				while(menu){                                        //while loop to check if user is attending the event
-					cout<<"Where would you like them to sit?"<<endl;
-					cout<<"Table 1,2,3, or 4?"<<endl;
-					cin>>menuOption1;
-					clearInput();
-					switch(toupper(menuOption1)){
-					case '1':
-						eventCreator[i].setSeating(i,"Table 1");
-						cout<<"It's been recorded"<<endl;
-						menu = false;
-						break;
-					case '2':
-						eventCreator[i].setSeating(i,"Table 2");
-						cout<<"It's been recorded"<< "\n"<<endl;
-						menu = false;
-						break;
-					case '3':
-						eventCreator[i].setSeating(i,"Table 3");
-						cout<<"It's been recorded"<<endl;
-						menu = false;
-						break;
-					case '4':
-						eventCreator[i].setSeating(i,"Table 4");
-						cout<<"It's been recorded"<< "\n"<<endl;
-						menu = false;
-						break;
-					default:
-						cout<<"Please enter an option 1-4."<<endl;
-						clearInput();
-						continue;
+						menu = true;
+						while(menu){                                        //while loop to check if user is attending the event
+							cout<<"Where would you like them to sit?"<<endl;
+							cout<<"Table 1,2,3, or 4?"<<endl;
+							cin>>menuOption1;
+							clearInput();
+							switch(toupper(menuOption1)){
+							case '1':
+								eventCreator[i].setSeating(i,"Table 1");
+								cout<<"It's been recorded"<<endl;
+								menu = false;
+								break;
+							case '2':
+								eventCreator[i].setSeating(i,"Table 2");
+								cout<<"It's been recorded"<< "\n"<<endl;
+								menu = false;
+								break;
+							case '3':
+								eventCreator[i].setSeating(i,"Table 3");
+								cout<<"It's been recorded"<<endl;
+								menu = false;
+								break;
+							case '4':
+								eventCreator[i].setSeating(i,"Table 4");
+								cout<<"It's been recorded"<< "\n"<<endl;
+								menu = false;
+								break;
+							default:
+								cout<<"Please enter an option 1-4."<<endl;
+								clearInput();
+								continue;
 
+							}
+						}
 					}
 				}
 			}
+			if(!inEvent){
+				cout<<"Error they were not on the list of invites"<<endl;
+			}
 		}
-	}
-	if(!inEvent){
-		cout<<"Error they were not on the list of invites"<<endl;
-	}
-	}
-	else if (ans4 == 2){
-		addSeat=false;
-	}
-	else{
-		cout<<"invalid input."<<endl;
-		clearInput();
-		continue;
-	}
+		else if (ans4 == 2){
+			addSeat=false;
+		}
+		else{
+			cout<<"invalid input."<<endl;
+			clearInput();
+			continue;
+		}
 	}
 }
 
@@ -224,10 +223,14 @@ void createEvent(int i){                    //int i is used to tell which event 
 	}
 	cout<<" "<<endl;
 
+
 	cout<<"What is the time of the event?" << endl;
 	cin.get();
 	getline(cin, eventTime);
+
+
 	cout<<" "<<endl;
+
 
 	//kareem and jovanny
 	bool menuBool = true;
@@ -471,9 +474,9 @@ void createEvent(int i){                    //int i is used to tell which event 
 			clearInput();
 			switch(toupper(addGuest)){
 			case 'Y':   //
-			menu = true;
-			menu2 = false;
-			break;
+				menu = true;
+				menu2 = false;
+				break;
 			case 'N':
 				menu = false;
 				menu2 = false;
@@ -511,37 +514,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 	}
 	cout<<" "<<endl;
 
-
-	//AGE REQUIREMENT SECTION
-
-	cout<<"Is there an age requirement? "<<endl;
-	cout<<"1. Yes "<<endl;
-	cout<<"2. No "<<endl;
-	int ynInput2;
-	string minAge;
-	string maxAge;
-	cin>>ynInput2;
-	cin.ignore();
-	if(ynInput2>2|| ynInput2<1) {
-		cout<<"Error, enter the number of the option you'd like."<<endl;
-	}
-	else{
-		switch(ynInput2){
-		case 1:
-			cout<<"What is the minimum age requirement? If none type NA "<<endl;
-			cin>>minAge;
-			//seperate code to deal with age
-			cout<<"What is the maximum age requirement? If none type NA. "<<endl;
-			cin>>maxAge;
-			//seperate code for age
-			break;
-		case 2:
-			break;
-		default:
-			break;
-		}
-	}
-	cout<<" "<<endl;
 }
 
 
@@ -579,10 +551,10 @@ void rsvpSystem(){
 					clearInput();
 					switch(toupper(menuOption)){
 					case 'Y':
-					eventCreator[i].setResponse(a,"Yes");
-					cout<<"Thank you for response!"<<endl;
-					menu = false;
-					break;
+						eventCreator[i].setResponse(a,"Yes");
+						cout<<"Thank you for response!"<<endl;
+						menu = false;
+						break;
 					case 'N':
 						eventCreator[i].setResponse(a,"No");
 						cout<<"Thank you for response!"<< "\n"<<endl;
@@ -606,151 +578,151 @@ void rsvpSystem(){
 
 //Nicholas
 void eventDetails(){
-    string Name;					//Initializes all of the event deatils
-    string tempName;
-    string tempEvent;
-    string tempEventType;
-    string tempEventDate;
-    string tempEventTime;
-    string tempEventLocation;
-    string tempDressCode;
-    vector<person> guestList;
-    string guestName;
-    string tableNum;
+	string Name;					//Initializes all of the event deatils
+	string tempName;
+	string tempEvent;
+	string tempEventType;
+	string tempEventDate;
+	string tempEventTime;
+	string tempEventLocation;
+	string tempDressCode;
+	vector<person> guestList;
+	string guestName;
+	string tableNum;
 
-    bool isEvent = false;
-    cout<<"What is the name of the event that you would like the details for? "<<endl;
-    cin.get();
-    getline(cin, Name);
+	bool isEvent = false;
+	cout<<"What is the name of the event that you would like the details for? "<<endl;
+	cin.get();
+	getline(cin, Name);
 
-    tempName = Name;
-    tempName.erase(remove(tempName.begin(), tempName.end(), ' '), tempName.end()); //removes whitespace for comparison
-    transform(tempName.begin(),tempName.end(), tempName.begin(), ::tolower);    //sets characters to lower case for comparison
-    cout<< tempName <<endl;
+	tempName = Name;
+	tempName.erase(remove(tempName.begin(), tempName.end(), ' '), tempName.end()); //removes whitespace for comparison
+	transform(tempName.begin(),tempName.end(), tempName.begin(), ::tolower);    //sets characters to lower case for comparison
+	cout<< tempName <<endl;
 
-    for(unsigned int i = 0; i < eventCreator.size(); i++) {          //for loop to iterate through all created events
-        tempEvent = eventCreator[i].getEventName();
-        tempEvent.erase(remove(tempEvent.begin(), tempEvent.end(), ' '), tempEvent.end()); //removes whitespace for comparison
-        transform(tempEvent.begin(), tempEvent.end(), tempEvent.begin(), ::tolower);    //sets characters to lower case for comparison
+	for(unsigned int i = 0; i < eventCreator.size(); i++) {          //for loop to iterate through all created events
+		tempEvent = eventCreator[i].getEventName();
+		tempEvent.erase(remove(tempEvent.begin(), tempEvent.end(), ' '), tempEvent.end()); //removes whitespace for comparison
+		transform(tempEvent.begin(), tempEvent.end(), tempEvent.begin(), ::tolower);    //sets characters to lower case for comparison
 
-        tempEventType = eventCreator[i].getEventType();   				//
-        tempEventDate = eventCreator[i].getEventDate();
-        tempEventTime = eventCreator[i].getEventTime();
-        tempEventLocation = eventCreator[i].getEventLocation();
-        tempDressCode = eventCreator[i].getDressCode();
-        guestList = eventCreator[i].getInvitees();
+		tempEventType = eventCreator[i].getEventType();   				//
+		tempEventDate = eventCreator[i].getEventDate();
+		tempEventTime = eventCreator[i].getEventTime();
+		tempEventLocation = eventCreator[i].getEventLocation();
+		tempDressCode = eventCreator[i].getDressCode();
+		guestList = eventCreator[i].getInvitees();
 
-        if (tempName == tempEvent) {
-            isEvent = true;
-            cout << "\nThe event " << Name << " has the following details to it:" << endl;
-            cout<<"The type of the event is "<<tempEventType<<endl;
-            cout<<"The date of the event is "<<tempEventDate<<endl;
-            cout<<"The time of the event is "<<tempEventTime<<endl;
-            cout<<"The location of the event is "<<tempEventLocation<<endl;
-            cout<<"The dress code of the event is "<<tempDressCode<<endl;
+		if (tempName == tempEvent) {
+			isEvent = true;
+			cout << "\nThe event " << Name << " has the following details to it:" << endl;
+			cout<<"The type of the event is "<<tempEventType<<endl;
+			cout<<"The date of the event is "<<tempEventDate<<endl;
+			cout<<"The time of the event is "<<tempEventTime<<endl;
+			cout<<"The location of the event is "<<tempEventLocation<<endl;
+			cout<<"The dress code of the event is "<<tempDressCode<<endl;
 
-            //kailee
-            //prints list of guest and table assignment
-            cout<<"The list of guests is " << endl;
-            for(unsigned int a = 0; a < guestList.size(); a++){        //for loop to iterate through all the people in the event
-                        guestName = guestList[a].getName();
-                        tableNum = guestList[a].getSeating();
-                        if(tableNum != "None"){
-                        cout<< guestName <<" at " << tableNum << endl;
-                        }
-                        else{
-                        	cout<<guestName<<endl;
-                        }
+			//kailee
+			//prints list of guest and table assignment
+			cout<<"The list of guests is " << endl;
+			for(unsigned int a = 0; a < guestList.size(); a++){        //for loop to iterate through all the people in the event
+				guestName = guestList[a].getName();
+				tableNum = guestList[a].getSeating();
+				if(tableNum != "None"){
+					cout<< guestName <<" at " << tableNum << endl;
+				}
+				else{
+					cout<<guestName<<endl;
+				}
 
-            }
-            cout<<""<<endl;
-        }
-    }
-    if(!isEvent) {
-        cout<<"Error, that is not an event name."<<endl;
+			}
+			cout<<""<<endl;
+		}
+	}
+	if(!isEvent) {
+		cout<<"Error, that is not an event name."<<endl;
 
-    }
+	}
 }
 void changeResponse(){
-    string tempEventName;
-    string tempRsvpName;
-    bool inEvent = false;
-    bool menu1 = true;
-    bool menu2 = false;
-    char menuOption1 = 'z';
-    char menuOption2 = 'z';
-    vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
+	string tempEventName;
+	string tempRsvpName;
+	bool inEvent = false;
+	bool menu1 = true;
+	bool menu2 = false;
+	char menuOption1 = 'z';
+	char menuOption2 = 'z';
+	vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
-    cout<<"Please enter your name"<< endl;
-    cin.get();
-    getline(cin, tempRsvpName);
-    tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
-    transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
-    cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
+	cout<<"Please enter your name"<< endl;
+	cin.get();
+	getline(cin, tempRsvpName);
+	tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
+	transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
+	cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
 
 
-    for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
-        tempPeople = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
-        for(unsigned int a = 0; a < tempPeople.size(); a++){        //for loop to iterate through all the people in the event
-            tempEventName = tempPeople[a].getName();
-            tempEventName.erase(remove(tempEventName.begin(), tempEventName.end(), ' '), tempEventName.end()); //removes whitespace for comparison
-            transform(tempEventName.begin(),tempEventName.end(), tempEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
-            if(tempEventName == tempRsvpName){
-                inEvent = true;                                     //bool to let user know whether they re in an event or not
-                eventCreator[i].printInvite();                      //prints the invitation to the event
-                menu1 = true;
-                while(menu1){										//while loop to ask if the user would like to change their response to an invitation
-                	cout<<"Would you like to change your response for this event? (hit Y for yes or N for no)"<<endl;
-                    cin>>menuOption1;
-                    clearInput();
-                    switch(toupper(menuOption1)){
-                            case 'Y':
-                                cout<<"Thank you for your response!"<<endl;
-                                cout<<"To change your response, answer the question below"<<endl;
-                                menu1 = false;
-                                menu2 = true;
-                                break;
-                            case 'N':
-                                cout<<"Thank you for your response!"<< "\n"<<endl;
-                                menu1 = false;
-                                menu2 = false;
-                                break;
-                            default:
-                                cout<<"Please enter either Y or N"<<endl;
-                                clearInput();
-                                continue;
+	for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
+		tempPeople = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
+		for(unsigned int a = 0; a < tempPeople.size(); a++){        //for loop to iterate through all the people in the event
+			tempEventName = tempPeople[a].getName();
+			tempEventName.erase(remove(tempEventName.begin(), tempEventName.end(), ' '), tempEventName.end()); //removes whitespace for comparison
+			transform(tempEventName.begin(),tempEventName.end(), tempEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
+			if(tempEventName == tempRsvpName){
+				inEvent = true;                                     //bool to let user know whether they re in an event or not
+				eventCreator[i].printInvite();                      //prints the invitation to the event
+				menu1 = true;
+				while(menu1){										//while loop to ask if the user would like to change their response to an invitation
+					cout<<"Would you like to change your response for this event? (hit Y for yes or N for no)"<<endl;
+					cin>>menuOption1;
+					clearInput();
+					switch(toupper(menuOption1)){
+					case 'Y':
+					cout<<"Thank you for your response!"<<endl;
+					cout<<"To change your response, answer the question below"<<endl;
+					menu1 = false;
+					menu2 = true;
+					break;
+					case 'N':
+						cout<<"Thank you for your response!"<< "\n"<<endl;
+						menu1 = false;
+						menu2 = false;
+						break;
+					default:
+						cout<<"Please enter either Y or N"<<endl;
+						clearInput();
+						continue;
 
-                    }
-                }
+					}
+				}
 
-                while(menu2){                                        //while loop to change if user is attending the event
-                    cout<<"What would you like to change your response to? (hit Y for yes or N for no)"<<endl;
-                    cin>>menuOption2;
-                    clearInput();
-                    switch(toupper(menuOption2)){
-                            case 'Y':
-                                eventCreator[i].setResponse(a,"Yes");
-                                cout<<"Thank you for response!"<<endl;
-                                menu2 = false;
-                                break;
-                            case 'N':
-                                eventCreator[i].setResponse(a,"No");
-                                cout<<"Thank you for response!"<< "\n"<<endl;
-                                menu2 = false;
-                                break;
-                            default:
-                                cout<<"Please enter either Y or N"<<endl;
-                                clearInput();
-                                continue;
+				while(menu2){                                        //while loop to change if user is attending the event
+					cout<<"What would you like to change your response to? (hit Y for yes or N for no)"<<endl;
+					cin>>menuOption2;
+					clearInput();
+					switch(toupper(menuOption2)){
+					case 'Y':
+					eventCreator[i].setResponse(a,"Yes");
+					cout<<"Thank you for response!"<<endl;
+					menu2 = false;
+					break;
+					case 'N':
+						eventCreator[i].setResponse(a,"No");
+						cout<<"Thank you for response!"<< "\n"<<endl;
+						menu2 = false;
+						break;
+					default:
+						cout<<"Please enter either Y or N"<<endl;
+						clearInput();
+						continue;
 
-                    }
-                }
-            }
-        }
-    }
-    if(!inEvent){
-        cout<<"Unfortunately you have not been invited to any events."<<endl;
-    }
+					}
+				}
+			}
+		}
+	}
+	if(!inEvent){
+		cout<<"Unfortunately you have not been invited to any events."<<endl;
+	}
 
 }
 
@@ -759,23 +731,23 @@ void changeResponse(){
 
 
 void userMenu(){
-    int userInput;
-    int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
+	int userInput;
+	int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
 
-    //jovanny and mark
-    while(true){        //while statement will continue to display the menu until a correct option is chosen
+	//jovanny and mark
+	while(true){        //while statement will continue to display the menu until a correct option is chosen
 
-    	//kimmy
-    	cout<<"Please select an option. "<<endl;
-    	cout<<" "<<endl;
-        cout<<"1. Creating an event "<<endl;
-        cout<<"2. RSVP to an event "<<endl;
-        cout<<"3. Details of an event "<<endl;
-        cout<<"4. Change response to event "<<endl;
-        cout<<"5. Exit system "<<endl;
-        cin>>userInput;
+		//kimmy
+		cout<<"Please select an option. "<<endl;
+		cout<<" "<<endl;
+		cout<<"1. Creating an event "<<endl;
+		cout<<"2. RSVP to an event "<<endl;
+		cout<<"3. Details of an event "<<endl;
+		cout<<"4. Change response to event "<<endl;
+		cout<<"5. Exit system "<<endl;
+		cin>>userInput;
 
-        //kimmy
+		//kimmy
 		switch(userInput){
 		case 1:
 			// Kareem
@@ -798,11 +770,11 @@ void userMenu(){
 			break;
 		case 2:
 			cout<<"Awesome! To RSVP to your event please follow the steps below. "<<endl;
-			 rsvpSystem();   //calls rsvp method
+			rsvpSystem();   //calls rsvp method
 			break;
 		case 3:
 			cout<<"Details are important! Please answer the questions below. "<<endl;
-						eventDetails();
+			eventDetails();
 			break;
 		case 4:
 			cout<<"No problem! To change your response follow the steps below. "<<endl;
@@ -813,55 +785,55 @@ void userMenu(){
 			cout<<"See you later, alligator! "<<endl;
 			exit(0);
 
-        default:                // clears all input a user puts in and continues the loop //jovanny and mark
-            cout<<"Error, enter the number of the option you'd like."<<endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                continue;
+		default:                // clears all input a user puts in and continues the loop //jovanny and mark
+			cout<<"Error, enter the number of the option you'd like."<<endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			continue;
 		}
 	}
 }
 
 void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
-    std::string DATA_FILE_NAME = "data.txt";
-    std::string PERSON_FILE_NAME = "person.txt";
-    vector<std::string> dataFileVector;
-    ofstream dataFile;
-    dataFile.open (DATA_FILE_NAME);
+	std::string DATA_FILE_NAME = "data.txt";
+	std::string PERSON_FILE_NAME = "person.txt";
+	vector<std::string> dataFileVector;
+	ofstream dataFile;
+	dataFile.open (DATA_FILE_NAME);
 
-   // for( std::string line; getline( input, line ); ){
-
-
-   // }
+	// for( std::string line; getline( input, line ); ){
 
 
-    dataFile.close();
+	// }
+
+
+	dataFile.close();
 
 }
 
 void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
-    int size = eventCreator.size(); //Gets the number of events
-    std::string DATA_FILE_NAME = "data.txt";
-    std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
-    ofstream dataFile(DATA_FILE_NAME);
+	int size = eventCreator.size(); //Gets the number of events
+	std::string DATA_FILE_NAME = "data.txt";
+	std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
+	ofstream dataFile(DATA_FILE_NAME);
 
 
-    for (int i= 0 ; i < size; i++){ //writes to file with new line seperation
-    dataFile << eventCreator.at(i).getEventPlanner() << "\n" << eventCreator.at(i).getEventName() << "\n" << eventCreator.at(i).getEventType() << "\n" << eventCreator.at(i).getEventLocation() << "\n" <<
-    eventCreator.at(i).getEventDate() << eventCreator.at(i).getEventTime() <<"\n" << eventCreator.at(i).getDressCode() << "\n" << eventCreator.at(i).getAgeMin()<< "\n";
+	for (int i= 0 ; i < size; i++){ //writes to file with new line seperation
+		dataFile << eventCreator.at(i).getEventPlanner() << "\n" << eventCreator.at(i).getEventName() << "\n" << eventCreator.at(i).getEventType() << "\n" << eventCreator.at(i).getEventLocation() << "\n" <<
+				eventCreator.at(i).getEventDate() << eventCreator.at(i).getEventTime() <<"\n" << eventCreator.at(i).getDressCode() << "\n" << eventCreator.at(i).getAgeMin()<< "\n";
 
-    }
+	}
 
-    dataFile.close();
+	dataFile.close();
 
 }
 int main(int argc, char *argv[]){
-    vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
+	vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
-   time_t now = time(0); //used for testing
+	time_t now = time(0); //used for testing
 
 
-    cout << "Welcome to the Gator RSVP system!!!!" << endl;
+	cout << "Welcome to the Gator RSVP system!!!!" << endl;
 	userMenu();
 
 }

@@ -27,6 +27,7 @@ public:
     void setResponse(string response);
     void plusOne(string name, int age);
     void setSeating(string table);
+    void printSeating();
 
     string getName();       // Returns the name of the person
     int getAge();           // Returns the age of the person

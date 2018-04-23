@@ -142,12 +142,17 @@ string Event::getMessage() { return message; }
 
 // Returns the list of people invited to the event // Mark and Jovanny
 vector<person> Event::getInvitees() { return invitees; }
+
+vector<person> Event::getGifts() { return gifts; }
 //method used to set response in case 2 Jovanny
 void Event::setResponse(unsigned int a, string Response) {
     invitees.at(a).setResponse(Response);
 }
 void Event::setSeating(unsigned int i, string Table){
 	invitees.at(i).setSeating(Table);
+}
+void Event::setRegistry(unsigned int i, string gift){
+	gifts.at(i).setSeating(gift);
 }
 
 
@@ -208,10 +213,6 @@ void Event::printInvite() {
     cout << "Notes: " << message << endl;
    // if (ageMinimum != 0)
     //    cout << "Age Limit: " << ageMinimum << " or older" << endl;
-
-
 }
-void Event::printSeating1(){
-    vector<person> Table1;
 
-}
+

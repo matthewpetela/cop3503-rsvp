@@ -21,6 +21,7 @@ class Event{
 private:
 
     vector<person> invitees;     // A list of all the people invited by the host.
+    vector<person> gifts;		//A list of gifts created by the host.
     // A person can log into the program and check to see if there name has been added to an invite list,
     // Where they can then reply as to whether they are going or not, etc.
 
@@ -95,6 +96,7 @@ public:
     int getAgeMin();             // Returns the age minimum // Mark and Jovanny
     string getMessage();         // Returns the message the event planner wants to send to the invite // Mark and Jovanny
     vector<person> getInvitees(); // Returns the list of people invited to the event // Mark and Jovanny
+    vector<person> getGifts();
 
 
     // PRINT METHODS //
@@ -105,8 +107,8 @@ public:
     void printInvite();          // Prints out the information for the invitation
     void setResponse(unsigned int a, string Response);     //method used for setting response of user in case 2
     void setSeating(unsigned int i, string Table);
-    void printSeating1();
-    void printSeating2();
-    void printSeating3();
-    void printSeating4();
+    void setRegistry(unsigned int i, string gift);
 };
+
+
+
