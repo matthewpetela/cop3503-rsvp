@@ -51,12 +51,10 @@ void seatingSystem(){
 	//cout<<"To exit type x."<<endl;
 
 	while(addSeat != false){
-		cout<<"Would you like to assign a new guest to a table? "<<endl;
-		cout<<"1. Yes"<<endl;
-		cout<<"2. No"<<endl;
-		int ans4;
+		cout<<"Would you like to assign a new guest to a table? (Y/N)"<<endl;
+		char ans4;
 		cin>>ans4;
-		if(ans4 == 1){
+		if(ans4 == 'y' || ans4 == 'Y"'){
 			cout<<"Please enter the guest you'd like to seat."<< endl;
 			cin.get();
 			getline(cin, tRsvpName);
@@ -116,7 +114,7 @@ void seatingSystem(){
 				cout<<"Error they were not on the list of invites"<<endl;
 			}
 		}
-		else if (ans4 == 2){
+		else if (ans4 == 'N' || ans4 == 'n'){
 			addSeat=false;
 		}
 		else{
@@ -137,14 +135,13 @@ void registry(){
 		char menuOption1 = 'z';
 		vector<person> tempTable;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 		//cout<<"To exit type x."<<endl;
-
+		cout<<"Time to make your registry!"<<endl;
+		cout<<""<<endl;
 		while(addItem != false){
-			cout<<"Would you like to assign a new guest to an item? "<<endl;
-			cout<<"1. Yes"<<endl;
-			cout<<"2. No"<<endl;
-			int ans4;
+			cout<<"Would you like to assign a new guest to an item? (Y/N)"<<endl;
+			char ans4;
 			cin>>ans4;
-			if(ans4 == 1){
+			if(ans4 == 'y' || ans4 =='Y'){
 				cout<<"Please enter the guest's name."<< endl;
 				cin.get();
 				getline(cin, tRsvpName);
@@ -179,7 +176,7 @@ void registry(){
 					cout<<"Error they were not on the list of invites"<<endl;
 				}
 			}
-			else if (ans4 == 2){
+			else if (ans4 == 'n' || ans4 == 'N'){
 				addItem=false;
 			}
 			else{
@@ -218,29 +215,37 @@ void createEvent(int i){                    //int i is used to tell which event 
 	getline(cin, eventName);
 	cout<<" "<<endl;
 
-	/*cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
+	//type
+	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
 	cout<<" "<<endl;
 	cout<<"1. Party "<<endl;
 	cout<<"2. Wedding "<<endl;
 	cout<<"3. Shower (bridal, baby, etc. "<<endl;
 	cout<<"4. Other (Please specify) "<<endl;
 	cin>>eventTypeOp;
+	bool registryTrue;
+
 	switch(eventTypeOp){
 	case 1:
 		eventType= "Party";
 		break;
 	case 2:
 		eventType = "Wedding";
-		cout<<"Would you like to create a registry? "<<endl;
-		cout<<"1. Yes"<<endl;
-		cout<<"2. No"<<endl;
-		int ans2;
+		cout<<"Would you like to create a registry?(Y/N) "<<endl;
+		char ans2;
 		cin>>ans2;
 		switch(ans2){
-		case 1:
-			registry();
+		case 'Y':
+			registryTrue = true;
 			break;
-		case 2:
+		case 'y' :
+			registryTrue = true;
+			break;
+		case 'N':
+			registryTrue = false;
+			break;
+		case 'n' :
+			registryTrue = false;
 			break;
 		default:
 			break;
@@ -248,16 +253,21 @@ void createEvent(int i){                    //int i is used to tell which event 
 		break;
 		case 3:
 			eventType = "Shower";
-			cout<<"Would you like to create a registry? "<<endl;
-			cout<<"1. Yes"<<endl;
-			cout<<"2. No"<<endl;
-			int ans3;
+			cout<<"Would you like to create a registry? (Y/N)"<<endl;
+			char ans3;
 			cin>>ans3;
 			switch(ans3){
-			case 1:
-				registry();
+			case 'Y':
+				registryTrue = true;
 				break;
-			case 2:
+			case'y' :
+				registryTrue = true;
+				break;
+			case 'N':
+				registryTrue = false;
+				break;
+			case 'n' :
+				registryTrue = false;
 				break;
 			default:
 				break;
@@ -270,9 +280,9 @@ void createEvent(int i){                    //int i is used to tell which event 
 				break;
 			default:
 				break;
-	}
-	cout<<" "<<endl;*/
 
+	}
+	cout<<" "<<endl;
 
 	cout<<"What is the time of the event? (Enter in the format --:--)" << endl;
 	cin.get();
@@ -441,19 +451,26 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 	}
 
-	cout<<"Any notes you'd like your guests to know?"<<endl;
-	cout<<"1. Yes"<<endl;
-	cout<<"2. No" <<endl;
-	int choice = 0;
+	cout<<"Any notes you'd like your guests to know?(Y/N)"<<endl;
+	char choice = 0;
 	cin>>choice;
 	switch(choice){
-	case 1:
+	case 'Y':
 		cout<<"Type your message."<<endl;
 		cin.get();
 		getline(cin, message);
 		cout<<endl;
 		break;
-	case 2:
+	case 'y' :
+		cout<<"Type your message."<<endl;
+		cin.get();
+		getline(cin,message);
+		cout<<endl;
+		break;
+	case 'N':
+		message = "N/A";
+		break;
+	case 'n' :
 		message = "N/A";
 		break;
 	default:
@@ -525,7 +542,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 		//while loop to check if user wants to add another guest
 		menu2 = true;
 		while(menu2){
-			cout<<"Would you like to add another guest? (hit Y for yes or N for no)"<<endl;
+			cout<<"Would you like to add another guest? (Y/N)"<<endl;
 			cin>>addGuest;
 			clearInput();
 			switch(toupper(addGuest)){
@@ -533,7 +550,15 @@ void createEvent(int i){                    //int i is used to tell which event 
 				menu = true;
 				menu2 = false;
 				break;
+			case 'y' :
+				menu = true;
+				menu2 = false;
+				break;
 			case 'N':
+				menu = false;
+				menu2 = false;
+				break;
+			case'n' :
 				menu = false;
 				menu2 = false;
 				break;
@@ -544,86 +569,33 @@ void createEvent(int i){                    //int i is used to tell which event 
 			}
 		}
 	}
-
-
-	//type
-	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
-	cout<<" "<<endl;
-	cout<<"1. Party "<<endl;
-	cout<<"2. Wedding "<<endl;
-	cout<<"3. Shower (bridal, baby, etc. "<<endl;
-	cout<<"4. Other (Please specify) "<<endl;
-	cin>>eventTypeOp;
-
-	switch(eventTypeOp){
-	case 1:
-		eventType= "Party";
-		break;
-	case 2:
-		eventType = "Wedding";
-		cout<<"Would you like to create a registry? "<<endl;
-		cout<<"1. Yes"<<endl;
-		cout<<"2. No"<<endl;
-		int ans2;
-		cin>>ans2;
-		switch(ans2){
-		case 1:
-			registry();
-			break;
-		case 2:
-			break;
-		default:
-			break;
-		}
-		break;
-		case 3:
-			eventType = "Shower";
-			cout<<"Would you like to create a registry? "<<endl;
-			cout<<"1. Yes"<<endl;
-			cout<<"2. No"<<endl;
-			int ans3;
-			cin>>ans3;
-			switch(ans3){
-			case 1:
-				registry();
-				break;
-			case 2:
-				break;
-			default:
-				break;
-			}
-			break;
-			case 4:
-				cin.get();
-				getline(cin, eventName);
-				cout<<" "<<endl;
-				break;
-			default:
-				break;
-
+	if(registryTrue)
+	{
+		registry();
 	}
-	cout<<" "<<endl;
+
 
 	//SEATING CHART SECTION
-	cout<<"Would you like to create a seating chart? "<<endl;
-	cout<<"1. Yes "<<endl;
-	cout<<"2. No "<<endl;
-	int ynInput;
+	cout<<"Would you like to create a seating chart? (Y/N)"<<endl;
+	char ynInput;
 	cin>>ynInput;
 	//cin.ignore()
-	if(ynInput>2|| ynInput<1) {
-		cout<<"Error, enter the number of the option you'd like."<<endl;
-	}
-	else{
+
 		switch(ynInput){
-		case 1:
+		case'Y' :
 			seatingSystem();
 			//create seating chart
 			break;
-		case 2:
+		case 'y' :
+			seatingSystem();
+		case 'N':
 			break;
+		case 'n' :
+			break;
+		default :
+			cout<<"Please enter Y or N."<<endl;
 		}
-	}
+
 	cout<<" "<<endl;
 
 }
@@ -1088,7 +1060,7 @@ int main(int argc, char *argv[]){
 	time_t now = time(0); //used for testing
 
 
-	cout << "Welcome to the Gator RSVP system!" << endl;
+	cout << "Welcome to the Gator RSVP system!!!!" << endl;
 	userMenu();
 
 }
