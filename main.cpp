@@ -1,4 +1,5 @@
 
+
 #include <ctime>
 
 /*
@@ -226,7 +227,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<"3. Shower (bridal, baby, etc. "<<endl;
 	cout<<"4. Other (Please specify) "<<endl;
 	cin>>eventTypeOp;
-
 	switch(eventTypeOp){
 	case 1:
 		eventType= "Party";
@@ -272,7 +272,6 @@ void createEvent(int i){                    //int i is used to tell which event 
 				break;
 			default:
 				break;
-
 	}
 	cout<<" "<<endl;*/
 
@@ -705,6 +704,7 @@ void eventDetails()
 	string guestName;
 	string tableNum;
 	string response;
+	string gift;
 
 	bool isEvent = false;
 	cout<<"What is the name of the event that you would like the details for? "<<endl;
@@ -732,6 +732,7 @@ void eventDetails()
 
 
 
+
 		if (tempName == tempEvent) {
 			isEvent = true;
 			cout << "\nThe event " << Name << " has the following details to it:" << endl;
@@ -748,8 +749,9 @@ void eventDetails()
 				guestName = guestList[a].getName();
 				tableNum = guestList[a].getSeating();
 				response = guestList[a].getResponse();
-				if(tableNum != "None" && response == "Yes"){
-					cout<< guestName <<" at " << tableNum << endl;
+				gift = guestList[a].getRegistry();
+				if(tableNum != "None" && response == "Yes" && gift != "NA"){
+					cout<< guestName <<" at " << tableNum <<" bringing a "  << gift <<endl;
 				}
 				else if (response == "Yes")
 				{
@@ -979,7 +981,7 @@ int main(int argc, char *argv[]){
 	time_t now = time(0); //used for testing
 
 
-	cout << "Welcome to the Gator RSVP system!!!!" << endl;
+	cout << "Welcome to the Gator RSVP system!" << endl;
 	userMenu();
 
 }
