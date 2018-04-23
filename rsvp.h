@@ -37,7 +37,6 @@ private:
     string message;           // A message for the planner to tell the invitee about the event
     string foodToBring;
 
-
 public:
 
     // CONSTRUCTORS //
@@ -83,9 +82,7 @@ public:
 
     // Adds the name of a person to the invitee list of people, where they can then respond // Mark and Jovanny
     void sendInvite(string name, int age);
-
-    void setFoodToBring(string foodToBring);
-
+void setFoodToBring(string foodToBring);
 
     // ACCESSOR METHODS //
 
@@ -102,7 +99,6 @@ public:
     string getFoodToBring();
 
 
-
     // PRINT METHODS //
 
     void rsvpYes();              // Shows the event planner who has indicated that they will attend the event
@@ -112,4 +108,9 @@ public:
     void setResponse(unsigned int a, string Response);     //method used for setting response of user in case 2
     void setSeating(unsigned int i, string Table);
     void setRegistry(unsigned int i, string gift);
+    void setBring(unsigned int i, string obj);
+    void setRide(unsigned int i, string ride);
 };
+
+
+

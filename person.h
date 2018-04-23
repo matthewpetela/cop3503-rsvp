@@ -20,15 +20,19 @@ private:
     bool primary;              // Yes for if the person is the primary person invited, false for if the person is the plus one
     string seating;
     string registry;
+    string bring;
+    string transport;
 
 public:
 
-    person(string name, int age, string response, bool primary, string table, string gift);  // Basic Constructor for a person with no plus one
+    person(string name, int age, string response, string bring, bool primary, string table, string gift, string transport);  // Basic Constructor for a person with no plus one
 
     void setResponse(string response);
     void plusOne(string name, int age);
     void setSeating(string table);
     void setRegistry(string gift);
+    void setBring(string obj);
+    void setRide(string ride);
     void printSeating();
 
     string getName();       // Returns the name of the person
@@ -36,6 +40,8 @@ public:
     string getResponse();   // Returns the response of the person
     string getSeating();
     string getRegistry();
+    string getBring();
+    string getRide();
 
 };
 
