@@ -407,12 +407,12 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<"What is the time of the event? (Enter in the format --:--)" << endl;
 	cin.get();
 	getline(cin, eventTime);
-	while(checktime(eventTime)==false){
+	/*while(checktime(eventTime)==false){
 		cout<<"wrong input please try again: ";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin>>eventTime;
-	}
+	}*/
 
 
 	cout<<" "<<endl;
