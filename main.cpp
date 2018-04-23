@@ -1,3 +1,4 @@
+
 #include <ctime>
 
 /*
@@ -1087,98 +1088,132 @@ void rsvpSystem(){
     }
 }
 
-//kailee nicholas
 void eventDetails()
 {
-    string Name;					//Initializes all of the event details
-    string tempName;
-    string tempEvent;
-    string tempEventType;
-    string tempEventDate;
-    string tempEventTime;
-    string tempEventLocation;
-    string tempDressCode;
-    vector<person> guestList;
-    string guestName;
-    string tableNum;
-    string response;
-    string gift;
+	string Name;					//Initializes all of the event details
+	string tempName;
+	string tempEvent;
+	string tempEventType;
+	string tempEventDate;
+	string tempEventTime;
+	string tempEventLocation;
+	string tempDressCode;
+	vector<person> guestList;
+	string guestName;
+	string tableNum;
+	string response;
+	string gift;
+	string bring;
+	string ride;
+	string food;
 
-    bool isEvent = false;
-    cout<<"What is the name of the event that you would like the details for? "<<endl;
-    cin.get();
-    getline(cin, Name);
+	bool isEvent = false;
+	cout<<"What is the name of the event that you would like the details for? "<<endl;
+	cin.get();
+	getline(cin, Name);
 
-    tempName = Name;
-    tempName.erase(remove(tempName.begin(), tempName.end(), ' '), tempName.end()); //removes whitespace for comparison
-    transform(tempName.begin(),tempName.end(), tempName.begin(), ::tolower);    //sets characters to lower case for comparison
-    cout<< tempName <<endl;
+	tempName = Name;
+	tempName.erase(remove(tempName.begin(), tempName.end(), ' '), tempName.end()); //removes whitespace for comparison
+	transform(tempName.begin(),tempName.end(), tempName.begin(), ::tolower);    //sets characters to lower case for comparison
+	cout<< tempName <<endl;
+	for(unsigned int i = 0; i < eventCreator.size(); i++) {          //for loop to iterate through all created events
+		tempEvent = eventCreator[i].getEventName();
+		tempEvent.erase(remove(tempEvent.begin(), tempEvent.end(), ' '), tempEvent.end()); //removes whitespace for comparison
+		transform(tempEvent.begin(), tempEvent.end(), tempEvent.begin(), ::tolower);    //sets characters to lower case for comparison
 
-    for(unsigned int i = 0; i < eventCreator.size(); i++) {          //for loop to iterate through all created events
-        tempEvent = eventCreator[i].getEventName();
-        tempEvent.erase(remove(tempEvent.begin(), tempEvent.end(), ' '), tempEvent.end()); //removes whitespace for comparison
-        transform(tempEvent.begin(), tempEvent.end(), tempEvent.begin(), ::tolower);    //sets characters to lower case for comparison
-
-        tempEventType = eventCreator[i].getEventType();   				//
-        tempEventDate = eventCreator[i].getEventDate();
-        tempEventTime = eventCreator[i].getEventTime();
-        tempEventLocation = eventCreator[i].getEventLocation();
-        tempDressCode = eventCreator[i].getDressCode();
-        guestList = eventCreator[i].getInvitees();
-
-
+		tempEventType = eventCreator[i].getEventType();   				//
+		tempEventDate = eventCreator[i].getEventDate();
+		tempEventTime = eventCreator[i].getEventTime();
+		tempEventLocation = eventCreator[i].getEventLocation();
+		tempDressCode = eventCreator[i].getDressCode();
+		guestList = eventCreator[i].getInvitees();
+		food = eventCreator[i].getFoodToBring();
 
 
+		if (tempName == tempEvent) {
+			isEvent = true;
+			cout << "\nThe event " << Name << " has the following details to it:" << endl;
+			cout<<"The type of the event is "<<tempEventType<<endl;
+			cout<<"The date of the event is "<<tempEventDate<<endl;
+			cout<<"The time of the event is "<<tempEventTime<<endl;
+			cout<<"The location of the event is "<<tempEventLocation<<endl;
+			cout<<"The dress code of the event is "<<tempDressCode<<endl;
+			//cout<<"The food to bring is " << food <<endl;
 
+			//prints list of guests and table assignments
+			cout<<"The list of guests who are coming  " << endl;
+			for(unsigned int a = 0; a < guestList.size(); a++)
+			{        //for loop to iterate through all the people in the event
+				guestName = guestList[a].getName();
+				tableNum = guestList[a].getSeating();
+				response = guestList[a].getResponse();
+				gift = guestList[a].getRegistry();
+				bring = guestList[a].getBring();
+				if(tableNum != "None" && response == "Yes" && gift != "NA" && bring != "nothing"){
+					cout<< guestName <<" at " << tableNum <<" their gift is "  << gift <<" and they are bringing " << bring  <<endl;
+				}
+				else if (response == "Yes" && tableNum != "None" && gift != "NA")
+				{
+					cout<< guestName <<" at " << tableNum <<" their gift is "  << gift <<endl;
+				}
+				else if (tableNum != "None" && response == "Yes"  && bring != "nothing")
+				{
+					cout<< guestName <<" at " << tableNum << " and they are bringing " << bring  <<endl;
+				}
+				else if (response == "Yes" && gift != "NA" && bring != "nothing"){
+					cout<< guestName <<" their gift is "  << gift <<" and they are bringing " << bring  <<endl;
+				}
+				else if (response == "Yes" && gift != "NA")
+				{
+					cout<< guestName <<" their gift is "  << gift <<endl;
+				}
+				else if (response == "Yes" && tableNum != "None")
+				{
+					cout<< guestName <<" at " << tableNum <<endl;
+				}
+				else if (response == "Yes" && bring != "nothing")
+				{
+					cout<< guestName <<" and they are bringing " << bring  <<endl;
+				}
+				else if (response == "Yes")
+				{
+					cout<< guestName << endl;
+				}
 
-        if (tempName == tempEvent) {
-            isEvent = true;
-            cout << "\nThe event " << Name << " has the following details to it:" << endl;
-            cout<<"The type of the event is "<<tempEventType<<endl;
-            cout<<"The date of the event is "<<tempEventDate<<endl;
-            cout<<"The time of the event is "<<tempEventTime<<endl;
-            cout<<"The location of the event is "<<tempEventLocation<<endl;
-            cout<<"The dress code of the event is "<<tempDressCode<<endl;
+			}
+			cout<<""<<endl;
+			cout<< "List of guests not coming " << endl;
+			for(unsigned int b = 0; b < guestList.size(); b++)
+			{
+				guestName = guestList[b].getName();
+				response = guestList[b].getResponse();
+				if(response == "No")
+				{
+					cout<<guestName<<endl;
+				}
+			}
+			cout<<""<<endl;
+			cout<<"List of guests who are Undecided"<<endl;
+			for(unsigned int c = 0; c < guestList.size(); c++)
+			{
+				guestName = guestList[c].getName();
+				response = guestList[c].getResponse();
+				if(response == "Undecided")
+				{
+					cout<<guestName<<endl;
+				}
+			}
+			cout<<"List of guests who need a ride"<<endl;
+			for(unsigned int d = 0; d < guestList.size(); d++)
+			{
+				guestName = guestList[d].getName();
+				ride = guestList[d].getRide();
+				if(ride == "Yes"){
+					cout<<guestName<<endl;
+				}
 
-            //prints list of guests and table assignments
-            cout<<"The list of guests who are coming and their table assignments " << endl;
-            for(unsigned int a = 0; a < guestList.size(); a++)
-            {        //for loop to iterate through all the people in the event
-                guestName = guestList[a].getName();
-                tableNum = guestList[a].getSeating();
-                response = guestList[a].getResponse();
-                gift = guestList[a].getRegistry();
-                if(tableNum != "None" && response == "Yes" && gift != "NA"){
-                    cout<< guestName <<" at " << tableNum <<" bringing a "  << gift <<endl;
-                }
-                else if (response == "Yes")
-                {
-                    cout<< guestName << endl;
-                }
+			}
 
-            }
-            cout<<""<<endl;
-            cout<< "List of guests not coming " << endl;
-            for(unsigned int b = 0; b < guestList.size(); b++)
-            {
-                guestName = guestList[b].getName();
-                response = guestList[b].getResponse();
-                if(response == "No")
-                {
-                    cout<<guestName<<endl;
-                }
-            }
-            cout<<""<<endl;
-            cout<<"List of guest who are Undecided"<<endl;
-            for(unsigned int c = 0; c < guestList.size(); c++)
-            {
-                guestName = guestList[c].getName();
-                response = guestList[c].getResponse();
-                if(response == "Undecided")
-                {
-                    cout<<guestName<<endl;
-                }
-            }
 
             cout<<""<<endl;
 
@@ -1378,7 +1413,7 @@ int main(int argc, char *argv[]){
     time_t now = time(0); //used for testing
 
 
-    cout << "Welcome to the Gator RSVP system!!!!" << endl;
+    cout << "Welcome to the Gator RSVP system!!" << endl;
     userMenu();
 
 }
