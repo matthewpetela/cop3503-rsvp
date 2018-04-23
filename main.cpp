@@ -22,6 +22,7 @@ Project_Team 18:
 #include<limits>
 #include<algorithm>
 #include<fstream>
+#include<regex>
 
 
 vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
@@ -36,10 +37,9 @@ void clearInput(){
 }
 //kareem method to check valid time
 bool checktime(std::string const& Input){
-std::regex validtime("([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])"); // check for good sequence
-return std::regex_match(Input, validtime);// return false if input does not match validtime
+regex validtime("([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])"); // check for good sequence
+return regex_match(Input, validtime);// return false if input does not match validtime
 }
-
 //Kailee and kimmy
 void seatingSystem(){
 	string tEventName;
@@ -129,79 +129,67 @@ void seatingSystem(){
 }
 
 //kimmy and kailee
-/*void registry(int i){
-	string itemName;
-	string qnty;
+void registry(){
+	string tEventName;
+		string tRsvpName;
+		bool inEvent = false;
+		bool menu = true;
+		bool addItem = true;
+		char menuOption1 = 'z';
+		vector<person> tempTable;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
+		//cout<<"To exit type x."<<endl;
 
-	//creates the event based on whatever inputs the user givse
-	eventCreator.emplace_back(itemName, qnty);
-	cout<<" "<<endl;
+		while(addItem != false){
+			cout<<"Would you like to assign a new guest to an item? "<<endl;
+			cout<<"1. Yes"<<endl;
+			cout<<"2. No"<<endl;
+			int ans4;
+			cin>>ans4;
+			if(ans4 == 1){
+				cout<<"Please enter the guest's name."<< endl;
+				cin.get();
+				getline(cin, tRsvpName);
+				tRsvpName.erase(remove(tRsvpName.begin(), tRsvpName.end(), ' '), tRsvpName.end()); //removes whitespace for comparison
+				transform(tRsvpName.begin(),tRsvpName.end(), tRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
+				cout<< tRsvpName <<endl;         // test to make sure input user name has no spaces
 
 
-	bool menu = true;
-	bool breakOut;          // bool to check if you broke out of the for loop due to a bad age string
-	bool menu2 = true;
-	char addItm = 'z';
+				for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
+					tempTable = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
+					for(unsigned int a = 0; a < tempTable.size(); a++){        //for loop to iterate through all the people in the event
+						tEventName = tempTable[a].getName();
+						tEventName.erase(remove(tEventName.begin(), tEventName.end(), ' '), tEventName.end()); //removes whitespace for comparison
+						transform(tEventName.begin(),tEventName.end(), tEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
+						if(tEventName == tRsvpName){
+							inEvent = true;                                     //bool to let user know whether they re in an event or not
+							//eventCreator[i].printSeating();                      //prints the invitation to the event
 
-	while(menu){
-		breakOut = false;
+							menu = true;
+							while(menu){
+								cout<<"What would you like the gift to be."<<endl;
+								string gifts;
+								getline(cin, gifts);
+								eventCreator[i].setRegistry(i, gifts);
 
-		cout<<"Please enter the name of the item you want to add."<<endl;
-		cin.get();
-		getline(cin, itemName);
-		cout<<endl;
-
-		cout<< itemName <<endl;
-
-		cout<<"Please enter the quantity you'd like for the item.(numbers only.)"<<endl;
-		cin>>qnty;
-		cout<<endl;
-		for(unsigned int a = 0; a < qnty.size(); a++){   //for loop to check if the age string contains numbers only
-			if(isdigit(qnty.at(a)) == 0){                //isdigit returns 0 when it is false
-				breakOut = true;
-				cout<< "Error: "<< itemName << " Was not added to your registry."<<endl;
-				cout<<"Please enter numbers only"<<endl;
-				cout<< "\n";
-				break;                                      //if a character isn't a number, we break out of the for loop
-			}
-			else{
-				if(a == (qnty.size()  - 1)){             // if you reach the end of the age string and everything is a number you create a person
-					cout<< itemName << " was added successfully to your registry!"<<endl;
-					eventCreator[i].addGift(itemName, stoi(qnty));
+								menu = false;
+							}
+						}
+					}
+				}
+				if(!inEvent){
+					cout<<"Error they were not on the list of invites"<<endl;
 				}
 			}
-		}
-		cout<< itemName << " " << qnty << "\n";      //used for testing purposes
-
-
-		if(breakOut){   // if we brokeout of the for loop due to bad age, the while loop is continued
-			continue;   // and the user is not prompted about adding another person
-		}
-
-		//while loop to check if user wants to add another guest
-		menu2 = true;
-		while(menu2){
-			cout<<"Would you like to add another item? (hit Y for yes or N for no)"<<endl;
-			cin>>addItm;
-			clearInput();
-			switch(toupper(addItm)){
-			case 'Y':   //
-				menu = true;
-				menu2 = false;
-				break;
-			case 'N':
-				menu = false;
-				menu2 = false;
-				break;
-			default:
-				menu2 = true;
-				cout<<"Please enter either Y or N"<<endl;
+			else if (ans4 == 2){
+				addItem=false;
+			}
+			else{
+				cout<<"invalid input."<<endl;
 				clearInput();
+				continue;
 			}
 		}
-	}
-
-}*/
+}
 
 //kimmy
 void createEvent(int i){                    //int i is used to tell which event we are currently creating.Kimmy
@@ -231,7 +219,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 	getline(cin, eventName);
 	cout<<" "<<endl;
 
-	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
+	/*cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
 	cout<<" "<<endl;
 	cout<<"1. Party "<<endl;
 	cout<<"2. Wedding "<<endl;
@@ -252,7 +240,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 		cin>>ans2;
 		switch(ans2){
 		case 1:
-			//registry(i);
+			registry();
 			break;
 		case 2:
 			break;
@@ -269,7 +257,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 			cin>>ans3;
 			switch(ans3){
 			case 1:
-				//registry(i);
+				registry();
 				break;
 			case 2:
 				break;
@@ -286,19 +274,18 @@ void createEvent(int i){                    //int i is used to tell which event 
 				break;
 
 	}
-	cout<<" "<<endl;
+	cout<<" "<<endl;*/
 
-	//Kareem
-	cout<<"What is the time of the event? (please use this format --:--)" << endl;
+
+	cout<<"What is the time of the event?" << endl;
 	cin.get();
 	getline(cin, eventTime);
 	while(checktime(eventTime)==false){
-     cout<<"wrong input please try again: ";
-     cin.clear();
-     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cin>>eventTime;
+		cout<<"wrong input please try again: ";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cin>>eventTime;
 	}
-
 
 
 	cout<<" "<<endl;
@@ -562,7 +549,63 @@ void createEvent(int i){                    //int i is used to tell which event 
 	}
 
 
+	//type
+	cout<<"What type of event is this?(Ex. party, wedding, etc.) "<<endl;
+	cout<<" "<<endl;
+	cout<<"1. Party "<<endl;
+	cout<<"2. Wedding "<<endl;
+	cout<<"3. Shower (bridal, baby, etc. "<<endl;
+	cout<<"4. Other (Please specify) "<<endl;
+	cin>>eventTypeOp;
 
+	switch(eventTypeOp){
+	case 1:
+		eventType= "Party";
+		break;
+	case 2:
+		eventType = "Wedding";
+		cout<<"Would you like to create a registry? "<<endl;
+		cout<<"1. Yes"<<endl;
+		cout<<"2. No"<<endl;
+		int ans2;
+		cin>>ans2;
+		switch(ans2){
+		case 1:
+			registry();
+			break;
+		case 2:
+			break;
+		default:
+			break;
+		}
+		break;
+		case 3:
+			eventType = "Shower";
+			cout<<"Would you like to create a registry? "<<endl;
+			cout<<"1. Yes"<<endl;
+			cout<<"2. No"<<endl;
+			int ans3;
+			cin>>ans3;
+			switch(ans3){
+			case 1:
+				registry();
+				break;
+			case 2:
+				break;
+			default:
+				break;
+			}
+			break;
+			case 4:
+				cin.get();
+				getline(cin, eventName);
+				cout<<" "<<endl;
+				break;
+			default:
+				break;
+
+	}
+	cout<<" "<<endl;
 
 	//SEATING CHART SECTION
 	cout<<"Would you like to create a seating chart? "<<endl;
