@@ -1,4 +1,3 @@
-
 /*
 rsvp.h
 COP3503
@@ -14,6 +13,7 @@ Project_Team 18:
 
 #include <vector>
 #include "person.h"
+#include "objects.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ class Event{
 private:
 
     vector<person> invitees;     // A list of all the people invited by the host.
-    vector<person> gifts;		//A list of gifts created by the host.
+	vector<objects> gifts;		//A list of gifts created by the host.
     // A person can log into the program and check to see if there name has been added to an invite list,
     // Where they can then reply as to whether they are going or not, etc.
 
@@ -85,6 +85,8 @@ public:
     // Adds the name of a person to the invitee list of people, where they can then respond // Mark and Jovanny
     void sendInvite(string name, int age);
 
+    void addGift(string gift, int qnty);
+
     // ACCESSOR METHODS //
 
     string getEventPlanner();    // Returns the name of the event planner // Mark and Jovanny
@@ -97,7 +99,7 @@ public:
     int getAgeMin();             // Returns the age minimum // Mark and Jovanny
     string getMessage();         // Returns the message the event planner wants to send to the invite // Mark and Jovanny
     vector<person> getInvitees(); // Returns the list of people invited to the event // Mark and Jovanny
-    vector<person> getGifts();
+    vector<objects> getGifts();
 
 
     // PRINT METHODS //

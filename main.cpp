@@ -1,4 +1,3 @@
-
 #include <ctime>
 
 /*
@@ -18,6 +17,7 @@ Project_Team 18:
 #include<vector>
 #include"rsvp.h"
 #include"person.h"
+#include"objects.h"
 #include<limits>
 #include<algorithm>
 #include<fstream>
@@ -123,20 +123,78 @@ void seatingSystem(){
 }
 
 //kimmy and kailee
-void registry(){
-	int numGifts;
-	string gift;
-	cout<<"How many gifts are on your registry?"<<endl;
-	cin>>numGifts;
-	string guestArray[numGifts];
-	for(int x = 0; x < numGifts; x++){
-		// breakOut = false;
-		cout<<"Please enter the name of the gift" << endl;
-		std::cin.get();
-		getline(std::cin, gift);
-		guestArray[x] = gift;
+void registry(int i){
+	string itemName;
+	string qnty;
+
+	//creates the event based on whatever inputs the user givse
+	eventCreator.emplace_back(itemName, qnty);
+	cout<<" "<<endl;
+
+
+	bool menu = true;
+	bool breakOut;          // bool to check if you broke out of the for loop due to a bad age string
+	bool menu2 = true;
+	char addItm = 'z';
+
+	while(menu){
+		breakOut = false;
+
+		cout<<"Please enter the name of the item you want to add."<<endl;
+		cin.get();
+		getline(cin, itemName);
 		cout<<endl;
+
+		cout<< itemName <<endl;
+
+		cout<<"Please enter the quantity you'd like for the item.(numbers only.)"<<endl;
+		cin>>qnty;
+		cout<<endl;
+		for(unsigned int a = 0; a < qnty.size(); a++){   //for loop to check if the age string contains numbers only
+			if(isdigit(qnty.at(a)) == 0){                //isdigit returns 0 when it is false
+				breakOut = true;
+				cout<< "Error: "<< itemName << " Was not added to your registry."<<endl;
+				cout<<"Please enter numbers only"<<endl;
+				cout<< "\n";
+				break;                                      //if a character isn't a number, we break out of the for loop
+			}
+			else{
+				if(a == (qnty.size()  - 1)){             // if you reach the end of the age string and everything is a number you create a person
+					cout<< itemName << " was added successfully to your registry!"<<endl;
+					eventCreator[i].addGift(itemName, stoi(qnty));
+				}
+			}
+		}
+		cout<< itemName << " " << qnty << "\n";      //used for testing purposes
+
+
+		if(breakOut){   // if we brokeout of the for loop due to bad age, the while loop is continued
+			continue;   // and the user is not prompted about adding another person
+		}
+
+		//while loop to check if user wants to add another guest
+		menu2 = true;
+		while(menu2){
+			cout<<"Would you like to add another item? (hit Y for yes or N for no)"<<endl;
+			cin>>addItm;
+			clearInput();
+			switch(toupper(addItm)){
+			case 'Y':   //
+				menu = true;
+				menu2 = false;
+				break;
+			case 'N':
+				menu = false;
+				menu2 = false;
+				break;
+			default:
+				menu2 = true;
+				cout<<"Please enter either Y or N"<<endl;
+				clearInput();
+			}
+		}
 	}
+
 }
 
 //kimmy
@@ -188,7 +246,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 		cin>>ans2;
 		switch(ans2){
 		case 1:
-			registry();
+			registry(i);
 			break;
 		case 2:
 			break;
@@ -205,7 +263,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 			cin>>ans3;
 			switch(ans3){
 			case 1:
-				registry();
+				registry(i);
 				break;
 			case 2:
 				break;
@@ -340,8 +398,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 	//jovanny  // loop to make sure a dress code is picked
 	bool dressBool = true;
-	while(dressBool)
-	{
+	while(dressBool){
 		cout<<"Please select the dresscode for this event?" <<endl;
 		cout<<"1. Casual "<<endl;
 		cout<<"2. Business casual "<<endl;
@@ -425,8 +482,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 	bool menu2 = true;
 	char addGuest = 'z';
 
-	while(menu)
-	{
+	while(menu){
 		breakOut = false;
 		//kimmy I had to turn it into two parts so it saves all letters correctly but the string is still saved under the same name
 		string firstInvite;
@@ -521,8 +577,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 
 //jovanny
-void rsvpSystem()
-{
+void rsvpSystem(){
 	string tempEventName;
 	string tempRsvpName;
 	bool inEvent = false;
@@ -579,8 +634,7 @@ void rsvpSystem()
 	}
 }
 
-
-//Nicholas and Kailee
+//kailee nicholas
 void eventDetails()
 {
 	string Name;					//Initializes all of the event details
@@ -679,9 +733,7 @@ void eventDetails()
 
 	}
 }
-
-void changeResponse()
-{
+void changeResponse(){
 	string tempEventName;
 	string tempRsvpName;
 	bool inEvent = false;
@@ -768,8 +820,7 @@ void changeResponse()
 
 
 
-void userMenu()
-{
+void userMenu(){
 	int userInput;
 	int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
 
@@ -833,8 +884,7 @@ void userMenu()
 	}
 }
 
-void loadFile()
-{//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
 	std::string DATA_FILE_NAME = "data.txt";
 	std::string PERSON_FILE_NAME = "person.txt";
 	vector<std::string> dataFileVector;
@@ -851,8 +901,7 @@ void loadFile()
 
 }
 
-void saveFile()
-{ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
 	int size = eventCreator.size(); //Gets the number of events
 	std::string DATA_FILE_NAME = "data.txt";
 	std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
@@ -868,14 +917,13 @@ void saveFile()
 	dataFile.close();
 
 }
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
 	vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
 	time_t now = time(0); //used for testing
 
 
-	cout << "Welcome to the Gator RSVP system!" << endl;
+	cout << "Welcome to the Gator RSVP system!!!!" << endl;
 	userMenu();
 
 }
