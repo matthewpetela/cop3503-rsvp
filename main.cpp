@@ -54,7 +54,7 @@ void seatingSystem(){
 		cout<<"Would you like to assign a new guest to a table? (Y/N)"<<endl;
 		char ans4;
 		cin>>ans4;
-		if(ans4 == 'y' || ans4 == 'Y"'){
+		if(ans4 == 'y' || ans4 == 'Y'){
 			cout<<"Please enter the guest you'd like to seat."<< endl;
 			cin.get();
 			getline(cin, tRsvpName);
@@ -1133,7 +1133,39 @@ void changeResponse(){
 }
 
 
+void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+	std::string DATA_FILE_NAME = "data.txt";
+	std::string PERSON_FILE_NAME = "person.txt";
+	vector<std::string> dataFileVector;
+	ofstream dataFile;
+	dataFile.open (DATA_FILE_NAME);
 
+	// for( std::string line; getline( input, line ); ){
+
+
+	// }
+
+
+	dataFile.close();
+
+}
+
+void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+	int size = eventCreator.size(); //Gets the number of events
+	std::string DATA_FILE_NAME = "data.txt";
+	std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
+	ofstream dataFile(DATA_FILE_NAME);
+
+
+	for (int i= 0 ; i < size; i++){ //writes to file with new line seperation
+		dataFile << eventCreator.at(i).getEventPlanner() << "\n" << eventCreator.at(i).getEventName() << "\n" << eventCreator.at(i).getEventType() << "\n" << eventCreator.at(i).getEventLocation() << "\n" <<
+				eventCreator.at(i).getEventDate() << eventCreator.at(i).getEventTime() <<"\n" << eventCreator.at(i).getDressCode() << "\n" << eventCreator.at(i).getAgeMin()<< "\n";
+
+	}
+
+	dataFile.close();
+
+}
 
 
 void userMenu(){
@@ -1143,6 +1175,7 @@ void userMenu(){
 	//jovanny and mark
 	while(true){        //while statement will continue to display the menu until a correct option is chosen
 
+		saveFile();
 		//kimmy
 		cout<<"Please select an option. "<<endl;
 		cout<<" "<<endl;
@@ -1200,39 +1233,6 @@ void userMenu(){
 	}
 }
 
-void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
-	std::string DATA_FILE_NAME = "data.txt";
-	std::string PERSON_FILE_NAME = "person.txt";
-	vector<std::string> dataFileVector;
-	ofstream dataFile;
-	dataFile.open (DATA_FILE_NAME);
-
-	// for( std::string line; getline( input, line ); ){
-
-
-	// }
-
-
-	dataFile.close();
-
-}
-
-void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
-	int size = eventCreator.size(); //Gets the number of events
-	std::string DATA_FILE_NAME = "data.txt";
-	std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
-	ofstream dataFile(DATA_FILE_NAME);
-
-
-	for (int i= 0 ; i < size; i++){ //writes to file with new line seperation
-		dataFile << eventCreator.at(i).getEventPlanner() << "\n" << eventCreator.at(i).getEventName() << "\n" << eventCreator.at(i).getEventType() << "\n" << eventCreator.at(i).getEventLocation() << "\n" <<
-				eventCreator.at(i).getEventDate() << eventCreator.at(i).getEventTime() <<"\n" << eventCreator.at(i).getDressCode() << "\n" << eventCreator.at(i).getAgeMin()<< "\n";
-
-	}
-
-	dataFile.close();
-
-}
 int main(int argc, char *argv[]){
 	vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
