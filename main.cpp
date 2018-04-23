@@ -50,9 +50,9 @@ void seatingSystem(){
         cout<<"Would you like to assign a new guest to a table? (Y/N)"<<endl;
         char ans4;
         cin>>ans4;
+        clearInput();
         if(ans4 == 'y' || ans4 == 'Y'){
             cout<<"Please enter the guest you'd like to seat."<< endl;
-            cin.get();
             getline(cin, tRsvpName);
             tRsvpName.erase(remove(tRsvpName.begin(), tRsvpName.end(), ' '), tRsvpName.end()); //removes whitespace for comparison
             transform(tRsvpName.begin(),tRsvpName.end(), tRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
@@ -98,7 +98,6 @@ void seatingSystem(){
                                     break;
                                 default:
                                     cout<<"Please enter an option 1-4."<<endl;
-                                    clearInput();
                                     continue;
 
                             }
@@ -189,7 +188,6 @@ void bringItem(){
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
     cout<<"Please enter your name"<< endl;
-    //cin.get();
     getline(cin, tempRsvpName);
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
@@ -322,12 +320,10 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 
     cout<<"What is your name?"<<endl; // used for eventplanner name
-    cin.get();
     getline(cin, eventPlanner);
     cout<<" "<<endl;
 
     cout<<"What is the name of your event?(Ex. Tom's party) "<<endl;
-    //cin.get();
     getline(cin, eventName);
     cout<<" "<<endl;
 
@@ -343,6 +339,7 @@ void createEvent(int i){                    //int i is used to tell which event 
         cout << "3. Shower (bridal, baby, etc. " << endl;
         cout << "4. Other (Please specify) " << endl;
         cin >> eventTypeOp;
+        clearInput();
 
         switch (eventTypeOp) {
             case 1:
@@ -356,6 +353,7 @@ void createEvent(int i){                    //int i is used to tell which event 
                     cout << "Would you like to create a registry?(Y/N) " << endl;
                     char ans2;
                     cin >> ans2;
+                    clearInput();
                     switch (ans2) {
                         case 'Y':
                             registryTrue = true;
@@ -372,7 +370,6 @@ void createEvent(int i){                    //int i is used to tell which event 
                         default:
                             cout << "Please enter either Y or N" << endl;
                             weddingError = true;
-                            clearInput();
                             break;
                     }
                 } while (weddingError);
@@ -385,6 +382,7 @@ void createEvent(int i){                    //int i is used to tell which event 
                     cout << "Would you like to create a registry? (Y/N)" << endl;
                     char ans3;
                     cin >> ans3;
+                    clearInput();
                     switch (ans3) {
                         case 'Y':
                             registryTrue = true;
@@ -401,21 +399,19 @@ void createEvent(int i){                    //int i is used to tell which event 
                         default:
                             cout << "Please enter either Y or N" << endl;
                             showerError = true;
-                            clearInput();
                             break;
                     }
                 } while (showerError);
                 break;
             case 4:
-                cin.get();
+                cout<<"What type of event is this?"<<endl;
                 getline(cin, eventName);
                 cout << " " << endl;
                 break;
             default:
                 cout << "Please enter a number 1 to 4" << endl;
-                clearInput();
                 typeError = true;
-                break;
+                continue;
 
         }
         cout << " " << endl;
@@ -504,7 +500,6 @@ void createEvent(int i){                    //int i is used to tell which event 
     char tempChar;
     while(menuBool){
         cout<<"What is the date of the event? (Enter in the form mm/dd/yyyy. Year must be between 2000 and 2199)" <<endl;
-        //std::cin.get();
         getline(std::cin, eventDate);	//HAS TO STAY AS GETLINE. IF NOT YOU HAVE TO CLEAR INPUT EVERYTIME ITS BAD INPUT OR YOU GET AN
         //cin>>eventDate;				//INFINITE LOOP - JOVANNY
 
@@ -599,7 +594,6 @@ void createEvent(int i){                    //int i is used to tell which event 
     cout<<" "<<endl;
 
     cout<<"Where will this event be held?" << endl;
-    //cin.get();
     getline(cin, eventLocation);
     cout<<" "<<endl;
 
@@ -614,6 +608,7 @@ void createEvent(int i){                    //int i is used to tell which event 
         cout<<"5. Formal "<<endl;
         cout<<"6. Other (please specify)"<<endl;
         cin>>dressOption;
+        clearInput();
         switch(dressOption){
             case 1:
                 dressCode = "Casual";
@@ -637,14 +632,11 @@ void createEvent(int i){                    //int i is used to tell which event 
                 break;
             case 6:
                 cout<<"Please specify your dress Code" <<endl;
-                cin.get();
                 getline(cin, dressCode);
                 dressBool = false;
                 break;
             default:
                 cout<<"Error, enter the number of the option you'd like."<<endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 continue;
 
         }
@@ -657,16 +649,15 @@ void createEvent(int i){                    //int i is used to tell which event 
         cout << "Any notes you'd like your guests to know?(Y/N)" << endl;
         char choice = 0;
         cin >> choice;
+        clearInput();
         switch (choice) {
             case 'Y':
                 cout << "Type your message." << endl;
-                cin.get();
                 getline(cin, message);
                 cout << endl;
                 break;
             case 'y' :
                 cout << "Type your message." << endl;
-                cin.get();
                 getline(cin, message);
                 cout << endl;
                 break;
@@ -679,13 +670,14 @@ void createEvent(int i){                    //int i is used to tell which event 
             default:
                 cout << "Please enter either Y or N" << endl;
                 notesError = true;
-                clearInput();
+
         }
     } while (notesError);
 
 
     //include the message in details?
 
+    /*
     //creates the event based on whatever inputs the user givse
     eventCreator.emplace_back(eventPlanner, eventName, eventType,eventDate, eventTime, eventLocation, dressCode , message);     //jovanny and mark emplace back is equivalent to push back
     cout<<" "<<endl;
@@ -694,12 +686,13 @@ void createEvent(int i){                    //int i is used to tell which event 
     cout<< dressCode<<endl;
     cout<< message<<endl; //used for error checking in dress code
     cout<<" "<<endl;
-
+     */
     //while loop used to create guests
     bool menu = true;
     bool breakOut;          // bool to check if you broke out of the for loop due to a bad age string
     bool menu2 = true;
     char addGuest = 'z';
+
 
     while(menu){
         breakOut = false;
@@ -708,19 +701,20 @@ void createEvent(int i){                    //int i is used to tell which event 
         string lastInvite;
 
         cout<<"Please Enter the first name of your guest."<<endl;
-        cin>>firstInvite;
+        getline(cin, firstInvite);
         cout<<endl;
 
         cout<<"Please enter the last name of your guest."<<endl;
-        cin>>lastInvite;
+        getline(cin, lastInvite);
         cout<<endl;
 
-        guestName = firstInvite +" "+ lastInvite;
+        guestName = firstInvite + " " + lastInvite;
 
         cout<< guestName <<endl;
 
         cout<<"Please enter the guest's age (numbers only)"<<endl;
         cin>>age;
+        clearInput();
         cout<<endl;
         for(unsigned int a = 0; a < age.size(); a++){   //for loop to check if the age string contains numbers only
             if(isdigit(age.at(a)) == 0){                //isdigit returns 0 when it is false
@@ -770,7 +764,6 @@ void createEvent(int i){                    //int i is used to tell which event 
                 default:
                     menu2 = true;
                     cout<<"Please enter either Y or N"<<endl;
-                    clearInput();
             }
         }
     }
@@ -784,7 +777,7 @@ void createEvent(int i){                    //int i is used to tell which event 
     cout<<"Would you like to create a seating chart? (Y/N)"<<endl;
     char ynInput;
     cin>>ynInput;
-    //cin.ignore()
+    clearInput();
 
     switch(ynInput){
         case'Y' :
@@ -811,7 +804,7 @@ void createEvent(int i){                    //int i is used to tell which event 
     char foodItemOption;
     char ynInput2;
     cin >> ynInput2;
-    cin.ignore();
+    clearInput();
     bool error;
     do {
         error = false;
@@ -824,7 +817,7 @@ void createEvent(int i){                    //int i is used to tell which event 
                 cout << "3. Desserts " << endl;
                 cout << "4. Any Food Item " << endl;
                 cin >> foodItemOption;
-
+                clearInput();
                 switch (foodItemOption) {
                     case '1':
                         eventCreator.back().setFoodToBring("appetizers ");
@@ -852,7 +845,6 @@ void createEvent(int i){                    //int i is used to tell which event 
                 break;
             default:
                 cout << "Please try again" << endl;
-                cin.clear();
                 error = true;
                 break;
         }
@@ -878,7 +870,7 @@ void plusOne(){
         cout << "2. No" << endl;
         //clearInput();
         cin >> menuOption;
-
+        clearInput();
         switch (menuOption){
             case '1':
                 cout << "Enter the first name of your plus one: ";
@@ -924,7 +916,6 @@ void checkAttendees(Event event){
     bool hasWhitespace = false;                         // If a name has whitespace, it will be removed
 
     cout << "Please enter the name of the person you are checking to see if they are going: ";
-    clearInput();                             // Clears input
     getline(cin, friendName);
     cout << endl;
 
@@ -1019,7 +1010,6 @@ void rsvpSystem(){
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
     cout<<"Please enter your name"<< endl;
-    cin.get();
     getline(cin, tempRsvpName);
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
@@ -1040,6 +1030,7 @@ void rsvpSystem(){
                 char menuOption1;
                 cout << "Would you like to check the guest list before choosing? (enter Y for yes or N for no)" << endl;
                 cin >> menuOption1;
+                clearInput();
                 switch (toupper(menuOption1)) {
                     case 'Y':
                         checkAttendees(eventCreator.at(i));
@@ -1074,7 +1065,6 @@ void rsvpSystem(){
                             break;
                         default:
                             cout<<"Please enter either Y or N"<<endl;
-                            clearInput();
                             continue;
 
                     }
@@ -1103,92 +1093,105 @@ void eventDetails()
     string tableNum;
     string response;
     string gift;
+    string bring;
+    string ride;
+    string food;
 
     bool isEvent = false;
     cout<<"What is the name of the event that you would like the details for? "<<endl;
-    cin.get();
     getline(cin, Name);
 
     tempName = Name;
     tempName.erase(remove(tempName.begin(), tempName.end(), ' '), tempName.end()); //removes whitespace for comparison
     transform(tempName.begin(),tempName.end(), tempName.begin(), ::tolower);    //sets characters to lower case for comparison
     cout<< tempName <<endl;
-
     for(unsigned int i = 0; i < eventCreator.size(); i++) {          //for loop to iterate through all created events
         tempEvent = eventCreator[i].getEventName();
-        tempEvent.erase(remove(tempEvent.begin(), tempEvent.end(), ' '), tempEvent.end()); //removes whitespace for comparison
-        transform(tempEvent.begin(), tempEvent.end(), tempEvent.begin(), ::tolower);    //sets characters to lower case for comparison
+        tempEvent.erase(remove(tempEvent.begin(), tempEvent.end(), ' '),
+                        tempEvent.end()); //removes whitespace for comparison
+        transform(tempEvent.begin(), tempEvent.end(), tempEvent.begin(),
+                  ::tolower);    //sets characters to lower case for comparison
 
-        tempEventType = eventCreator[i].getEventType();   				//
+        tempEventType = eventCreator[i].getEventType();                //
         tempEventDate = eventCreator[i].getEventDate();
         tempEventTime = eventCreator[i].getEventTime();
         tempEventLocation = eventCreator[i].getEventLocation();
         tempDressCode = eventCreator[i].getDressCode();
         guestList = eventCreator[i].getInvitees();
-
-
-
-
+        food = eventCreator[i].getFoodToBring();
 
 
         if (tempName == tempEvent) {
             isEvent = true;
             cout << "\nThe event " << Name << " has the following details to it:" << endl;
-            cout<<"The type of the event is "<<tempEventType<<endl;
-            cout<<"The date of the event is "<<tempEventDate<<endl;
-            cout<<"The time of the event is "<<tempEventTime<<endl;
-            cout<<"The location of the event is "<<tempEventLocation<<endl;
-            cout<<"The dress code of the event is "<<tempDressCode<<endl;
+            cout << "The type of the event is " << tempEventType << endl;
+            cout << "The date of the event is " << tempEventDate << endl;
+            cout << "The time of the event is " << tempEventTime << endl;
+            cout << "The location of the event is " << tempEventLocation << endl;
+            cout << "The dress code of the event is " << tempDressCode << endl;
+            //cout<<"The food to bring is " << food <<endl;
 
             //prints list of guests and table assignments
-            cout<<"The list of guests who are coming and their table assignments " << endl;
-            for(unsigned int a = 0; a < guestList.size(); a++)
-            {        //for loop to iterate through all the people in the event
+            cout << "The list of guests who are coming  " << endl;
+            for (unsigned int a = 0;
+                 a < guestList.size(); a++) {        //for loop to iterate through all the people in the event
                 guestName = guestList[a].getName();
                 tableNum = guestList[a].getSeating();
                 response = guestList[a].getResponse();
                 gift = guestList[a].getRegistry();
-                if(tableNum != "None" && response == "Yes" && gift != "NA"){
-                    cout<< guestName <<" at " << tableNum <<" bringing a "  << gift <<endl;
-                }
-                else if (response == "Yes")
-                {
-                    cout<< guestName << endl;
+                bring = guestList[a].getBring();
+                if (tableNum != "None" && response == "Yes" && gift != "NA" && bring != "nothing") {
+                    cout << guestName << " at " << tableNum << " their gift is " << gift << " and they are bringing "
+                         << bring << endl;
+                } else if (response == "Yes" && tableNum != "None" && gift != "NA") {
+                    cout << guestName << " at " << tableNum << " their gift is " << gift << endl;
+                } else if (tableNum != "None" && response == "Yes" && bring != "nothing") {
+                    cout << guestName << " at " << tableNum << " and they are bringing " << bring << endl;
+                } else if (response == "Yes" && gift != "NA" && bring != "nothing") {
+                    cout << guestName << " their gift is " << gift << " and they are bringing " << bring << endl;
+                } else if (response == "Yes" && gift != "NA") {
+                    cout << guestName << " their gift is " << gift << endl;
+                } else if (response == "Yes" && tableNum != "None") {
+                    cout << guestName << " at " << tableNum << endl;
+                } else if (response == "Yes" && bring != "nothing") {
+                    cout << guestName << " and they are bringing " << bring << endl;
+                } else if (response == "Yes") {
+                    cout << guestName << endl;
                 }
 
             }
-            cout<<""<<endl;
-            cout<< "List of guests not coming " << endl;
-            for(unsigned int b = 0; b < guestList.size(); b++)
-            {
+            cout << "" << endl;
+            cout << "List of guests not coming " << endl;
+            for (unsigned int b = 0; b < guestList.size(); b++) {
                 guestName = guestList[b].getName();
                 response = guestList[b].getResponse();
-                if(response == "No")
-                {
-                    cout<<guestName<<endl;
+                if (response == "No") {
+                    cout << guestName << endl;
                 }
             }
-            cout<<""<<endl;
-            cout<<"List of guest who are Undecided"<<endl;
-            for(unsigned int c = 0; c < guestList.size(); c++)
-            {
+            cout << "" << endl;
+            cout << "List of guests who are Undecided" << endl;
+            for (unsigned int c = 0; c < guestList.size(); c++) {
                 guestName = guestList[c].getName();
                 response = guestList[c].getResponse();
-                if(response == "Undecided")
-                {
-                    cout<<guestName<<endl;
+                if (response == "Undecided") {
+                    cout << guestName << endl;
                 }
             }
+            cout << "List of guests who need a ride" << endl;
+            for (unsigned int d = 0; d < guestList.size(); d++) {
+                guestName = guestList[d].getName();
+                ride = guestList[d].getRide();
+                if (ride == "Yes") {
+                    cout << guestName << endl;
+                }
 
-            cout<<""<<endl;
-
+            }
         }
     }
-    if(!isEvent) {
-        cout<<"Error, that is not an event name."<<endl;
-
-    }
 }
+
+
 void changeResponse(){
     string tempEventName;
     string tempRsvpName;
@@ -1200,7 +1203,6 @@ void changeResponse(){
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
     cout<<"Please enter your name"<< endl;
-    cin.get();
     getline(cin, tempRsvpName);
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
@@ -1271,10 +1273,6 @@ void changeResponse(){
     }
 
 }
-
-
-
-
 
 void userMenu(){
     int userInput;
@@ -1373,11 +1371,6 @@ void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person
 
 }
 int main(int argc, char *argv[]){
-    vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
-
-    time_t now = time(0); //used for testing
-
-
     cout << "Welcome to the Gator RSVP system!!!!" << endl;
     userMenu();
 
