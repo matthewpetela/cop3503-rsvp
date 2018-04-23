@@ -82,7 +82,13 @@ public:
 
     // Adds the name of a person to the invitee list of people, where they can then respond // Mark and Jovanny
     void sendInvite(string name, int age);
-void setFoodToBring(string foodToBring);
+
+    // Creates a new person if the primary invitee wants to bring a plus one
+    // This person is "Going" by default, and they cannot invite another plus one
+    // Mark
+    void plusOne(string name, int age);
+
+    void setFoodToBring(string foodToBring);
 
     // ACCESSOR METHODS //
 
@@ -111,6 +117,3 @@ void setFoodToBring(string foodToBring);
     void setBring(unsigned int i, string obj);
     void setRide(unsigned int i, string ride);
 };
-
-
-

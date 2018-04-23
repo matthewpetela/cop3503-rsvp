@@ -37,23 +37,16 @@ void person::setResponse(string response) {
     this->inviteResponse = response;
 }
 void person::setSeating(string table){
-	this->seating = table;
+    this->seating = table;
 }
 void person::setRegistry(string gift){
-	this->registry = gift;
+    this->registry = gift;
 }
 void person::setBring(string obj){
-	this->bring=obj;
+    this->bring=obj;
 }
 void person::setRide(string ride){
-	this->transport=ride;
-}
-
-// Creates a new person if the primary invitee wants to bring a plus one
-// This person is "Going" by default, and they cannot invite another plus one
-// Mark
-void person::plusOne(string name, int age) {
-    person(name, age, "Going", "nothing" , false, "None", "NA", "No");
+    this->transport=ride;
 }
 
 // Returns the name of the person // Mark
@@ -73,3 +66,4 @@ string person::getBring(){return bring;}
 
 string person::getRide(){return transport;}
 
+bool person::isPrimary() { return primary;}

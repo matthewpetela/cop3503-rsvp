@@ -43,7 +43,7 @@ Event::Event(string eventPlanner, string eventName, string eventType, string eve
     this->eventTime = eventTime;
     this->location = eventLocation;
     this->dresscode = dresscode;
-  //  this->ageMinimum = ageMin;
+    //  this->ageMinimum = ageMin;
     this->message = message;
     foodToBring = " ";
 }
@@ -114,6 +114,13 @@ void Event::sendInvite(string name, int age) {
     invitees.emplace_back(person(name, age, "Undecided","nothing ",  true, "None", "NA", "No"));
 }
 
+// Creates a new person if the primary invitee wants to bring a plus one
+// This person is "Going" by default, and they cannot invite another plus one
+// Mark
+void Event::plusOne(string name, int age) {
+    invitees.emplace_back(person(name, age, "Yes", false, "None", "NA"));
+}
+
 //FOOD ITEMS TO BRING SECTION
 //Nicholas and Mark
 void Event::setFoodToBring(string foodToBring) {
@@ -158,16 +165,16 @@ void Event::setResponse(unsigned int a, string Response) {
     invitees.at(a).setResponse(Response);
 }
 void Event::setSeating(unsigned int i, string Table){
-	invitees.at(i).setSeating(Table);
+    invitees.at(i).setSeating(Table);
 }
 void Event::setRegistry(unsigned int i, string gift){
-	invitees.at(i).setRegistry(gift);
+    invitees.at(i).setRegistry(gift);
 }
 void Event::setBring(unsigned int i, string obj){
-	invitees.at(i).setBring(obj);
+    invitees.at(i).setBring(obj);
 }
 void Event::setRide(unsigned int i, string ride){
-	invitees.at(i).setRide(ride);
+    invitees.at(i).setRide(ride);
 }
 
 
@@ -227,8 +234,6 @@ void Event::printInvite() {
     cout << "Where: " << location << endl;
     cout << "Dresscode: " << dresscode << endl;
     cout << "Notes: " << message << endl;
-   // if (ageMinimum != 0)
+    // if (ageMinimum != 0)
     //    cout << "Age Limit: " << ageMinimum << " or older" << endl;
 }
-
-
