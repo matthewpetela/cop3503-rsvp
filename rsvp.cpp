@@ -114,6 +114,11 @@ void Event::sendInvite(string name, int age) {
     invitees.emplace_back(person(name, age, "Undecided","nothing ",  true, "None", "NA", "No"));
 }
 
+//FOOD ITEMS TO BRING SECTION
+//Nicholas and Mark
+void Event::setFoodToBring(string foodToBring) {
+    this->foodToBring = foodToBring;
+}
 
 // ACCESSOR METHODS //
 
