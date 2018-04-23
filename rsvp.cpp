@@ -1,3 +1,4 @@
+
 /*
 rsvp.cpp
 COP3503
@@ -64,38 +65,45 @@ Event::Event(string eventPlanner) {
 Event::Event() = default;
 
 // Sets the name of the event // Mark and Jovanny
-void Event::setEventName(string eventName){
+void Event::setEventName(string eventName)
+{
     this->eventName = eventName;
 }
 
 // Sets the type of event, we can have a list of event types the event planner can choose from
 // Mark and Jovanny
-void Event::setEventType(string eventType){
+void Event::setEventType(string eventType)
+{
     this->eventType = eventType;
 }
 
 // Sets the date of the event // Mark and Jovanny
-void Event::setEventDate(string eventDate){
+void Event::setEventDate(string eventDate)
+{
     this->eventDate = eventDate;
 }
 
 // Sets the time the event will take place // Mark and Jovanny
-void Event::setEventTime(string eventTime){
+void Event::setEventTime(string eventTime)
+{
     this->eventTime = eventTime;
 }
 
 // Sets the location where the event will take place // Mark and Jovanny
-void Event::setEventLocation(string eventLocation){
+void Event::setEventLocation(string eventLocation)
+{
     this->location = eventLocation;
 }
 
 // Sets the dresscode for the event // Mark and Jovanny
-void Event::setDressCode(string dresscode){
+void Event::setDressCode(string dresscode)
+{
     this->dresscode = dresscode;
 }
 
 // Sets the minimum age for the event // Mark and Jovanny
-void Event::setAgeMin(int ageMinimum){
+void Event::setAgeMin(int ageMinimum)
+{
     this->ageMinimum = ageMinimum;
 }
 
@@ -107,51 +115,88 @@ void Event::setMessage(string message){
 // Creates a person with a name and an age, sets their decision to Undecided
 // and says that they are the primary invitee, rather than a plus one
 // This person is that added to a vector of all the people invited to the event //Mark and Jovanny
-void Event::sendInvite(string name, int age) {
+void Event::sendInvite(string name, int age)
+{
     invitees.emplace_back(person(name, age, "Undecided", true, "None"));
 }
 
 // ACCESSOR METHODS //
 
 // Returns the name of the event planner // Mark and Jovanny
-string Event::getEventPlanner() { return eventPlanner; }
+string Event::getEventPlanner()
+{
+	return eventPlanner;
+}
 
 // Returns the name of the event // Mark and Jovanny
-string Event::getEventName() { return eventName;}
+string Event::getEventName()
+{
+	return eventName;
+}
 
 // Returns the type of the event // Mark and Jovanny
-string Event::getEventType() { return eventType;}
+string Event::getEventType()
+{
+	return eventType;
+}
 
 // Returns the location of the event // Mark and Jovanny
-string Event::getEventLocation() { return location;}
+string Event::getEventLocation()
+{
+	return location;
+}
 
 // Returns the date of the event // Mark and Jovanny
-string Event::getEventDate() { return eventDate;}
+string Event::getEventDate()
+{
+	return eventDate;
+}
 
 // Returns the time of the event // Mark and Jovanny
-string Event::getEventTime() { return eventTime;}
+string Event::getEventTime()
+{
+	return eventTime;
+}
 
 // Returns the event's dresscode // Mark and Jovanny
-string Event::getDressCode(){ return dresscode; }
+string Event::getDressCode()
+{
+	return dresscode;
+}
 
 // Returns the age minimum // Mark and Jovanny
-int Event::getAgeMin(){ return ageMinimum; }
+int Event::getAgeMin()
+{
+	return ageMinimum;
+}
 
 // Returns the message the event planner wants to send to the invite // Mark and Jovanny
-string Event::getMessage() { return message; }
+string Event::getMessage()
+{
+	return message;
+}
 
 // Returns the list of people invited to the event // Mark and Jovanny
-vector<person> Event::getInvitees() { return invitees; }
+vector<person> Event::getInvitees()
+{
+	return invitees;
+}
 
-vector<person> Event::getGifts() { return gifts; }
+vector<person> Event::getGifts()
+{
+	return gifts;
+}
 //method used to set response in case 2 Jovanny
-void Event::setResponse(unsigned int a, string Response) {
+void Event::setResponse(unsigned int a, string Response)
+{
     invitees.at(a).setResponse(Response);
 }
-void Event::setSeating(unsigned int i, string Table){
+void Event::setSeating(unsigned int i, string Table)
+{
 	invitees.at(i).setSeating(Table);
 }
-void Event::setRegistry(unsigned int i, string gift){
+void Event::setRegistry(unsigned int i, string gift)
+{
 	gifts.at(i).setSeating(gift);
 }
 
@@ -159,52 +204,62 @@ void Event::setRegistry(unsigned int i, string gift){
 // PRINT METHODS //
 
 // Prints out a list of people that have said they will go to the event // Mark and Jovanny
-void Event::rsvpYes() {
+void Event::rsvpYes()
+{
     vector<person> rsvpYes;
-    for(unsigned int i = 0; i < invitees.size(); i++){
+    for(unsigned int i = 0; i < invitees.size(); i++)
+    {
         if(invitees.at(i).getResponse() == "Yes"){}
         rsvpYes.push_back(invitees.at(i));
     }
 
     cout << "The list of people that have responded that they are going to attend " << eventName << " are: " << endl;
-    for( unsigned int i = 0; i < rsvpYes.size() - 1; i++){
+    for( unsigned int i = 0; i < rsvpYes.size() - 1; i++)
+    {
         cout << rsvpYes.at(i).getName() << " (" << rsvpYes.at(i).getAge() << "), " << endl;
     }
     cout << rsvpYes.at(rsvpYes.size()).getName() << " (" << rsvpYes.at(rsvpYes.size()).getAge() << ") \n" << endl;
 }
 
 // Prints out a list of people that have not responded to the invite // Mark and Jovanny
-void Event::rsvpUndecided() {
+void Event::rsvpUndecided()
+{
     vector<person> rsvpUndecided;
-    for(unsigned int i = 0; i < invitees.size(); i++){
+    for(unsigned int i = 0; i < invitees.size(); i++)
+    {
         if(invitees.at(i).getResponse() == "Undecided"){}
         rsvpUndecided.push_back(invitees.at(i));
     }
 
     cout << "The list of people that have not responded to the invite for " << eventName << " are: " << endl;
-    for( unsigned int i = 0; i < rsvpUndecided.size() - 1; i++){
+    for( unsigned int i = 0; i < rsvpUndecided.size() - 1; i++)
+    {
         cout << rsvpUndecided.at(i).getName() << " (" << rsvpUndecided.at(i).getAge() << "), " << endl;
     }
     cout << rsvpUndecided.at(rsvpUndecided.size()).getName() << " (" << rsvpUndecided.at(rsvpUndecided.size()).getAge() << ") \n" << endl;
 }
 
 // Prints out a list of people that have said they will not go to the event // Mark and Jovanny
-void Event::rsvpNo() {
+void Event::rsvpNo()
+{
     vector<person> rsvpNo;
-    for(unsigned int i = 0; i < invitees.size(); i++){
+    for(unsigned int i = 0; i < invitees.size(); i++)
+    {
         if(invitees.at(i).getResponse() == "No"){}
         rsvpNo.push_back(invitees.at(i));
     }
 
     cout << "The list of people that have responded that they are unable to attend " << eventName << " are: " << endl;
-    for( unsigned int i = 0; i < rsvpNo.size() - 1; i++){
+    for( unsigned int i = 0; i < rsvpNo.size() - 1; i++)
+    {
         cout << rsvpNo.at(i).getName() << " (" << rsvpNo.at(i).getAge() << "), " << endl;
     }
     cout << rsvpNo.at(rsvpNo.size()).getName() << " (" << rsvpNo.at(rsvpNo.size()).getAge() << ") \n" << endl;
 }
 
 // Prints out the information for the invitation
-void Event::printInvite() {
+void Event::printInvite()
+{
     cout << "You were invited to " << eventPlanner << "'s " << eventType << "!" << endl;
     cout << eventName << ": " << endl;
     cout << "When: " << eventDate << " at " << eventTime << endl;

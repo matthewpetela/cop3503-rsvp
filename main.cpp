@@ -1,3 +1,4 @@
+
 #include <ctime>
 
 /*
@@ -339,7 +340,8 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 	//jovanny  // loop to make sure a dress code is picked
 	bool dressBool = true;
-	while(dressBool){
+	while(dressBool)
+	{
 		cout<<"Please select the dresscode for this event?" <<endl;
 		cout<<"1. Casual "<<endl;
 		cout<<"2. Business casual "<<endl;
@@ -423,7 +425,8 @@ void createEvent(int i){                    //int i is used to tell which event 
 	bool menu2 = true;
 	char addGuest = 'z';
 
-	while(menu){
+	while(menu)
+	{
 		breakOut = false;
 		//kimmy I had to turn it into two parts so it saves all letters correctly but the string is still saved under the same name
 		string firstInvite;
@@ -518,7 +521,8 @@ void createEvent(int i){                    //int i is used to tell which event 
 
 
 //jovanny
-void rsvpSystem(){
+void rsvpSystem()
+{
 	string tempEventName;
 	string tempRsvpName;
 	bool inEvent = false;
@@ -576,9 +580,10 @@ void rsvpSystem(){
 }
 
 
-//Nicholas
-void eventDetails(){
-	string Name;					//Initializes all of the event deatils
+//Nicholas and Kailee
+void eventDetails()
+{
+	string Name;					//Initializes all of the event details
 	string tempName;
 	string tempEvent;
 	string tempEventType;
@@ -589,6 +594,7 @@ void eventDetails(){
 	vector<person> guestList;
 	string guestName;
 	string tableNum;
+	string response;
 
 	bool isEvent = false;
 	cout<<"What is the name of the event that you would like the details for? "<<endl;
@@ -612,6 +618,10 @@ void eventDetails(){
 		tempDressCode = eventCreator[i].getDressCode();
 		guestList = eventCreator[i].getInvitees();
 
+
+
+
+
 		if (tempName == tempEvent) {
 			isEvent = true;
 			cout << "\nThe event " << Name << " has the following details to it:" << endl;
@@ -621,21 +631,19 @@ void eventDetails(){
 			cout<<"The location of the event is "<<tempEventLocation<<endl;
 			cout<<"The dress code of the event is "<<tempDressCode<<endl;
 
-			//kailee
-			//prints list of guest and table assignment
-			cout<<"The list of guests is " << endl;
+			//prints list of guests and table assignments
+			cout<<"The list of guests who are coming and their table assignments " << endl;
 			for(unsigned int a = 0; a < guestList.size(); a++){        //for loop to iterate through all the people in the event
 				guestName = guestList[a].getName();
 				tableNum = guestList[a].getSeating();
-				if(tableNum != "None"){
+				response = guestList[a].getResponse();
+				if(tableNum != "None" && response == "Yes"){
 					cout<< guestName <<" at " << tableNum << endl;
 				}
-				else{
-					cout<<guestName<<endl;
-				}
-
 			}
+
 			cout<<""<<endl;
+
 		}
 	}
 	if(!isEvent) {
@@ -643,7 +651,9 @@ void eventDetails(){
 
 	}
 }
-void changeResponse(){
+
+void changeResponse()
+{
 	string tempEventName;
 	string tempRsvpName;
 	bool inEvent = false;
@@ -730,7 +740,8 @@ void changeResponse(){
 
 
 
-void userMenu(){
+void userMenu()
+{
 	int userInput;
 	int i = 0;   // int tht is sent to create event class. used to tell which event we are currently creating
 	bool menuLoop = true; //used to quite menu. 
@@ -796,7 +807,8 @@ void userMenu(){
 	}
 }
 
-void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+void loadFile()
+{//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
 	std::string DATA_FILE_NAME = "data.txt";
 	std::string PERSON_FILE_NAME = "person.txt";
 	vector<std::string> dataFileVector;
@@ -813,7 +825,8 @@ void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding pers
 
 }
 
-void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+void saveFile()
+{ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
 	int size = eventCreator.size(); //Gets the number of events
 	std::string DATA_FILE_NAME = "data.txt";
 	std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
@@ -829,7 +842,8 @@ void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person
 	dataFile.close();
 
 }
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
 	vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
 	time_t now = time(0); //used for testing
