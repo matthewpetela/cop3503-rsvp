@@ -54,7 +54,7 @@ void seatingSystem(){
 		cout<<"Would you like to assign a new guest to a table? (Y/N)"<<endl;
 		char ans4;
 		cin>>ans4;
-		if(ans4 == 'y' || ans4 == 'Y'){
+		if(ans4 == 'y' || ans4 == 'Y"'){
 			cout<<"Please enter the guest you'd like to seat."<< endl;
 			cin.get();
 			getline(cin, tRsvpName);
@@ -407,12 +407,12 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<"What is the time of the event? (Enter in the format --:--)" << endl;
 	cin.get();
 	getline(cin, eventTime);
-	/*while(checktime(eventTime)==false){
+	while(checktime(eventTime)==false){
 		cout<<"wrong input please try again: ";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin>>eventTime;
-	}*/
+	}
 
 
 	cout<<" "<<endl;
@@ -719,61 +719,62 @@ void createEvent(int i){                    //int i is used to tell which event 
 	cout<<" "<<endl;
 
 
-// Food request // Nicholas and Mark
-cout << "Do you want any guests to bring any food items?" << endl;
-cout << "1. Yes " << endl;
-cout << "2. No " << endl;
-char foodItemOption;
-char ynInput2;
-cin >> ynInput2;
-cin.ignore();
-bool error;
-do {
-	error = false;
-	switch (ynInput2) {
-	case '1':
-	cout << "What type of food would you like your guests to bring? " << endl;
+	// Food request // Nicholas and Mark
+	cout << "Do you want any guests to bring any food items?" << endl;
+	cout << "1. Yes " << endl;
+	cout << "2. No " << endl;
+	char foodItemOption;
+	char ynInput2;
+	cin >> ynInput2;
+	cin.ignore();
+	bool error;
+	do {
+		error = false;
+		switch (ynInput2) {
+		case '1':
+		cout << "What type of food would you like your guests to bring? " << endl;
+		cout << " " << endl;
+		cout << "1. Appetizers " << endl;
+		cout << "2. Entrees " << endl;
+		cout << "3. Desserts " << endl;
+		cout << "4. Any Food Item " << endl;
+		cin >> foodItemOption;
+
+		switch (foodItemOption) {
+		case '1':
+			eventCreator.back().setFoodToBring("appetizers ");
+			cout << "We'll let your guests know to bring appetizers." << endl;
+			break;
+		case '2':
+			eventCreator.back().setFoodToBring("entrees ");
+			cout << "We'll let your guests know to bring entrees." << endl;
+			break;
+		case '3':
+			eventCreator.back().setFoodToBring("desserts ");
+			cout << "We'll let your guests know to bring desserts." << endl;
+			break;
+		case '4':
+			eventCreator.back().setFoodToBring("any food item ");
+			cout << "We'll let your guests know to bring any food item." << endl;
+			break;
+		default:
+			cout << "Error, enter the number of the option you'd like." << endl;
+			error = true;
+			break;
+		}
+		case '2':
+			eventCreator.back().setFoodToBring("");
+			break;
+		default:
+			cout << "Please try again" << endl;
+			cin.clear();
+			error = true;
+			break;
+		}
+	} while (error);
+
 	cout << " " << endl;
-	cout << "1. Appetizers " << endl;
-	cout << "2. Entrees " << endl;
-	cout << "3. Desserts " << endl;
-	cout << "4. Any Food Item " << endl;
-	cin >> foodItemOption;
 
-	switch (foodItemOption) {
-	case '1':
-		eventCreator.back().setFoodToBring("appetizers ");
-		cout << "We'll let your guests know to bring appetizers." << endl;
-		break;
-	case '2':
-		eventCreator.back().setFoodToBring("entrees ");
-		cout << "We'll let your guests know to bring entrees." << endl;
-		break;
-	case '3':
-		eventCreator.back().setFoodToBring("desserts ");
-		cout << "We'll let your guests know to bring desserts." << endl;
-		break;
-	case '4':
-		eventCreator.back().setFoodToBring("any food item ");
-		cout << "We'll let your guests know to bring any food item." << endl;
-		break;
-	default:
-		cout << "Error, enter the number of the option you'd like." << endl;
-		error = true;
-		break;
-	}
-	case '2':
-		eventCreator.back().setFoodToBring("");
-		break;
-	default:
-		cout << "Please try again" << endl;
-		cin.clear();
-		error = true;
-		break;
-	}
-} while (error);
-
-cout << " " << endl;
 
 }
 
@@ -923,13 +924,13 @@ void rsvpSystem(){
 					case 'Y':
 						eventCreator[i].setResponse(a,"Yes");
 						cout<<"Thank you for response!"<<endl;
+						bringItem();
+						ride();
 						menu = false;
 						break;
 					case 'N':
 						eventCreator[i].setResponse(a,"No");
 						cout<<"Thank you for response!"<< "\n"<<endl;
-						bringItem();
-						ride();
 						menu = false;
 						break;
 					default:
@@ -1133,39 +1134,7 @@ void changeResponse(){
 }
 
 
-void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
-	std::string DATA_FILE_NAME = "data.txt";
-	std::string PERSON_FILE_NAME = "person.txt";
-	vector<std::string> dataFileVector;
-	ofstream dataFile;
-	dataFile.open (DATA_FILE_NAME);
 
-	// for( std::string line; getline( input, line ); ){
-
-
-	// }
-
-
-	dataFile.close();
-
-}
-
-void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
-	int size = eventCreator.size(); //Gets the number of events
-	std::string DATA_FILE_NAME = "data.txt";
-	std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
-	ofstream dataFile(DATA_FILE_NAME);
-
-
-	for (int i= 0 ; i < size; i++){ //writes to file with new line seperation
-		dataFile << eventCreator.at(i).getEventPlanner() << "\n" << eventCreator.at(i).getEventName() << "\n" << eventCreator.at(i).getEventType() << "\n" << eventCreator.at(i).getEventLocation() << "\n" <<
-				eventCreator.at(i).getEventDate() << eventCreator.at(i).getEventTime() <<"\n" << eventCreator.at(i).getDressCode() << "\n" << eventCreator.at(i).getAgeMin()<< "\n";
-
-	}
-
-	dataFile.close();
-
-}
 
 
 void userMenu(){
@@ -1175,7 +1144,6 @@ void userMenu(){
 	//jovanny and mark
 	while(true){        //while statement will continue to display the menu until a correct option is chosen
 
-		saveFile();
 		//kimmy
 		cout<<"Please select an option. "<<endl;
 		cout<<" "<<endl;
@@ -1233,6 +1201,39 @@ void userMenu(){
 	}
 }
 
+void loadFile(){//Opens saved file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+	std::string DATA_FILE_NAME = "data.txt";
+	std::string PERSON_FILE_NAME = "person.txt";
+	vector<std::string> dataFileVector;
+	ofstream dataFile;
+	dataFile.open (DATA_FILE_NAME);
+
+	// for( std::string line; getline( input, line ); ){
+
+
+	// }
+
+
+	dataFile.close();
+
+}
+
+void saveFile(){ //saves to file. ***IMPORTANT*** Must modify when adding person or event variables/traits - Matt
+	int size = eventCreator.size(); //Gets the number of events
+	std::string DATA_FILE_NAME = "data.txt";
+	std::string PERSON_FILE_NAME = "person.txt"; //used later to transfer over guests
+	ofstream dataFile(DATA_FILE_NAME);
+
+
+	for (int i= 0 ; i < size; i++){ //writes to file with new line seperation
+		dataFile << eventCreator.at(i).getEventPlanner() << "\n" << eventCreator.at(i).getEventName() << "\n" << eventCreator.at(i).getEventType() << "\n" << eventCreator.at(i).getEventLocation() << "\n" <<
+				eventCreator.at(i).getEventDate() << eventCreator.at(i).getEventTime() <<"\n" << eventCreator.at(i).getDressCode() << "\n" << eventCreator.at(i).getAgeMin()<< "\n";
+
+	}
+
+	dataFile.close();
+
+}
 int main(int argc, char *argv[]){
 	vector<Event> eventCreator;  // create a vector of events for easy addition and checking what people are going to an event Jovanny/Mark
 
