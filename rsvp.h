@@ -35,6 +35,7 @@ private:
     int ageMinimum;           // The age restriction for the event
 
     string message;           // A message for the planner to tell the invitee about the event
+    string foodToBring;
 
 
 public:
@@ -83,6 +84,8 @@ public:
     // Adds the name of a person to the invitee list of people, where they can then respond // Mark and Jovanny
     void sendInvite(string name, int age);
 
+    void setFoodToBring(string foodToBring);
+
 
     // ACCESSOR METHODS //
 
@@ -96,6 +99,7 @@ public:
     int getAgeMin();             // Returns the age minimum // Mark and Jovanny
     string getMessage();         // Returns the message the event planner wants to send to the invite // Mark and Jovanny
     vector<person> getInvitees(); // Returns the list of people invited to the event // Mark and Jovanny
+    string getFoodToBring();
 
 
 
@@ -109,6 +113,3 @@ public:
     void setSeating(unsigned int i, string Table);
     void setRegistry(unsigned int i, string gift);
 };
-
-
-

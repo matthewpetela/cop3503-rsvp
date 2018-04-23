@@ -28,9 +28,10 @@ Event::Event(string eventPlanner, string eventName, string eventType, string eve
     this->eventDate = eventDate;
     this->eventTime = eventTime;
     this->location = eventLocation;
-    this->dresscode = "";
-    this->ageMinimum = 0;
+    dresscode = "";
+    ageMinimum = 0;
     this->message = message;
+    foodToBring = "";
 }
 
 // Overloaded Constructor for an event with all elements filled out except for the dresscode and age limit // Mark and Jovanny
@@ -44,19 +45,21 @@ Event::Event(string eventPlanner, string eventName, string eventType, string eve
     this->dresscode = dresscode;
   //  this->ageMinimum = ageMin;
     this->message = message;
+    foodToBring = "";
 }
 
 // Overloaded Constructor with no elements filled in // Mark and Jovanny
 Event::Event(string eventPlanner) {
-    this->eventPlanner = eventPlanner;
-    this->eventName = "";
-    this->eventType = "";
-    this->eventDate = "";
-    this->eventTime = "";
-    this->location = "";
-    this->dresscode = "";
-    this->ageMinimum = 0;
-    this->message = "";
+    eventPlanner = eventPlanner;
+    eventName = "";
+    eventType = "";
+    eventDate = "";
+    eventTime = "";
+    location = "";
+    dresscode = "";
+    ageMinimum = 0;
+    message = "";
+    foodToBring = "";
 }
 
 // MUTATOR METHODS //
@@ -111,6 +114,22 @@ void Event::sendInvite(string name, int age) {
     invitees.emplace_back(person(name, age, "Undecided", true, "None", "NA"));
 }
 
+//method used to set response in case 2 Jovanny
+void Event::setResponse(unsigned int a, string Response) {
+    invitees.at(a).setResponse(Response);
+}
+void Event::setSeating(unsigned int i, string Table){
+    invitees.at(i).setSeating(Table);
+}
+void Event::setRegistry(unsigned int i, string gift){
+    invitees.at(i).setRegistry(gift);
+}
+
+//FOOD ITEMS TO BRING SECTION
+//Nicholas and Mark
+void Event::setFoodToBring(string foodToBring) {
+    this->foodToBring = foodToBring;
+}
 
 // ACCESSOR METHODS //
 
@@ -144,18 +163,8 @@ string Event::getMessage() { return message; }
 // Returns the list of people invited to the event // Mark and Jovanny
 vector<person> Event::getInvitees() { return invitees; }
 
-//method used to set response in case 2 Jovanny
-void Event::setResponse(unsigned int a, string Response) {
-    invitees.at(a).setResponse(Response);
-}
-void Event::setSeating(unsigned int i, string Table){
-	invitees.at(i).setSeating(Table);
-}
-void Event::setRegistry(unsigned int i, string gift){
-	invitees.at(i).setRegistry(gift);
-}
-
-
+// Returns the food items being brought
+string Event::getFoodToBring() { return foodToBring;}
 
 // PRINT METHODS //
 
@@ -214,6 +223,7 @@ void Event::printInvite() {
     cout << "Notes: " << message << endl;
    // if (ageMinimum != 0)
     //    cout << "Age Limit: " << ageMinimum << " or older" << endl;
+    if (foodToBring != "")
+        cout << eventPlanner << " is also asking for guest to bring " << foodToBring << endl;
+
 }
-
-
