@@ -17,7 +17,6 @@ Project_Team 18:
 #include<vector>
 #include"rsvp.h"
 #include"person.h"
-//#include"objects.h"
 #include<limits>
 #include<algorithm>
 #include<fstream>
@@ -130,7 +129,6 @@ void ride(){
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
     cout<<"Please enter your name"<< endl;
-    //cin.get();
     getline(cin, tempRsvpName);
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
@@ -166,7 +164,6 @@ void ride(){
                             break;
                         default:
                             cout<<"Please enter either Y or N"<<endl;
-                            clearInput();
                             continue;
 
                     }
@@ -191,8 +188,6 @@ void bringItem(){
     getline(cin, tempRsvpName);
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
-    cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
-
 
     for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
         tempPeople = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
@@ -212,7 +207,6 @@ void bringItem(){
                     switch(toupper(menuOption)){
                         case 'Y':
                             cout<<"What are you bringing?"<<endl;
-                            cin.get();
                             getline(cin, item);
                             eventCreator[i].setBring(i,item);
                             cout<<"Thank you for response!"<<endl;
@@ -226,7 +220,6 @@ void bringItem(){
                             break;
                         default:
                             cout<<"Please enter either Y or N"<<endl;
-                            clearInput();
                             continue;
 
                     }
@@ -255,9 +248,9 @@ void registry(){
         cout<<"Would you like to assign a new guest to an item? (Y/N)"<<endl;
         char ans4;
         cin>>ans4;
+        clearInput();
         if(ans4 == 'y' || ans4 =='Y'){
             cout<<"Please enter the guest's name."<< endl;
-            cin.get();
             getline(cin, tRsvpName);
             tRsvpName.erase(remove(tRsvpName.begin(), tRsvpName.end(), ' '), tRsvpName.end()); //removes whitespace for comparison
             transform(tRsvpName.begin(),tRsvpName.end(), tRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
@@ -295,7 +288,6 @@ void registry(){
         }
         else{
             cout<<"invalid input."<<endl;
-            clearInput();
             continue;
         }
     }
@@ -501,8 +493,6 @@ void createEvent(int i){                    //int i is used to tell which event 
     while(menuBool){
         cout<<"What is the date of the event? (Enter in the form mm/dd/yyyy. Year must be between 2000 and 2199)" <<endl;
         getline(std::cin, eventDate);	//HAS TO STAY AS GETLINE. IF NOT YOU HAVE TO CLEAR INPUT EVERYTIME ITS BAD INPUT OR YOU GET AN
-        //cin>>eventDate;				//INFINITE LOOP - JOVANNY
-
 
         if(eventDate.length() != 10){
             cout<<"Wrong input"<<endl;
@@ -677,16 +667,9 @@ void createEvent(int i){                    //int i is used to tell which event 
 
     //include the message in details?
 
-    /*
-    //creates the event based on whatever inputs the user givse
+
     eventCreator.emplace_back(eventPlanner, eventName, eventType,eventDate, eventTime, eventLocation, dressCode , message);     //jovanny and mark emplace back is equivalent to push back
-    cout<<" "<<endl;
-    cout<< eventPlanner<< " " << eventName << " " << eventType <<endl;
-    cout<< eventLocation<< " " << eventTime << " "<< eventDate <<endl;			//statement for erro checking
-    cout<< dressCode<<endl;
-    cout<< message<<endl; //used for error checking in dress code
-    cout<<" "<<endl;
-     */
+
     //while loop used to create guests
     bool menu = true;
     bool breakOut;          // bool to check if you broke out of the for loop due to a bad age string
@@ -710,7 +693,7 @@ void createEvent(int i){                    //int i is used to tell which event 
 
         guestName = firstInvite + " " + lastInvite;
 
-        cout<< guestName <<endl;
+        //cout<< guestName <<endl;
 
         cout<<"Please enter the guest's age (numbers only)"<<endl;
         cin>>age;
@@ -796,17 +779,19 @@ void createEvent(int i){                    //int i is used to tell which event 
 
     cout<<" "<<endl;
 
-
+    char foodItemOption;
+    char ynInput2;
+    bool error;
     // Food request // Nicholas and Mark
+    do {
     cout << "Do you want any guests to bring any food items?" << endl;
     cout << "1. Yes " << endl;
     cout << "2. No " << endl;
-    char foodItemOption;
-    char ynInput2;
+
     cin >> ynInput2;
     clearInput();
-    bool error;
-    do {
+
+
         error = false;
         switch (ynInput2) {
             case '1':
@@ -868,7 +853,6 @@ void plusOne(){
         cout << "Would you like to bring a plus one?" << endl;
         cout << "1. Yes" << endl;
         cout << "2. No" << endl;
-        //clearInput();
         cin >> menuOption;
         clearInput();
         switch (menuOption){
@@ -1237,7 +1221,6 @@ void changeResponse(){
                             break;
                         default:
                             cout<<"Please enter either Y or N"<<endl;
-                            clearInput();
                             continue;
 
                     }
@@ -1260,7 +1243,6 @@ void changeResponse(){
                             break;
                         default:
                             cout<<"Please enter either Y or N"<<endl;
-                            clearInput();
                             continue;
 
                     }
@@ -1304,7 +1286,7 @@ void userMenu(){
                     {
                         cout << "Do you want to create another event (Y/N)" << endl;
                         cin >> cont;
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        clearInput();
 
                     } while(cont != 'y' && cont != 'Y' && cont != 'N' && cont != 'n');
 
@@ -1331,7 +1313,6 @@ void userMenu(){
 
             default:                // clears all input a user puts in and continues the loop //jovanny and mark
                 cout<<"Error, enter the number of the option you'd like."<<endl;
-
                 continue;
         }
     }
