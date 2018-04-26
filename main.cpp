@@ -53,8 +53,6 @@ void seatingSystem(){
             getline(cin, tRsvpName);
             tRsvpName.erase(remove(tRsvpName.begin(), tRsvpName.end(), ' '), tRsvpName.end()); //removes whitespace for comparison
             transform(tRsvpName.begin(),tRsvpName.end(), tRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
-            cout<< tRsvpName <<endl;         // test to make sure input user name has no spaces
-
 
             for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
                 tempTable = eventCreator[i].getInvitees();                 //gets a copy of the invitees to the event
@@ -64,7 +62,6 @@ void seatingSystem(){
                     transform(tEventName.begin(),tEventName.end(), tEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
                     if(tEventName == tRsvpName){
                         inEvent = true;                                     //bool to let user know whether they re in an event or not
-                        //eventCreator[i].printSeating();                      //prints the invitation to the event
 
                         menu = true;
                         while(menu){                                        //while loop to check if user is attending the event
@@ -111,7 +108,6 @@ void seatingSystem(){
         }
         else{
             cout<<"invalid input."<<endl;
-            clearInput();
             continue;
         }
     }
@@ -126,9 +122,7 @@ void ride(string tempRsvpName){
     string trans;
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
-    /*cout<<"Please enter your name"<< endl;
-    getline(cin, tempRsvpName);
-    */
+
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
 
@@ -180,9 +174,7 @@ void bringItem(string tempRsvpName){
     string item;
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
-   /* cout<<"Please enter your name"<< endl;
-    getline(cin, tempRsvpName);
-    */
+
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
 
@@ -194,7 +186,6 @@ void bringItem(string tempRsvpName){
             transform(tempEventName.begin(),tempEventName.end(), tempEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
             if(tempEventName == tempRsvpName){
                 inEvent = true;                                     //bool to let user know whether they re in an event or not
-                //eventCreator[i].printInvite();                      //prints the invitation to the event
 
                 menu = true;
                 while(menu){                                        //while loop to check if user is attending the event
