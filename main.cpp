@@ -1,5 +1,3 @@
-#include <ctime>
-
 /*
 main.cpp
 COP3503
@@ -119,20 +117,21 @@ void seatingSystem(){
     }
 }
 
-void ride(){
+void ride(string tempRsvpName){
     string tempEventName;
-    string tempRsvpName;
+
     bool inEvent = false;
     bool menu = true;
     char menuOption = 'z';
     string trans;
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
-    cout<<"Please enter your name"<< endl;
+    /*cout<<"Please enter your name"<< endl;
     getline(cin, tempRsvpName);
+    */
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
-    cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
+
 
 
     for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
@@ -143,8 +142,6 @@ void ride(){
             transform(tempEventName.begin(),tempEventName.end(), tempEventName.begin(), ::tolower);    //sets characters to lower case for comparisom
             if(tempEventName == tempRsvpName){
                 inEvent = true;                                     //bool to let user know whether they re in an event or not
-                //eventCreator[i].printInvite();                      //prints the invitation to the event
-
                 menu = true;
                 while(menu){                                        //while loop to check if user is attending the event
                     cout<<"Will you need a ride to the event? (hit Y for yes or N for no)"<<endl;
@@ -175,17 +172,17 @@ void ride(){
         cout<<"Unfortunately you have not been invited to any events."<<endl;
     }
 }
-void bringItem(){
+void bringItem(string tempRsvpName){
     string tempEventName;
-    string tempRsvpName;
     bool inEvent = false;
     bool menu = true;
     char menuOption = 'z';
     string item;
     vector<person> tempPeople;          //POSSIBILY USE POINTERS HERE FOR BETTER MEMORY MANAGEMENT
 
-    cout<<"Please enter your name"<< endl;
+   /* cout<<"Please enter your name"<< endl;
     getline(cin, tempRsvpName);
+    */
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
 
@@ -997,7 +994,6 @@ void rsvpSystem(){
     getline(cin, tempRsvpName);
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
-    cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
 
 
     for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
@@ -1038,8 +1034,8 @@ void rsvpSystem(){
                             if (tempPeople.at(a).isPrimary()) {
                                 plusOne();
                             }
-                            bringItem();
-                            ride();
+                            bringItem(tempRsvpName);
+                            ride(tempRsvpName);
                             menu = false;
                             break;
                         case 'N':
@@ -1190,7 +1186,6 @@ void changeResponse(){
     getline(cin, tempRsvpName);
     tempRsvpName.erase(remove(tempRsvpName.begin(), tempRsvpName.end(), ' '), tempRsvpName.end()); //removes whitespace for comparison
     transform(tempRsvpName.begin(),tempRsvpName.end(), tempRsvpName.begin(), ::tolower);    //sets characters to lower case for comparison
-    cout<< tempRsvpName <<endl;         // test to make sure input user name has no spaces
 
 
     for(unsigned int i = 0; i < eventCreator.size(); i++){          //for loop to iterate through all created events
@@ -1209,8 +1204,6 @@ void changeResponse(){
                     clearInput();
                     switch(toupper(menuOption1)){
                         case 'Y':
-                            cout<<"Thank you for your response!"<<endl;
-                            cout<<"To change your response, answer the question below"<<endl;
                             menu1 = false;
                             menu2 = true;
                             break;
